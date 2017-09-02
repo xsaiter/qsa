@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#include "q_vector.h"
+#include "../q_vector.h"
 
 #ifdef __cplusplus
 extern "C" {

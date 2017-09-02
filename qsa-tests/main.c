@@ -4,6 +4,8 @@
 
 #include "q_list.h"
 
+#include "str/q_str.h"
+
 struct person{
     int age;
     char *name;
@@ -14,6 +16,6 @@ static void print_(void *data){
 }
 
 int main(int argc, char** argv)
-{ 
+{     
     return (EXIT_SUCCESS);
 }
