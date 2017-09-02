@@ -3,4 +3,5 @@
 !*.c
 !*.h
 !qsa
+!qsa/graphs
 !qsa-tests
