@@ -66,24 +66,6 @@ void q_list_append(q_list *list, void *data)
     list->len++;
 }
 
-void q_list_insert(q_list *list, size_t before, void *data)
-{
-    size_t pos = 0;
-
-    q_list_node *cur = list->head;
-
-    while (cur && pos < before) {
-        cur = cur->next;
-        ++pos;
-    }
-
-    if (cur) {
-        cur->data = data;
-    }
-    
-    list->len++;
-}
-
 bool q_list_remove(q_list *list, void *data)
 {
     q_list_node *cur = list->head;
@@ -139,7 +121,7 @@ q_list_node *q_list_find(q_list *list, void *data)
     q_list_node *cur;
     cur = list->head;
     while (cur) {
-        if (cur->data, data) {
+        if (cur->data == data) {
             return cur;
         }
         cur = cur->next;

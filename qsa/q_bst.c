@@ -2,7 +2,7 @@
 
 #include "q_bst.h"
 
-static q_bst_node* _q_bst_node_create(int key)
+static q_bst_node *_q_bst_node_create(int key)
 {
     q_bst_node *node = malloc(sizeof (q_bst_node));
     if (!node) {
@@ -60,7 +60,7 @@ q_bst_node* q_bst_find(q_bst *tree, int key)
     return NULL;
 }
 
-static q_bst_node* min(q_bst_node *z)
+static q_bst_node *min(q_bst_node *z)
 {
     q_bst_node *x = z;
     while ((x->left)) {
@@ -69,7 +69,7 @@ static q_bst_node* min(q_bst_node *z)
     return x;
 }
 
-static void q_transplant(q_bst* tree, q_bst_node *a, q_bst_node *b)
+static void q_transplant(q_bst *tree, q_bst_node *a, q_bst_node *b)
 {
     if (!a->parent) {
         tree->root = b;
@@ -134,5 +134,5 @@ void q_bst_remove(q_bst *tree, int key)
 }
 
 void q_bst_destroy(q_bst *tree)
-{    
+{
 }

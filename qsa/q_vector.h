@@ -8,13 +8,12 @@ extern "C" {
 #endif
 
     typedef struct {
-        void **elems;
-        size_t elem_size;
-        size_t elems_count;
+        void **elems;        
+        size_t len;
         size_t capacity;
     } q_vector;
     
-    void q_vector_init(q_vector *v, size_t elem_size, size_t capacity);
+    void q_vector_init(q_vector *v, size_t capacity);
     void q_vector_destroy(q_vector *v);
     void q_vector_add(q_vector *v, void *elem);    
     void q_vector_set(q_vector *v, size_t index, void *elem);
