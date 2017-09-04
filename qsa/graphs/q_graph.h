@@ -7,22 +7,23 @@ extern "C" {
 #endif
 
     typedef struct q_graph_node {
-        int sink;
-        int weight;
+        int b;
+        double weight;
         struct q_graph_node *next;
     } q_graph_node;
 
     typedef struct {
-        q_graph_node **nodes;
-        int nodes_count;
-        int edges_count;
+        q_graph_node **adj;
+        int nnodes;
+        int nedges;
         bool directed;
+        bool weighed;
     } q_graph;
 
-    void q_graph_init(q_graph *g, int nv);
-    void q_graph_free(q_graph *g);
-    void q_graph_add_node(q_graph *g, int node);
-    void q_graph_add_edge(q_graph *g, int src, int dest, int w);
+    void q_graph_init(q_graph *g, int nnodes, bool directed, bool weighed);
+    void q_graph_free(q_graph *g);    
+    void q_graph_add_edge(q_graph *g, int a, int b, double weight);
+    void q_graph_print(q_graph *g);
 
 #ifdef __cplusplus
 }
