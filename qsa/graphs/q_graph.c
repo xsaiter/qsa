@@ -32,14 +32,9 @@ static void add_edge(q_graph *g, int a, int b, double weight)
 
     node->b = b;
     node->weight = weight;
-
-    if (!g->adj[a]) {
-        node->next = NULL;
-        g->adj[a] = node;
-    } else {
-        node->next = g->adj[a];
-        g->adj[a] = node;
-    }
+    
+    node->next = g->adj[a];        
+    g->adj[a] = node;
 }
 
 void q_graph_add_edge(q_graph *g, int a, int b, double weight)
