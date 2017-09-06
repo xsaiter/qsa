@@ -11,7 +11,7 @@ void q_stack_init(q_stack *s){
 
 void q_stack_destroy(q_stack *s)
 {
-    q_list_free(s->list);
+    q_list_destroy(s->list);
     free(s->list);
 }
 

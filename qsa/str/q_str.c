@@ -143,7 +143,7 @@ bool q_check_balanced_round_brackets(char *s)
     return (n == 0);
 }
 
-int q_boyer_moore(const char *s, const char *p)
+int q_str_boyer_moore(const char *s, const char *p)
 {
     int n, m, i;
 
@@ -175,7 +175,7 @@ int q_boyer_moore(const char *s, const char *p)
     return -1;
 }
 
-int q_kmp(const char *s, const char *p)
+int q_str_kmp(const char *s, const char *p)
 {
     int n = strlen(s);
     int m = strlen(p);

@@ -11,7 +11,7 @@ void q_queue_init(q_queue *q){
 
 void q_queue_destroy(q_queue *q)
 {
-    q_list_free(q->list);
+    q_list_destroy(q->list);
     free(q->list);
 }
 

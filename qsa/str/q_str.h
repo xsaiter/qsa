@@ -21,8 +21,8 @@ extern "C" {
 
     bool q_check_balanced_round_brackets(char *s);    
     
-    int q_boyer_moore(const char *s, const char *p);
-    int q_kmp(const char *s, const char *p);    
+    int q_str_boyer_moore(const char *s, const char *p);
+    int q_str_kmp(const char *s, const char *p);    
 
 #ifdef __cplusplus
 }

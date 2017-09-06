@@ -13,7 +13,7 @@ void q_list_init(q_list *list)
     list->head = list->tail = NULL;
 }
 
-void q_list_free(q_list *list)
+void q_list_destroy(q_list *list)
 {
     q_list_node *e = list->head;
     while (e) {
@@ -69,7 +69,7 @@ void q_list_append(q_list *list, void *data)
 bool q_list_remove(q_list *list, void *data)
 {
     q_list_node *cur = list->head;
-    
+
     while (cur) {
         if (cur->data == data) {
             q_list_remove_node(list, cur);
@@ -78,7 +78,7 @@ bool q_list_remove(q_list *list, void *data)
         }
         cur = cur->next;
     }
-    
+
     return false;
 }
 

@@ -4,13 +4,13 @@
 #include"q_vector.h"
 
 void q_vector_init(q_vector *v, size_t capacity)
-{    
+{
     v->len = 0;
     v->capacity = capacity;
     v->elems = malloc(v->capacity * sizeof (void*));
 }
 
-void q_vector_free(q_vector *v)
+void q_vector_destroy(q_vector *v)
 {
     free(v->elems);
 }
