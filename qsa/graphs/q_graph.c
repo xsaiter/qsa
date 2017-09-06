@@ -68,12 +68,11 @@ static inline bool *q_graph_marked_alloc(const q_graph *g)
 
 void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg)
 {
+    bool *marked = q_graph_marked_alloc(g);
+    
     q_queue q;
     q_queue_init(&q);
-
-    q_queue_enq(&q, Q_INT_TO_VOIDPTR(s));
-
-    bool *marked = q_graph_marked_alloc(g);
+    q_queue_enq(&q, Q_INT_TO_VOIDPTR(s));    
 
     while (!q_queue_empty(&q)) {
         int i = Q_VOIDPTR_TO_INT(q_queue_deq(&q));
@@ -90,7 +89,9 @@ void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg)
 
         marked[i] = true;
     }
-
+    
+    q_queue_destroy(&q);
+    
     free(marked);
 }
 
