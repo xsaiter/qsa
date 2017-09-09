@@ -99,15 +99,16 @@ static void test_stack()
 static void test_graph_print()
 {
     printf("\ntest graph printf");
+    
+    q_graph *g = q_graph_new(5, false, false);
 
-    q_graph g;
-    q_graph_init(&g, 5, false, false);
+    q_graph_add_edge(g, 1, 2, 0);
+    q_graph_add_edge(g, 1, 3, 0);
+    q_graph_add_edge(g, 2, 4, 0);
 
-    q_graph_add_edge(&g, 1, 2, 0);
-    q_graph_add_edge(&g, 1, 3, 0);
-    q_graph_add_edge(&g, 2, 4, 0);
-
-    q_graph_print(&g);
+    q_graph_print(g);
+    
+    q_graph_free(g);
 }
 
 static void q_visit(q_graph *g, q_graph_edge *e, void *arg)
@@ -115,34 +116,38 @@ static void q_visit(q_graph *g, q_graph_edge *e, void *arg)
     printf("%d ", e->b);
 }
 
-static q_graph *init_test_graph(q_graph *g)
+static q_graph *test_make_graph()
 {
-    q_graph_init(g, 6, false, false);
+    q_graph *g = q_graph_new(6, false, false);
 
     q_graph_add_edge(g, 1, 2, 0);
     q_graph_add_edge(g, 1, 3, 0);
     q_graph_add_edge(g, 1, 4, 0);
     q_graph_add_edge(g, 3, 5, 0);
+    
+    return g;
 }
 
 static void test_graph_bfs()
 {
     printf("\ntest graph bfs: ");
 
-    q_graph g;
-    init_test_graph(&g);
-    q_graph_bfs(&g, 1, q_visit, NULL);
-    q_graph_destroy(&g);
+    q_graph *g = test_make_graph();    
+    
+    q_graph_bfs(g, 1, q_visit, NULL);
+    
+    q_graph_free(g);
 }
 
 static void test_graph_dfs()
 {
     printf("\ntest graph dfs: ");
 
-    q_graph g;
-    init_test_graph(&g);
-    q_graph_dfs(&g, 1, q_visit, NULL);
-    q_graph_destroy(&g);
+    q_graph *g = test_make_graph();    
+    
+    q_graph_dfs(g, 1, q_visit, NULL);
+    
+    q_graph_free(g);
 }
 
 int main(int argc, char** argv)

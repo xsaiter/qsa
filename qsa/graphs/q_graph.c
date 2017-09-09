@@ -7,15 +7,17 @@
 
 #include "q_graph.h"
 
-void q_graph_init(q_graph *g, int nv, bool directed, bool weighed)
+q_graph *q_graph_new(int nv, bool directed, bool weighed)
 {
+    q_graph *g = xmalloc(sizeof(q_graph));    
     g->nv = nv;
-    g->adj = calloc(g->nv, sizeof (q_graph_edge*));
+    g->adj = xcalloc(g->nv, sizeof (q_graph_edge*));
     g->directed = directed;
     g->weighed = weighed;
+    return g;
 }
 
-void q_graph_destroy(q_graph *g)
+void q_graph_free(q_graph *g)
 {
     for (int i = 0; i < g->nv; ++i) {
         q_graph_edge *e = g->adj[i];
@@ -25,6 +27,7 @@ void q_graph_destroy(q_graph *g)
         }
     }
     free(g->adj);
+    free(g);
 }
 
 static void add_edge(q_graph *g, int a, int b, double weight)
@@ -115,4 +118,9 @@ void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg)
     bool *marked = q_graph_marked_alloc(g);
     dfs(g, s, marked, visit, arg);
     free(marked);
+}
+
+void q_graph_bfs_paths(q_graph *g, int s, q_graph_paths *paths)
+{
+    
 }

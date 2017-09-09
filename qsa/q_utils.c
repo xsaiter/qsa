@@ -12,18 +12,27 @@ inline void die(const char *text)
 void *xmalloc(size_t size)
 {
     void *p = malloc(size);
-    if(!p){
+    if (!p) {
         die("xmalloc");
-    }    
+    }
     return p;
 }
 
 void *xmalloc0(size_t size)
 {
-   
+
     void *p = calloc(1, size);
-    if(!p){
+    if (!p) {
         die("xmalloc0");
-    }    
+    }
+    return p;
+}
+
+void *xcalloc(size_t nmemb, size_t size)
+{
+    void *p = calloc(nmemb, size);
+    if (!p) {
+        die("xcalloc");
+    }
     return p;
 }

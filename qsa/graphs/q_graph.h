@@ -20,15 +20,25 @@ extern "C" {
         bool directed;
         bool weighed;
     } q_graph;
+    
+    typedef struct{
+        int nv;
+        int s;        
+        bool *marked;        
+        int *distance;
+    } q_graph_paths;
 
     typedef void (*visit_fn)(q_graph *g, q_graph_edge *e, void *arg);
 
-    void q_graph_init(q_graph *g, int nv, bool directed, bool weighed);
-    void q_graph_destroy(q_graph *g);
+    q_graph *q_graph_new(int nv, bool directed, bool weighed);    
+    void q_graph_free(q_graph *g);
     void q_graph_add_edge(q_graph *g, int a, int b, double weight);
     void q_graph_print(q_graph *g);
+    
     void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg);
     void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg);
+    
+    void q_graph_bfs_paths(q_graph *g, int s, q_graph_paths *paths);
 
 #ifdef __cplusplus
 }
