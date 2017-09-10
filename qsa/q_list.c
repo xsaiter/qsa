@@ -6,20 +6,27 @@
 #include <assert.h>
 
 #include "q_list.h"
+#include "q_utils.h"
 
-void q_list_init(q_list *list)
+q_list *q_list_new()
 {
+    q_list *list = xmalloc(sizeof(q_list));
+    
     list->len = 0;
     list->head = list->tail = NULL;
+    
+    return list;
 }
 
-void q_list_destroy(q_list *list)
+void q_list_free(q_list *list)
 {
     q_list_node *e = list->head;
     while (e) {
         free(e);
         e = e->next;
     }
+    
+    free(list);
 }
 
 void q_list_prepend(q_list *list, void *data)

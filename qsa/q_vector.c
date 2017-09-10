@@ -2,17 +2,23 @@
 #include <stdlib.h>
 
 #include"q_vector.h"
+#include "q_utils.h"
 
-void q_vector_init(q_vector *v, size_t capacity)
+q_vector *q_vector_new(size_t capacity)
 {
+    q_vector *v = xmalloc(sizeof(q_vector));
+    
     v->len = 0;
     v->capacity = capacity;
     v->elems = malloc(v->capacity * sizeof (void*));
+    
+    return v;
 }
 
-void q_vector_destroy(q_vector *v)
+void q_vector_free(q_vector *v)
 {
     free(v->elems);
+    free(v);
 }
 
 static void q_vector_resize(q_vector *v, int new_capacity)

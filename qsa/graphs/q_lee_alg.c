@@ -14,7 +14,7 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
     int dx[Q_DIRECTIONS] = {1, 0, -1, 0};
     int dy[Q_DIRECTIONS] = {0, -1, 0, 1};
 
-    q_queue q;
+    q_queue *q = q_queue_new();
 
     int bx = opts->beg_x;
     int by = opts->beg_y;
@@ -36,15 +36,15 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
     cc[bx][by].y = by;
     cc[bx][by].visited = true;
 
-    q_queue_enq(&q, &cc[bx][by]);
+    q_queue_enq(q, &cc[bx][by]);
 
     int x, y, num, nx, ny;
 
     bool stop = false;
 
-    while (!stop && !q_queue_empty(&q)) {
+    while (!stop && !q_queue_empty(q)) {
 
-        q_lee_cell *c = q_queue_deq(&q);
+        q_lee_cell *c = q_queue_deq(q);
         x = c->x;
         y = c->y;
         num = c->n + 1;
@@ -64,12 +64,12 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
                     break;
                 }
 
-                q_queue_enq(&q, &cc[nx][ny]);
+                q_queue_enq(q, &cc[nx][ny]);
             }
         }
     }
 
-    q_queue_destroy(&q);
+    q_queue_free(q);
 
     if (!stop) {
         return false;

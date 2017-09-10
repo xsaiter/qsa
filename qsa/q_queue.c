@@ -3,16 +3,18 @@
 #include <stdbool.h>
 
 #include "q_queue.h"
+#include "q_utils.h"
 
-void q_queue_init(q_queue *q){    
-    q->list = malloc(sizeof(q_list));
-    q_list_init(q->list);
+q_queue *q_queue_new(){    
+    q_queue *q = xmalloc(sizeof(q_queue));
+    q->list = q_list_new();
+    return q;
 }
 
-void q_queue_destroy(q_queue *q)
+void q_queue_free(q_queue *q)
 {
-    q_list_destroy(q->list);
-    free(q->list);
+    q_list_free(q->list);
+    free(q);
 }
 
 void q_queue_enq(q_queue *q, void *data)

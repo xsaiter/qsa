@@ -11,8 +11,8 @@ extern "C" {
         q_list *list;
     } q_queue;
     
-    void q_queue_init(q_queue *q);    
-    void q_queue_destroy(q_queue *q);
+    q_queue *q_queue_new();    
+    void q_queue_free(q_queue *q);
     void q_queue_enq(q_queue *q, void *data);
     void *q_queue_deq(q_queue *q);
     bool q_queue_empty(q_queue *q);

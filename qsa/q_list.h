@@ -19,8 +19,8 @@ extern "C" {
         size_t len;
     } q_list;
     
-    void q_list_init(q_list *list);
-    void q_list_destroy(q_list *list);    
+    q_list *q_list_new();
+    void q_list_free(q_list *list);
     
     void q_list_prepend(q_list *list, void *data);
     void q_list_append(q_list *list, void *data);    

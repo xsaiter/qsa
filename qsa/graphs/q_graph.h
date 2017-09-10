@@ -19,16 +19,11 @@ extern "C" {
         int ne; // number of edges
         bool directed;
         bool weighed;
-    } q_graph;
-    
-    typedef struct{
-        int nv;
-        int s;        
-        bool *marked;        
-        int *distance;
-    } q_graph_paths;
+    } q_graph;         
 
     typedef void (*visit_fn)(q_graph *g, q_graph_edge *e, void *arg);
+    
+    bool *q_graph_marked_alloc(const q_graph *g);
 
     q_graph *q_graph_new(int nv, bool directed, bool weighed);    
     void q_graph_free(q_graph *g);
@@ -36,9 +31,18 @@ extern "C" {
     void q_graph_print(q_graph *g);
     
     void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg);
-    void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg);
+    void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg);              
     
-    void q_graph_bfs_paths(q_graph *g, int s, q_graph_paths *paths);
+    typedef struct {
+        int nv; // number of vertices
+        int s; // source vertex
+        bool *marked; // exists paths
+        int *distance; // distance[i] - from s to i
+    } q_graph_paths;
+    
+    q_graph_paths *q_graph_paths_new(q_graph *g, int s);
+    void q_graph_paths_free(q_graph_paths *paths);
+    void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths);
 
 #ifdef __cplusplus
 }

@@ -12,9 +12,9 @@ extern "C" {
         size_t len;
         size_t capacity;
     } q_vector;
-    
-    void q_vector_init(q_vector *v, size_t capacity);
-    void q_vector_destroy(q_vector *v);
+        
+    q_vector *q_vector_new(size_t capacity);
+    void q_vector_free(q_vector *v);
     void q_vector_add(q_vector *v, void *elem);    
     void q_vector_set(q_vector *v, size_t index, void *elem);
     void *q_vector_get(q_vector *v, size_t index);

@@ -3,16 +3,18 @@
 #include <assert.h>
 
 #include "q_stack.h"
+#include "q_utils.h"
 
-void q_stack_init(q_stack *s){
-    s->list = malloc(sizeof(q_list));
-    q_list_init(s->list);
+q_stack *q_stack_new(){
+    q_stack *s = xmalloc(sizeof(q_stack));    
+    s->list = q_list_new();        
+    return s;
 }
 
-void q_stack_destroy(q_stack *s)
+void q_stack_free(q_stack *s)
 {
-    q_list_destroy(s->list);
-    free(s->list);
+    q_list_free(s->list);
+    free(s);
 }
 
 void q_stack_push(q_stack *s, void *data)
