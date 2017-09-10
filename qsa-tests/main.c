@@ -25,7 +25,7 @@ static void test_vector_int()
 {
     printf("\ntest vector int");
 
-    q_vector *v = q_vector_new(2);    
+    q_vector *v = q_vector_new(2);
 
     q_vector_add(v, Q_INT_TO_VOIDPTR(10));
     q_vector_add(v, Q_INT_TO_VOIDPTR(20));
@@ -37,7 +37,7 @@ static void test_vector_int()
         int s = Q_VOIDPTR_TO_INT(v->elems[i]);
         printf("%d\n", s);
     }
-    
+
     q_vector_free(v);
 }
 
@@ -45,7 +45,7 @@ static void test_vector_str()
 {
     printf("\ntest vector str");
 
-    q_vector *v = q_vector_new(2);    
+    q_vector *v = q_vector_new(2);
 
     q_vector_add(v, "aa");
     q_vector_add(v, "bb");
@@ -56,7 +56,7 @@ static void test_vector_str()
         char *s = v->elems[i];
         printf("%s\n", s);
     }
-    
+
     q_vector_free(v);
 }
 
@@ -64,7 +64,7 @@ static void test_queue()
 {
     printf("\ntest queue:\n");
 
-    q_queue *q = q_queue_new();    
+    q_queue *q = q_queue_new();
 
     q_queue_enq(q, Q_INT_TO_VOIDPTR(10));
     q_queue_enq(q, Q_INT_TO_VOIDPTR(20));
@@ -82,7 +82,7 @@ static void test_stack()
 {
     printf("\ntest stack:\n");
 
-    q_stack *s = q_stack_new();    
+    q_stack *s = q_stack_new();
 
     q_stack_push(s, Q_INT_TO_VOIDPTR(10));
     q_stack_push(s, Q_INT_TO_VOIDPTR(20));

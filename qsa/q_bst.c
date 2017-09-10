@@ -1,13 +1,11 @@
 #include <stdlib.h>
 
+#include "q_utils.h"
 #include "q_bst.h"
 
 static q_bst_node *_q_bst_node_create(int key)
 {
-    q_bst_node *node = malloc(sizeof (q_bst_node));
-    if (!node) {
-        return NULL;
-    }
+    q_bst_node *node = xmalloc(sizeof (q_bst_node));
     node->key = key;
     return node;
 }

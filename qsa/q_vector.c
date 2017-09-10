@@ -10,7 +10,7 @@ q_vector *q_vector_new(size_t capacity)
     
     v->len = 0;
     v->capacity = capacity;
-    v->elems = malloc(v->capacity * sizeof (void*));
+    v->elems = xmalloc(v->capacity * sizeof (void*));
     
     return v;
 }

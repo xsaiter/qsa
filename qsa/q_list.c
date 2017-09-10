@@ -31,11 +31,7 @@ void q_list_free(q_list *list)
 
 void q_list_prepend(q_list *list, void *data)
 {
-    q_list_node *node = malloc(sizeof (q_list_node));
-    if (!node) {
-        return;
-    }
-
+    q_list_node *node = xmalloc(sizeof (q_list_node));    
     node->data = data;
 
     if (list->len == 0) {
@@ -53,11 +49,7 @@ void q_list_prepend(q_list *list, void *data)
 
 void q_list_append(q_list *list, void *data)
 {
-    q_list_node *node = malloc(sizeof (q_list_node));
-    if (!node) {
-        return;
-    }
-
+    q_list_node *node = xmalloc(sizeof (q_list_node));
     node->data = data;
 
     if (list->len == 0) {
