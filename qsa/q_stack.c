@@ -5,10 +5,14 @@
 #include "q_stack.h"
 #include "q_utils.h"
 
-q_stack *q_stack_new(){
+q_stack *q_stack_new(size_t data_size){
     q_stack *s = xmalloc(sizeof(q_stack));    
-    s->list = q_list_new();        
+    s->list = q_list_new(data_size);
     return s;
+}
+
+inline q_stack *q_stack_new_int(){
+    return q_stack_new(sizeof(int));
 }
 
 void q_stack_free(q_stack *s)

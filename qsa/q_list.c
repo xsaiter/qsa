@@ -8,14 +8,28 @@
 #include "q_list.h"
 #include "q_utils.h"
 
-q_list *q_list_new()
+q_list *q_list_new(size_t data_size)
 {
-    q_list *list = xmalloc(sizeof(q_list));
-    
+    q_list *list = xmalloc(sizeof (q_list));
+
     list->len = 0;
+    list->data_size = data_size;
     list->head = list->tail = NULL;
-    
+
     return list;
+}
+
+q_list *q_List_new_int()
+{
+    return q_list_new(sizeof (int));
+}
+
+static q_list_node *node_new(q_list *list, void *data)
+{
+    q_list_node *node = xmalloc(sizeof (q_list_node));
+    node->data = xmalloc(list->data_size);
+    memcpy(node->data, data, list->data_size);
+    return node;
 }
 
 void q_list_free(q_list *list)
@@ -25,14 +39,13 @@ void q_list_free(q_list *list)
         free(e);
         e = e->next;
     }
-    
+
     free(list);
 }
 
 void q_list_prepend(q_list *list, void *data)
 {
-    q_list_node *node = xmalloc(sizeof (q_list_node));    
-    node->data = data;
+    q_list_node *node = node_new(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;
@@ -49,8 +62,7 @@ void q_list_prepend(q_list *list, void *data)
 
 void q_list_append(q_list *list, void *data)
 {
-    q_list_node *node = xmalloc(sizeof (q_list_node));
-    node->data = data;
+    q_list_node *node = node_new(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;

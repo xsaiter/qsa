@@ -25,16 +25,13 @@ static void test_vector_int()
 {
     printf("\ntest vector int");
 
-    q_vector *v = q_vector_new(2);
-
-    q_vector_add(v, Q_INT_TO_VOIDPTR(10));
-    q_vector_add(v, Q_INT_TO_VOIDPTR(20));
-    q_vector_add(v, Q_INT_TO_VOIDPTR(30));
-    q_vector_add(v, Q_INT_TO_VOIDPTR(40));
-    q_vector_add(v, Q_INT_TO_VOIDPTR(50));
-
+    q_vector *v = q_vector_new(2, sizeof(int));
+    for(int i = 10;i <= 50;i+=10){
+        q_vector_add(v, &i);
+    }
+   
     for (size_t i = 0; i < v->len; ++i) {
-        int s = Q_VOIDPTR_TO_INT(v->elems[i]);
+        int s = Q_VPTR_TO_INT(v->elems[i]);
         printf("%d\n", s);
     }
 
@@ -45,7 +42,7 @@ static void test_vector_str()
 {
     printf("\ntest vector str");
 
-    q_vector *v = q_vector_new(2);
+    q_vector *v = q_vector_new(2, sizeof(char*));
 
     q_vector_add(v, "aa");
     q_vector_add(v, "bb");
@@ -64,15 +61,14 @@ static void test_queue()
 {
     printf("\ntest queue:\n");
 
-    q_queue *q = q_queue_new();
+    q_queue *q = q_queue_new_int();
+    
+    for(int i = 10; i<= 30; i+=10){
+        q_queue_enq(q, &i);
+    }   
 
-    q_queue_enq(q, Q_INT_TO_VOIDPTR(10));
-    q_queue_enq(q, Q_INT_TO_VOIDPTR(20));
-    q_queue_enq(q, Q_INT_TO_VOIDPTR(30));
-
-    while (!q_queue_empty(q)) {
-        int elt = Q_VOIDPTR_TO_INT(q_queue_deq(q));
-        printf("%d ", elt);
+    while (!q_queue_empty(q)) {             
+        printf("%d ", Q_VPTR_TO_INT(q_queue_deq(q)));
     }
 
     q_queue_free(q);
@@ -82,15 +78,14 @@ static void test_stack()
 {
     printf("\ntest stack:\n");
 
-    q_stack *s = q_stack_new();
+    q_stack *s = q_stack_new_int();
+    
+    for(int i = 10; i< 30; i+=10){
+        q_stack_push(s, &i);
+    }
 
-    q_stack_push(s, Q_INT_TO_VOIDPTR(10));
-    q_stack_push(s, Q_INT_TO_VOIDPTR(20));
-    q_stack_push(s, Q_INT_TO_VOIDPTR(30));
-
-    while (!q_stack_empty(s)) {
-        int elt = Q_VOIDPTR_TO_INT(q_stack_pop(s));
-        printf("%d ", elt);
+    while (!q_stack_empty(s)) {        
+        printf("%d ", Q_VPTR_TO_INT(q_stack_pop(s)));
     }
 
     q_stack_free(s);
@@ -169,7 +164,7 @@ static void test_graph_paths()
 }
 
 int main(int argc, char** argv)
-{
+{        
     test_graph_bfs();
     test_graph_dfs();
     test_queue();

@@ -5,10 +5,14 @@
 #include "q_queue.h"
 #include "q_utils.h"
 
-q_queue *q_queue_new(){    
-    q_queue *q = xmalloc(sizeof(q_queue));
-    q->list = q_list_new();
+q_queue *q_queue_new(size_t data_size){    
+    q_queue *q = xmalloc(sizeof(q_queue));    
+    q->list = q_list_new(data_size);
     return q;
+}
+
+inline q_queue *q_queue_new_int(){
+    return q_queue_new(sizeof(int));
 }
 
 void q_queue_free(q_queue *q)

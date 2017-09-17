@@ -1,8 +1,7 @@
 #ifndef Q_UTILS_H
 #define Q_UTILS_H
 
-#define Q_INT_TO_VOIDPTR(i) ((void*) (long) (i))
-#define Q_VOIDPTR_TO_INT(p) ((int)(long)(p))
+#define Q_VPTR_TO_INT(p) (*(int*)(p))
 
 #ifdef __cplusplus
 extern "C" {

@@ -17,9 +17,10 @@ extern "C" {
         q_list_node *head;
         q_list_node *tail;
         size_t len;
+        size_t data_size;
     } q_list;
     
-    q_list *q_list_new();
+    q_list *q_list_new(size_t data_size);
     void q_list_free(q_list *list);
     
     void q_list_prepend(q_list *list, void *data);
@@ -33,6 +34,8 @@ extern "C" {
     
     void q_list_for_each(q_list *list, void (*f)(void *data));    
     bool q_list_empty(q_list *list);
+    
+    q_list *q_List_new_int();
 
 #ifdef __cplusplus
 }

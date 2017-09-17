@@ -75,18 +75,18 @@ void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg)
 {
     bool *marked = q_graph_marked_alloc(g);
     
-    q_queue *q = q_queue_new();    
-    q_queue_enq(q, Q_INT_TO_VOIDPTR(s));    
+    q_queue *q = q_queue_new_int();
+    q_queue_enq(q, &s);    
 
     while (!q_queue_empty(q)) {
-        int i = Q_VOIDPTR_TO_INT(q_queue_deq(q));
+        int i = Q_VPTR_TO_INT(q_queue_deq(q));
 
         q_graph_edge *e = g->adj[i];
 
         while (e) {
             if (!marked[e->b]) {
                 visit(g, e, arg);
-                q_queue_enq(q, Q_INT_TO_VOIDPTR(e->b));
+                q_queue_enq(q, &(e->b));
             }
             e = e->next;
         }
@@ -123,17 +123,17 @@ void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg)
 
 void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
 {        
-    q_queue *q = q_queue_new();    
-    q_queue_enq(q, Q_INT_TO_VOIDPTR(paths->s));
+    q_queue *q = q_queue_new_int();
+    q_queue_enq(q, &(paths->s));
 
     while (!q_queue_empty(q)) {
-        int i = Q_VOIDPTR_TO_INT(q_queue_deq(q));
+        int i = Q_VPTR_TO_INT(q_queue_deq(q));
 
         q_graph_edge *e = g->adj[i];
 
         while (e) {
             if (!paths->marked[e->b]) {                
-                q_queue_enq(q, Q_INT_TO_VOIDPTR(e->b));
+                q_queue_enq(q, &(e->b));
                 paths->distance[e->b] = paths->distance[i] + 1;
             }
             e = e->next;

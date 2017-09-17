@@ -9,7 +9,7 @@ inline void die(const char *text)
     exit(EXIT_FAILURE);
 }
 
-void *xmalloc(size_t size)
+    void *xmalloc(size_t size)
 {
     void *p = malloc(size);
     if (!p) {
