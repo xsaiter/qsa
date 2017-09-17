@@ -19,7 +19,7 @@ q_list *q_list_new(size_t data_size)
     return list;
 }
 
-q_list *q_List_new_int()
+q_list *q_list_new_int()
 {
     return q_list_new(sizeof (int));
 }

@@ -35,7 +35,7 @@ extern "C" {
     void q_list_for_each(q_list *list, void (*f)(void *data));    
     bool q_list_empty(q_list *list);
     
-    q_list *q_List_new_int();
+    q_list *q_list_new_int();
 
 #ifdef __cplusplus
 }
