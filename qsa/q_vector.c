@@ -44,8 +44,7 @@ static void q_vector_resize(q_vector *v, int new_capacity)
 }
 
 void q_vector_add(q_vector *v, void *elem)
-{
-    int elt = *(int*) elem;
+{    
     if (v->len == v->capacity) {
         q_vector_resize(v, v->capacity * 2);
     }

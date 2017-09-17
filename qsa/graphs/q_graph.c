@@ -121,6 +121,25 @@ void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg)
     free(marked);
 }
 
+q_graph_paths *q_graph_paths_new(q_graph *g, int s)
+{
+    q_graph_paths *paths = xmalloc(sizeof(q_graph_paths));
+    
+    paths->marked = q_graph_marked_alloc(g);
+    paths->distance = xmalloc0(g->nv);
+    paths->s = s;
+    paths->nv = g->nv;    
+    
+    return paths;
+}
+
+void q_graph_paths_free(q_graph_paths *paths)
+{
+    free(paths->distance);
+    free(paths->marked);
+    free(paths);
+}
+
 void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
 {        
     q_queue *q = q_queue_new_int();
@@ -143,23 +162,4 @@ void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
     }
     
     q_queue_free(q);
-}
-
-q_graph_paths *q_graph_paths_new(q_graph *g, int s)
-{
-    q_graph_paths *paths = xmalloc(sizeof(q_graph_paths));
-    
-    paths->marked = q_graph_marked_alloc(g);
-    paths->distance = xmalloc0(g->nv);
-    paths->s = s;
-    paths->nv = g->nv;    
-    
-    return paths;
-}
-
-void q_graph_paths_free(q_graph_paths *paths)
-{
-    free(paths->distance);
-    free(paths->marked);
-    free(paths);
 }
