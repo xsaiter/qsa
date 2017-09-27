@@ -126,7 +126,7 @@ q_graph_paths *q_graph_paths_new(q_graph *g, int s)
     q_graph_paths *paths = xmalloc(sizeof(q_graph_paths));
     
     paths->marked = q_graph_marked_alloc(g);
-    paths->distance = xmalloc0(g->nv);
+    paths->dist = xmalloc0(g->nv);
     paths->s = s;
     paths->nv = g->nv;    
     
@@ -135,12 +135,12 @@ q_graph_paths *q_graph_paths_new(q_graph *g, int s)
 
 void q_graph_paths_free(q_graph_paths *paths)
 {
-    free(paths->distance);
+    free(paths->dist);
     free(paths->marked);
     free(paths);
 }
 
-void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
+void q_graph_paths_bfs(q_graph *g, q_graph_paths *paths)
 {        
     q_queue *q = q_queue_new_int();
     q_queue_enq(q, &(paths->s));
@@ -153,7 +153,7 @@ void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
         while (e) {
             if (!paths->marked[e->b]) {                
                 q_queue_enq(q, &(e->b));
-                paths->distance[e->b] = paths->distance[i] + 1;
+                paths->dist[e->b] = paths->dist[i] + 1;
             }
             e = e->next;
         }
@@ -162,4 +162,22 @@ void q_graph_bfs_paths(q_graph *g, q_graph_paths *paths)
     }
     
     q_queue_free(q);
+}
+
+static void paths_dfs(q_graph *g, q_graph_paths *paths, int i){
+    paths->marked[i] = true;
+    q_graph_edge *e = g->adj[i];
+    
+    while(e){
+        if(!paths->marked[e->b]){
+            paths->dist[e->b] = paths->dist[i] + 1;
+            paths_dfs(g, paths, e->b);
+        }
+        e = e->next;
+    }
+}
+
+void q_graph_paths_dfs(q_graph *g, q_graph_paths *paths)
+{
+    paths_dfs(g, paths, paths->s);
 }

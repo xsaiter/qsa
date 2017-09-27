@@ -153,10 +153,10 @@ static void test_graph_paths()
 
     int s = 1;
     q_graph_paths *paths = q_graph_paths_new(g, s);
-    q_graph_bfs_paths(g, paths);
+    q_graph_paths_bfs(g, paths);
 
     for (int i = 0; i < g->nv; ++i) {
-        printf("\ndistance from %d to %d = %d", s, i, paths->distance[i]);
+        printf("\ndistance from %d to %d = %d", s, i, paths->dist[i]);
     }
 
     q_graph_paths_free(paths);
