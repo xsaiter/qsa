@@ -129,7 +129,7 @@ static void test_graph_bfs()
 
     q_graph *g = test_make_graph();
 
-    q_graph_bfs(g, 1, q_visit, NULL);
+    q_graph_traversal_bfs(g, 1, q_visit, NULL);
 
     q_graph_free(g);
 }
@@ -140,7 +140,7 @@ static void test_graph_dfs()
 
     q_graph *g = test_make_graph();
 
-    q_graph_dfs(g, 1, q_visit, NULL);
+    q_graph_traversal_dfs(g, 1, q_visit, NULL);
 
     q_graph_free(g);
 }

@@ -71,7 +71,7 @@ inline bool *q_graph_marked_alloc(const q_graph *g)
     return calloc(g->nv, sizeof (bool));
 }
 
-void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg)
+void q_graph_traversal_bfs(q_graph *g, int s, visit_fn visit, void *arg)
 {
     bool *marked = q_graph_marked_alloc(g);
     
@@ -114,7 +114,7 @@ static void dfs(q_graph *g, int i, bool *marked, visit_fn visit, void *arg)
     }
 }
 
-void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg)
+void q_graph_traversal_dfs(q_graph *g, int s, visit_fn visit, void *arg)
 {
     bool *marked = q_graph_marked_alloc(g);
     dfs(g, s, marked, visit, arg);

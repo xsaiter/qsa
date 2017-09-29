@@ -30,13 +30,13 @@ extern "C" {
     void q_graph_add_edge(q_graph *g, int a, int b, double weight);
     void q_graph_print(q_graph *g);
 
-    void q_graph_bfs(q_graph *g, int s, visit_fn visit, void *arg);
-    void q_graph_dfs(q_graph *g, int s, visit_fn visit, void *arg);
+    void q_graph_traversal_bfs(q_graph *g, int s, visit_fn visit, void *arg);
+    void q_graph_traversal_dfs(q_graph *g, int s, visit_fn visit, void *arg);
 
     typedef struct {
         int nv; // number of vertices
         int s; // source vertex
-        bool *marked; // exists paths
+        bool *marked; // marked[i] - exists paths from s to i
         int *dist; // dist[i] - distance from s to i
     } q_graph_paths;
 
@@ -47,10 +47,9 @@ extern "C" {
     void q_graph_paths_dfs(q_graph *g, q_graph_paths *paths);
     
     typedef struct {
-        int nv;
-        int s;
-        int *dist;
-        q_graph_edge *edges;
+        int nv; // number of vertices
+        int s; // source vertex
+        int *dist; // dist[i] - distance from s to i
     } q_graph_shortest_paths;
 
 #ifdef __cplusplus
