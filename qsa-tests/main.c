@@ -7,6 +7,7 @@
 
 #include "str/q_str.h"
 #include "graphs/q_graph.h"
+#include "q_pqueue.h"
 
 #include "q_queue.h"
 #include "q_stack.h"
@@ -163,6 +164,53 @@ static void test_graph_paths()
     q_graph_free(g);
 }
 
+int q_compare_int(void *lhs, void *rhs){
+    int v1 = Q_VPTR_TO_INT(lhs);
+    int v2 = Q_VPTR_TO_INT(rhs);
+    
+    if(v1 < v2){
+        return -1;
+    }
+    if(v1  > v2){
+        return 1;
+    }
+    return 0;
+}
+
+static void test_priority_queue()
+{    
+    
+    /*q_priority_queue *pq = q_priority_queue_new(sizeof(int), &compare_int);
+    
+    int x = 10;
+    q_priority_queue_add(pq, &x);
+    
+    x = 20;
+    q_priority_queue_add(pq, &x);
+    
+    x = 5;
+    q_priority_queue_add(pq, &x);
+    
+    x = 2;
+    q_priority_queue_add(pq, &x);
+    
+    x = 30;
+    q_priority_queue_add(pq, &x);
+    
+    int ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
+    printf("\n%d", ext);
+    int t1 = q_priority_queue_remove(pq, &ext);    
+    
+    ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
+    printf("\n%d", ext);
+    q_priority_queue_remove(pq, &ext);
+    int t2 = q_priority_queue_remove(pq, &ext);    
+    
+    ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
+    printf("\n%d", ext);
+    q_priority_queue_remove(pq, &ext);*/
+}
+
 int main(int argc, char** argv)
 {        
     test_graph_bfs();
@@ -173,5 +221,8 @@ int main(int argc, char** argv)
     test_vector_str();
     test_graph_print();
     test_graph_paths();
+    
+    test_priority_queue();
+    
     return (EXIT_SUCCESS);
 }

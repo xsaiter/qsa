@@ -49,8 +49,12 @@ extern "C" {
     typedef struct {
         int nv; // number of vertices
         int s; // source vertex
-        int *dist; // dist[i] - distance from s to i
+        double *dist; // dist[i] - distance from s to i
+        q_graph_edge *edges;
     } q_graph_shortest_paths;
+        
+    bool q_graph_shortest_paths_to(q_graph_shortest_paths *paths, int v);
+    double q_graph_shortest_paths_distance_to(q_graph_shortest_paths *paths, int v);
 
 #ifdef __cplusplus
 }
