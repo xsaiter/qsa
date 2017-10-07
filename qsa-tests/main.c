@@ -211,8 +211,14 @@ static void test_heap(){
     
     q_heap_add(heap, &x);
     
-    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));
-    int tmp = y2;
+    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));    
+    
+    x = 5;
+    
+    q_heap_add(heap, &x);
+    
+    int y3 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int t = y3;
 }
 
 int main(int argc, char** argv)

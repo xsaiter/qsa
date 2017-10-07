@@ -16,7 +16,7 @@ extern "C" {
     } q_heap;
 
     q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *compare);
-    q_heap q_heap_free(q_heap* h);
+    void q_heap_free(q_heap* h);
     void q_heap_add(q_heap *h, void *elem);
     void *q_heap_top(q_heap *h);
     void *q_heap_extract(q_heap *h);
