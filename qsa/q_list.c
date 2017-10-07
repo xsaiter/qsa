@@ -114,7 +114,7 @@ void q_list_remove_node(q_list *list, q_list_node *node)
     list->len--;
 }
 
-q_list_node *q_list_find_by(q_list *list, void *data, equals_fn *equals)
+q_list_node *q_list_find_by(q_list *list, void *data, q_equals_fn *equals)
 {
     q_list_node *cur;
     cur = list->head;

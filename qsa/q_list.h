@@ -30,7 +30,7 @@ extern "C" {
     bool q_list_remove(q_list *list, void *data);
     void q_list_remove_node(q_list *list, q_list_node *node);    
     
-    q_list_node *q_list_find_by(q_list *list, void *data, equals_fn *equals);
+    q_list_node *q_list_find_by(q_list *list, void *data, q_equals_fn *equals);
     q_list_node *q_list_find(q_list *list, void *data);
     
     void q_list_for_each(q_list *list, void (*f)(void *data));    

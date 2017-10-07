@@ -15,8 +15,8 @@ extern "C" {
     void *xmalloc0(size_t size);    
     void *xcalloc(size_t nmemb, size_t size);
 
-    typedef int (compare_fn) (const void *l, const void *r);
-    typedef bool (equals_fn) (const void *l, const void *r);
+    typedef int (q_compare_fn) (const void *l, const void *r);
+    typedef bool (q_equals_fn) (const void *l, const void *r);
     int q_compare_int(const void *l, const void *r);
 
 #ifdef __cplusplus
