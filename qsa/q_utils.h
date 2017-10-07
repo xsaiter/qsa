@@ -9,16 +9,14 @@
 extern "C" {
 #endif
 
-    void die(const char*text);
-    void *xmalloc(size_t size);
-    void *xmalloc0(size_t size);
+    void die(const char*text);    
+    void *xmalloc(size_t size);    
+    void *xmalloc0(size_t size);    
     void *xcalloc(size_t nmemb, size_t size);
 
-    typedef int (compare_fn) (void *lhs, void *rhs);
-
-    typedef bool (equals_fn) (void *lhs, void *rhs);
-
-    int q_compare_int(void *lhs, void *rhs);
+    typedef int (compare_fn) (const void *l, const void *r);
+    typedef bool (equals_fn) (const void *l, const void *r);
+    int q_compare_int(const void *l, const void *r);
 
 #ifdef __cplusplus
 }

@@ -7,10 +7,11 @@
 
 #include "str/q_str.h"
 #include "graphs/q_graph.h"
-#include "q_pqueue.h"
 
 #include "q_queue.h"
 #include "q_stack.h"
+
+#include "q_heap.h"
 
 struct person {
     int age;
@@ -164,19 +165,6 @@ static void test_graph_paths()
     q_graph_free(g);
 }
 
-int q_compare_int(void *lhs, void *rhs){
-    int v1 = Q_VPTR_TO_INT(lhs);
-    int v2 = Q_VPTR_TO_INT(rhs);
-    
-    if(v1 < v2){
-        return -1;
-    }
-    if(v1  > v2){
-        return 1;
-    }
-    return 0;
-}
-
 static void test_priority_queue()
 {    
     
@@ -211,8 +199,26 @@ static void test_priority_queue()
     q_priority_queue_remove(pq, &ext);*/
 }
 
+static void test_heap(){
+    int x = 10;
+    
+    q_heap *heap = q_heap_new(10, sizeof(int), &q_compare_int);
+    q_heap_add(heap, &x);
+    
+    int y = Q_VPTR_TO_INT(q_heap_top(heap));
+    
+    x = 20;
+    
+    q_heap_add(heap, &x);
+    
+    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int tmp = y2;
+}
+
 int main(int argc, char** argv)
-{        
+{     
+    test_heap();
+    /*
     test_graph_bfs();
     test_graph_dfs();
     test_queue();
@@ -223,6 +229,6 @@ int main(int argc, char** argv)
     test_graph_paths();
     
     test_priority_queue();
-    
+    */
     return (EXIT_SUCCESS);
 }

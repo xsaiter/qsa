@@ -37,9 +37,9 @@ void *xcalloc(size_t nmemb, size_t size)
     return p;
 }
 
-int q_compare_int(void *lhs, void *rhs) {
-        int lv = Q_VPTR_TO_INT(lhs);
-        int rv = Q_VPTR_TO_INT(rhs);
+int q_compare_int(const void *l, const void *r) {
+        int lv = Q_VPTR_TO_INT(l);
+        int rv = Q_VPTR_TO_INT(r);
 
         if (lv < rv) {
             return -1;
