@@ -11,6 +11,8 @@ extern "C" {
     } q_dict_pair;
 
     typedef struct {
+        q_dict_pair **pairs;
+        int len;
     } q_dict;
 
 
