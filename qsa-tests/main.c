@@ -199,26 +199,56 @@ static void test_priority_queue()
     q_priority_queue_remove(pq, &ext);*/
 }
 
-static void test_heap(){
-    int x = 10;
-    
+static void test_heap(){        
     q_heap *heap = q_heap_new(10, sizeof(int), &q_compare_int);
+    
+    int x = 10;
+    q_heap_add(heap, &x);        
+    
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    
+    x = 20;    
+    q_heap_add(heap, &x);        
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    
+    x = 5;    
     q_heap_add(heap, &x);
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
     
-    int y = Q_VPTR_TO_INT(q_heap_top(heap));
-    
-    x = 20;
-    
+    x = 30;    
     q_heap_add(heap, &x);
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
     
-    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));    
-    
-    x = 5;
-    
+    x = 40;    
     q_heap_add(heap, &x);
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
     
-    int y3 = Q_VPTR_TO_INT(q_heap_top(heap));
-    int t = y3;
+    x = 2;    
+    q_heap_add(heap, &x);
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    
+    printf("\n");
+    
+    int y1 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y1);
+    
+    int y2 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y2);
+    
+    int y3 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y3);
+    
+    int y4 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y4);
+    
+    int y5 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y5);
+    
+    int y6 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    printf("%d -> ", y6);
+    
+    int tmp = y3;
+       
 }
 
 int main(int argc, char** argv)

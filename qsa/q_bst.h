@@ -1,6 +1,7 @@
 /*
  * binary search tree
  */
+
 #ifndef Q_BST_H
 #define Q_BST_H
 
@@ -19,10 +20,10 @@ extern "C" {
         q_bst_node *root;
     } q_bst;
             
-    void q_bst_destroy(q_bst *tree);
-    q_bst_node *q_bst_find(q_bst *tree, int key);
-    void q_bst_add(q_bst *tree, int key);    
-    void q_bst_remove(q_bst *tree, int key);            
+    void q_bst_destroy(q_bst *t);
+    q_bst_node *q_bst_find(q_bst *t, int key);
+    void q_bst_add(q_bst *t, int key);    
+    void q_bst_remove(q_bst *t, int key);
 
 #ifdef __cplusplus
 }

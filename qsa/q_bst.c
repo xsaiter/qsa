@@ -10,7 +10,7 @@ static q_bst_node *_q_bst_node_create(int key)
     return node;
 }
 
-static void _q_add_node(q_bst *tree, int key, q_bst_node *node)
+static void _q_add_node(q_bst *t, int key, q_bst_node *node)
 {
     if (node->key == key) {
         return;
@@ -20,29 +20,29 @@ static void _q_add_node(q_bst *tree, int key, q_bst_node *node)
         if (!node->left) {
             node->left = _q_bst_node_create(key);
         } else {
-            _q_add_node(tree, key, node->left);
+            _q_add_node(t, key, node->left);
         }
     } else {
         if (!node->right) {
             node->right = _q_bst_node_create(key);
         } else {
-            _q_add_node(tree, key, node->right);
+            _q_add_node(t, key, node->right);
         }
     }
 }
 
-void q_bst_add(q_bst *tree, int key)
+void q_bst_add(q_bst *t, int key)
 {
-    if (!tree->root) {
-        tree->root = _q_bst_node_create(key);
+    if (!t->root) {
+        t->root = _q_bst_node_create(key);
     } else {
-        _q_add_node(tree, key, tree->root);
+        _q_add_node(t, key, t->root);
     }
 }
 
-q_bst_node* q_bst_find(q_bst *tree, int key)
+q_bst_node *q_bst_find(q_bst *t, int key)
 {
-    q_bst_node *r = tree->root;
+    q_bst_node *r = t->root;
 
     while (r) {
         if (r->key == key) {
@@ -67,10 +67,10 @@ static q_bst_node *min(q_bst_node *z)
     return x;
 }
 
-static void q_transplant(q_bst *tree, q_bst_node *a, q_bst_node *b)
+static void transplant(q_bst *t, q_bst_node *a, q_bst_node *b)
 {
     if (!a->parent) {
-        tree->root = b;
+        t->root = b;
     } else if (a == a->parent->left) {
         a->parent->left = b;
     } else {
@@ -82,11 +82,11 @@ static void q_transplant(q_bst *tree, q_bst_node *a, q_bst_node *b)
     }
 }
 
-static void _q_bst_remove_for(q_bst *tree, q_bst_node *z)
+static void _q_bst_remove_for(q_bst *t, q_bst_node *z)
 {
     if (!z->left && !z->right) {
         if (!z->parent) {
-            tree->root = NULL;
+            t->root = NULL;
         } else {
             if (z->parent->right == z) {
                 z->parent->right = NULL;
@@ -95,42 +95,42 @@ static void _q_bst_remove_for(q_bst *tree, q_bst_node *z)
             }
         }
     } else if (!z->left) {
-        q_transplant(tree, z, z->right);
+        transplant(t, z, z->right);
     } else if (!z->right) {
-        q_transplant(tree, z, z->left);
+        transplant(t, z, z->left);
     } else {
         q_bst_node *m = min(z->right);
 
         if (m->parent != z) {
-            q_transplant(tree, m, m->right);
+            transplant(t, m, m->right);
             m->right = z->right;
             m->right->parent = m;
         }
 
-        q_transplant(tree, z, m);
+        transplant(t, z, m);
         m->left = z->left;
         m->left->parent = m;
     }
 }
 
-static void _q_bst_remove(q_bst *tree, int key, q_bst_node *node)
+static void _q_bst_remove(q_bst *t, int key, q_bst_node *node)
 {
     if (node) {
         if (node->key > key) {
-            _q_bst_remove(tree, key, node->left);
+            _q_bst_remove(t, key, node->left);
         } else if (node->key < key) {
-            _q_bst_remove(tree, key, node->right);
+            _q_bst_remove(t, key, node->right);
         } else {
-            _q_bst_remove_for(tree, node);
+            _q_bst_remove_for(t, node);
         }
     }
 }
 
-void q_bst_remove(q_bst *tree, int key)
+void q_bst_remove(q_bst *t, int key)
 {
-    _q_bst_remove(tree, key, tree->root);
+    _q_bst_remove(t, key, t->root);
 }
 
-void q_bst_destroy(q_bst *tree)
+void q_bst_destroy(q_bst *t)
 {
 }

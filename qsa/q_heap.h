@@ -12,10 +12,10 @@ extern "C" {
         int len;
         size_t elem_size;
         void **elems;
-        compare_fn *compare;
+        compare_fn *cmp;
     } q_heap;
 
-    q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *compare);
+    q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *cmp);
     void q_heap_free(q_heap* h);
     void q_heap_add(q_heap *h, void *elem);
     void *q_heap_top(q_heap *h);

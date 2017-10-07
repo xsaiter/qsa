@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #define Q_VPTR_TO_INT(p) (*(int*)(p))
+#define Q_VPTR_TO_LONG(p) (*(long*)(p))
 
 #ifdef __cplusplus
 extern "C" {
