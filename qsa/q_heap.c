@@ -10,7 +10,7 @@
 #define Q_RIGHT(x) (2*(x) + 2)
 #define Q_PARENT(x) ((x)/2)
 
-q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *compare)
+q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *cmp)
 {
     q_heap *h = xmalloc(sizeof (q_heap));
 
@@ -21,7 +21,7 @@ q_heap *q_heap_new(int capacity, size_t elem_size, compare_fn *compare)
     for (int i = 0; i < h->capacity; ++i) {
         h->elems[i] = xmalloc(h->elem_size);
     }
-    h->cmp = compare;
+    h->cmp = cmp;
 
     return h;
 }
