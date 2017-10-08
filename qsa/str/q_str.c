@@ -125,7 +125,7 @@ int *q_str_z_func(const char *s, size_t *res_size)
     return res;
 }
 
-bool q_check_balanced_round_brackets(char *s)
+bool q_str_check_balanced_round_brackets(char *s)
 {
     int n = 0;
     while (*s != '\0') {

@@ -3,6 +3,8 @@
 
 #include "q_utils.h"
 
+#define FNV_32_PRIME (0x01000193)
+
 inline void die(const char *text)
 {
     perror(text);
@@ -47,6 +49,28 @@ int q_compare_int(const void *l, const void *r)
     }
     if (lv < rv) {
         return -1;
-    }    
+    }
     return 0;
+}
+
+bool q_equals_int(const void *l, const void *r)
+{
+    return q_compare_int(l, r) == 0;
+}
+
+unsigned int q_hash_str(const void *arg)
+{
+    return fnv1_hash((char*)arg);
+}
+
+unsigned int fnv1_hash(char *buf)
+{
+    unsigned int hval = 0x811c9dc5;
+
+    while (*buf) {
+        hval ^= (unsigned int) *buf++;
+        hval *= FNV_32_PRIME;
+    }
+
+    return hval;
 }

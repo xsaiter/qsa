@@ -19,7 +19,7 @@ extern "C" {
     int *q_str_prefix_func(const char *s, size_t *rsize);
     int *q_str_z_func(const char *s, size_t *rsize);
 
-    bool q_check_balanced_round_brackets(char *s);    
+    bool q_str_check_balanced_round_brackets(char *s);    
     
     int q_str_boyer_moore(const char *s, const char *p);
     int q_str_kmp(const char *s, const char *p);    

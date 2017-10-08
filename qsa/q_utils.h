@@ -17,7 +17,14 @@ extern "C" {
 
     typedef int (q_compare_fn) (const void *l, const void *r);
     typedef bool (q_equals_fn) (const void *l, const void *r);
+    
+    typedef unsigned int (q_hash_fn)(const void *arg);
+    
     int q_compare_int(const void *l, const void *r);
+    bool q_equals_int(const void *l, const void *r);
+    unsigned int q_hash_str(const void *arg);
+    
+    unsigned int fnv1_hash(char *buf);
 
 #ifdef __cplusplus
 }

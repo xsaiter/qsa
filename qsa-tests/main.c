@@ -13,6 +13,8 @@
 
 #include "q_heap.h"
 
+#include "q_dict.h"
+
 struct person {
     int age;
 };
@@ -27,11 +29,11 @@ static void test_vector_int()
 {
     printf("\ntest vector int");
 
-    q_vector *v = q_vector_new(2, sizeof(int));
-    for(int i = 10;i <= 50;i+=10){
+    q_vector *v = q_vector_new(2, sizeof (int));
+    for (int i = 10; i <= 50; i += 10) {
         q_vector_add(v, &i);
     }
-   
+
     for (size_t i = 0; i < v->len; ++i) {
         int s = Q_VPTR_TO_INT(v->elems[i]);
         printf("%d\n", s);
@@ -44,7 +46,7 @@ static void test_vector_str()
 {
     printf("\ntest vector str");
 
-    q_vector *v = q_vector_new(2, sizeof(char*));
+    q_vector *v = q_vector_new(2, sizeof (char*));
 
     q_vector_add(v, "aa");
     q_vector_add(v, "bb");
@@ -64,12 +66,12 @@ static void test_queue()
     printf("\ntest queue:\n");
 
     q_queue *q = q_queue_new_int();
-    
-    for(int i = 10; i<= 30; i+=10){
-        q_queue_enq(q, &i);
-    }   
 
-    while (!q_queue_empty(q)) {             
+    for (int i = 10; i <= 30; i += 10) {
+        q_queue_enq(q, &i);
+    }
+
+    while (!q_queue_empty(q)) {
         printf("%d ", Q_VPTR_TO_INT(q_queue_deq(q)));
     }
 
@@ -81,12 +83,12 @@ static void test_stack()
     printf("\ntest stack:\n");
 
     q_stack *s = q_stack_new_int();
-    
-    for(int i = 10; i< 30; i+=10){
+
+    for (int i = 10; i < 30; i += 10) {
         q_stack_push(s, &i);
     }
 
-    while (!q_stack_empty(s)) {        
+    while (!q_stack_empty(s)) {
         printf("%d ", Q_VPTR_TO_INT(q_stack_pop(s)));
     }
 
@@ -166,8 +168,8 @@ static void test_graph_paths()
 }
 
 static void test_priority_queue()
-{    
-    
+{
+
     /*q_priority_queue *pq = q_priority_queue_new(sizeof(int), &compare_int);
     
     int x = 10;
@@ -199,61 +201,75 @@ static void test_priority_queue()
     q_priority_queue_remove(pq, &ext);*/
 }
 
-static void test_heap(){        
-    q_heap *heap = q_heap_new(10, sizeof(int), &q_compare_int);
-    
+static void test_heap()
+{
+    q_heap *heap = q_heap_new(10, sizeof (int), &q_compare_int);
+
     int x = 10;
-    q_heap_add(heap, &x);        
-    
+    q_heap_add(heap, &x);
+
     printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
-    x = 20;    
-    q_heap_add(heap, &x);        
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
-    x = 5;    
+
+    x = 20;
     q_heap_add(heap, &x);
     printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
-    x = 30;    
+
+    x = 5;
     q_heap_add(heap, &x);
     printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
-    x = 40;    
+
+    x = 30;
     q_heap_add(heap, &x);
     printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
-    x = 2;    
+
+    x = 40;
     q_heap_add(heap, &x);
     printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
-    
+
+    x = 2;
+    q_heap_add(heap, &x);
+    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+
     printf("\n");
-    
+
     int y1 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y1);
-    
+
     int y2 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y2);
-    
+
     int y3 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y3);
-    
+
     int y4 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y4);
-    
+
     int y5 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y5);
-    
+
     int y6 = Q_VPTR_TO_INT(q_heap_extract(heap));
     printf("%d -> ", y6);
-    
+
     int tmp = y3;
-       
+
+}
+
+static void test_dict()
+{
+    int x = 10;
+    q_dict *d = q_dict_new(&q_hash_str, &q_equals_int);
+    q_dict_add(d, "abc", &x);
+
+    int y = 20;
+    q_dict_add(d, "abcd", &y);
+
+    int val1 = Q_VPTR_TO_INT(q_dict_get(d, "abcd"));
+    int val2 = Q_VPTR_TO_INT(q_dict_get(d, "abc"));
 }
 
 int main(int argc, char** argv)
-{     
-    test_heap();
+{
+    test_dict();
     /*
     test_graph_bfs();
     test_graph_dfs();
@@ -265,6 +281,6 @@ int main(int argc, char** argv)
     test_graph_paths();
     
     test_priority_queue();
-    */
+     */
     return (EXIT_SUCCESS);
 }
