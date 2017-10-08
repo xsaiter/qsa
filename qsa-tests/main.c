@@ -255,9 +255,10 @@ static void test_heap()
 }
 
 static void test_dict()
-{
+{    
+    q_dict *d = q_dict_new(sizeof(char*), &q_hash_str, &q_equals_int, sizeof(int));
+ 
     int x = 10;
-    q_dict *d = q_dict_new(&q_hash_str, &q_equals_int);
     q_dict_add(d, "abc", &x);
 
     int y = 20;
