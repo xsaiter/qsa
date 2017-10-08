@@ -167,40 +167,6 @@ static void test_graph_paths()
     q_graph_free(g);
 }
 
-static void test_priority_queue()
-{
-
-    /*q_priority_queue *pq = q_priority_queue_new(sizeof(int), &compare_int);
-    
-    int x = 10;
-    q_priority_queue_add(pq, &x);
-    
-    x = 20;
-    q_priority_queue_add(pq, &x);
-    
-    x = 5;
-    q_priority_queue_add(pq, &x);
-    
-    x = 2;
-    q_priority_queue_add(pq, &x);
-    
-    x = 30;
-    q_priority_queue_add(pq, &x);
-    
-    int ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
-    printf("\n%d", ext);
-    int t1 = q_priority_queue_remove(pq, &ext);    
-    
-    ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
-    printf("\n%d", ext);
-    q_priority_queue_remove(pq, &ext);
-    int t2 = q_priority_queue_remove(pq, &ext);    
-    
-    ext = Q_VPTR_TO_INT(q_priority_queue_extract(pq));
-    printf("\n%d", ext);
-    q_priority_queue_remove(pq, &ext);*/
-}
-
 static void test_heap()
 {
     q_heap *heap = q_heap_new(10, sizeof (int), &q_compare_int);
@@ -232,23 +198,29 @@ static void test_heap()
 
     printf("\n");
 
-    int y1 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y1 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y1);
+    q_heap_pop(heap);
 
-    int y2 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y2);
+    q_heap_pop(heap);
 
-    int y3 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y3 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y3);
+    q_heap_pop(heap);
 
-    int y4 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y4 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y4);
+    q_heap_pop(heap);
 
-    int y5 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y5 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y5);
+    q_heap_pop(heap);
 
-    int y6 = Q_VPTR_TO_INT(q_heap_extract(heap));
+    int y6 = Q_VPTR_TO_INT(q_heap_top(heap));
     printf("%d -> ", y6);
+    q_heap_pop(heap);
 
     int tmp = y3;
 

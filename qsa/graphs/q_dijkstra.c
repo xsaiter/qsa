@@ -18,7 +18,8 @@ void q_dijkstra(const q_graph *g, int s, q_graph_shortest_paths *res)
     q_heap_add(h, &s);
 
     while (!q_heap_empty(h)) {
-        int t = Q_VPTR_TO_INT(q_heap_extract(h));
+        int t = Q_VPTR_TO_INT(q_heap_top(h));
+        q_heap_pop(h);
 
         q_graph_edge *e = g->adj[t];
 

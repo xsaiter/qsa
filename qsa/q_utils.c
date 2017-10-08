@@ -59,7 +59,7 @@ bool q_equals_int(const void *l, const void *r)
 }
 
 unsigned int q_hash_str(const void *arg)
-{
+{    
     return fnv1_hash((char*)arg);
 }
 

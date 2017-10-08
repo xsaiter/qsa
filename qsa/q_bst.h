@@ -5,12 +5,14 @@
 #ifndef Q_BST_H
 #define Q_BST_H
 
+#include "q_utils.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
     typedef struct q_bst_node {
-        int key;
+        void *key;
         struct q_bst_node *parent;
         struct q_bst_node *left;
         struct q_bst_node *right;
@@ -18,12 +20,15 @@ extern "C" {
 
     typedef struct {
         q_bst_node *root;
+        size_t key_size;
+        q_compare_fn *key_cmp;
     } q_bst;
-            
-    void q_bst_destroy(q_bst *t);
-    q_bst_node *q_bst_find(q_bst *t, int key);
-    void q_bst_add(q_bst *t, int key);    
-    void q_bst_remove(q_bst *t, int key);
+
+    q_bst *q_bst_new(size_t key_size, q_compare_fn *key_cmp);
+    void q_bst_free(q_bst *t);
+    void q_bst_add(q_bst *t, void *key);
+    void q_bst_remove(q_bst *t, void *key);
+    q_bst_node *q_bst_find(q_bst *t, void *key);
 
 #ifdef __cplusplus
 }

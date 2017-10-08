@@ -63,7 +63,7 @@ static void sink(q_heap *h, int i)
         if (h->cmp(h->elems[i], h->elems[x]) > 0) {
             break;
         }
-        
+
         swap(h, i, x);
 
         i = x;
@@ -82,12 +82,10 @@ void *q_heap_top(q_heap *h)
     return h->elems[0];
 }
 
-void *q_heap_extract(q_heap *h)
+void q_heap_pop(q_heap *h)
 {
-    void *res = h->elems[0];
     swap(h, 0, h->len--);
     sink(h, 0);
-    return res;
 }
 
 bool q_heap_empty(q_heap *h)
