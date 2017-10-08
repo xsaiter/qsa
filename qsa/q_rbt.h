@@ -9,7 +9,12 @@
 extern "C" {
 #endif
 
-    typedef struct{        
+    typedef struct q_rbt_node {
+        struct q_rbt_node *left, *right, *parent;
+    } q_rbt_node;
+
+    typedef struct {
+        q_rbt_node *root;
     } q_rbt;
 
 
