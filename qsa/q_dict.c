@@ -39,7 +39,7 @@ static q_dict_elem *q_find_elem(q_dict *d, const void *key)
     return e;
 }
 
-q_dict_elem *elem_new(q_dict *d, void *key, void *value)
+static q_dict_elem *elem_new(q_dict *d, void *key, void *value)
 {
     q_dict_elem *e = xmalloc(sizeof (q_dict_elem));
 
