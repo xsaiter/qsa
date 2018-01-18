@@ -1,5 +1,5 @@
-#ifndef Q_CONVEX_HULL_H
-#define Q_CONVEX_HULL_H
+#ifndef _QSA_CONVEX_HULL_H
+#define _QSA_CONVEX_HULL_H
 
 #include "qsa_geo.h"
 #include "../qsa_stack.h"
@@ -14,5 +14,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_CONVEX_HULL_H */
+#endif /* _QSA_CONVEX_HULL_H */
 

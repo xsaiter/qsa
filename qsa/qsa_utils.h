@@ -1,5 +1,5 @@
-#ifndef Q_UTILS_H
-#define Q_UTILS_H
+#ifndef _QSA_UTILS_H
+#define _QSA_UTILS_H
 
 #include <stdbool.h>
 
@@ -30,5 +30,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_UTILS_H */
+#endif /* _QSA_UTILS_H */
 

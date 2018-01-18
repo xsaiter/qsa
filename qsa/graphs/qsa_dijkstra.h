@@ -1,5 +1,5 @@
-#ifndef Q_DIJKSTRA_H
-#define Q_DIJKSTRA_H
+#ifndef _QSA_DIJKSTRA_H
+#define _QSA_DIJKSTRA_H
 
 #include "qsa_graph.h"
 
@@ -13,4 +13,4 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_DIJKSTRA_H */
+#endif /* _QSA_DIJKSTRA_H */

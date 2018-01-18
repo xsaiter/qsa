@@ -1,5 +1,5 @@
-#ifndef Q_LIST_H
-#define Q_LIST_H
+#ifndef _QSA_LIST_H
+#define _QSA_LIST_H
 
 #include <stddef.h>
 #include <stdbool.h>
@@ -42,5 +42,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_LIST_H */
+#endif /* _QSA_LIST_H */
 

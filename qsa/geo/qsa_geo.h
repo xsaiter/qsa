@@ -1,5 +1,5 @@
-#ifndef Q_GEO_H
-#define Q_GEO_H
+#ifndef _QSA_GEO_H
+#define _QSA_GEO_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,4 +17,4 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_GEO_H */
+#endif /* _QSA_GEO_H */

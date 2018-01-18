@@ -1,5 +1,5 @@
-#ifndef Q_VECTOR_H
-#define Q_VECTOR_H
+#ifndef _QSA_VECTOR_H
+#define _QSA_VECTOR_H
 
 #include<stddef.h>
 
@@ -27,5 +27,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_VECTOR_H */
+#endif /* _QSA_VECTOR_H */
 

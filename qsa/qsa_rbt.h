@@ -2,8 +2,8 @@
  * red-black tree
  */
 
-#ifndef Q_RBT_H
-#define Q_RBT_H
+#ifndef _QSA_RBT_H
+#define _QSA_RBT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,5 +22,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_RBT_H */
+#endif /* _QSA_RBT_H */
 

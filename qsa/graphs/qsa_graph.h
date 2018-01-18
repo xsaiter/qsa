@@ -1,5 +1,5 @@
-#ifndef Q_GRAPH_H
-#define Q_GRAPH_H
+#ifndef _QSA_GRAPH_H
+#define _QSA_GRAPH_H
 
 #include <stdbool.h>
 
@@ -60,4 +60,4 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_GRAPH_H */
+#endif /* _QSA_GRAPH_H */

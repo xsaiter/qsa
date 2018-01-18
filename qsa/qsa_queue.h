@@ -1,5 +1,5 @@
-#ifndef Q_QUEUE_H
-#define Q_QUEUE_H
+#ifndef _QSA_QUEUE_H
+#define _QSA_QUEUE_H
 
 #include "qsa_list.h"
 
@@ -23,5 +23,5 @@ extern "C" {
 }
 #endif
 
-#endif /* Q_QUEUE_H */
+#endif /* _QSA_QUEUE_H */
 
