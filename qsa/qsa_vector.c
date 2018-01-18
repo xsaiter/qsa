@@ -5,63 +5,63 @@
 #include"qsa_vector.h"
 #include "qsa_utils.h"
 
-q_vector *q_vector_new(size_t capacity, size_t elem_size)
+qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size)
 {
-    q_vector *v = xmalloc(sizeof (q_vector));
+    qsa_vector_s *v = qsa_malloc(sizeof (qsa_vector_s));
 
     v->len = 0;
     v->capacity = capacity;
-    v->elems = xmalloc(v->capacity * sizeof (void*));
+    v->elems = qsa_malloc(v->capacity * sizeof (void*));
     for (size_t i = 0; i < v->capacity; ++i) {
-        v->elems[i] = xmalloc(elem_size);
+        v->elems[i] = qsa_malloc(elem_size);
     }
     v->elem_size = elem_size;
 
     return v;
 }
 
-inline q_vector *q_vector_new_int(size_t capacity)
+inline qsa_vector_s *qsa_vector_new_int(size_t capacity)
 {
-    return q_vector_new(capacity, sizeof (int));
+    return qsa_vector_new(capacity, sizeof (int));
 }
 
-void q_vector_free(q_vector *v)
+void qsa_vector_free(qsa_vector_s *v)
 {
     free(v->elems);
     free(v);
 }
 
-static void q_vector_resize(q_vector *v, int new_capacity)
+static void qsa_vector_resize(qsa_vector_s *v, int new_capacity)
 {
     void **elems = realloc(v->elems, new_capacity * sizeof (void*));
     if (elems) {
         for (size_t i = v->capacity; i < new_capacity; ++i) {
-            elems[i] = xmalloc(v->elem_size);
+            elems[i] = qsa_malloc(v->elem_size);
         }
         v->elems = elems;
         v->capacity = new_capacity;
     }
 }
 
-void q_vector_add(q_vector *v, void *elem)
+void qsa_vector_add(qsa_vector_s *v, void *elem)
 {    
     if (v->len == v->capacity) {
-        q_vector_resize(v, v->capacity * 2);
+        qsa_vector_resize(v, v->capacity * 2);
     }
     memcpy(v->elems[v->len++], elem, v->elem_size);
 }
 
-void q_vector_set(q_vector *v, size_t index, void *elem)
+void qsa_vector_set(qsa_vector_s *v, size_t index, void *elem)
 {
     memcpy(v->elems[index], elem, v->elem_size);
 }
 
-void *q_vector_get(q_vector *v, size_t index)
+void *qsa_vector_get(qsa_vector_s *v, size_t index)
 {
     return v->elems[index];
 }
 
-void q_vector_for_each(q_vector *v, void (*f)(void* elem))
+void qsa_vector_for_each(qsa_vector_s *v, void (*f)(void* elem))
 {
     for (size_t i = 0; i < v->len; ++i) {
         f(v->elems[i]);

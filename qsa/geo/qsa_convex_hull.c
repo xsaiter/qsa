@@ -8,27 +8,27 @@
 
 #define Q_MIN_POINTS 3
 
-static int q_smaller_angle(const void *x1, const void *x2, void *xpivot)
+static int qsa_smaller_angle(const void *x1, const void *x2, void *xpivot)
 {
-    q_point *p1 = (q_point*) x1;
-    q_point *p2 = (q_point*) x2;
-    q_point *pivot = (q_point*) xpivot;
+    qsa_point_s *p1 = (qsa_point_s*) x1;
+    qsa_point_s *p2 = (qsa_point_s*) x2;
+    qsa_point_s *pivot = (qsa_point_s*) xpivot;
 
-    int r = q_rotate(pivot, p1, p2);
+    int r = qsa_rotate(pivot, p1, p2);
     if (r == 0) {
-        int d1 = q_distance2(pivot, p1);
-        int d2 = q_distance2(pivot, p2);
+        int d1 = qsa_distance2(pivot, p1);
+        int d2 = qsa_distance2(pivot, p2);
         return (d1 > d2);
     }
 
     return (r < 0);
 }
 
-void q_graham_scan(q_point *points, int npoints, q_stack *hull)
+void qsa_graham_scan(qsa_point_s *points, int npoints, qsa_stack_s *hull)
 {
     if (npoints <= Q_MIN_POINTS) {
         for (int i = 0; i < npoints; i++) {
-            q_stack_push(hull, &points[i]);
+            qsa_stack_push(hull, &points[i]);
         }
         return;
     }
@@ -43,28 +43,28 @@ void q_graham_scan(q_point *points, int npoints, q_stack *hull)
         }
     }
     
-    q_point t = points[0];
+    qsa_point_s t = points[0];
     points[0] = points[ymin_i];
     points[ymin_i] = t;
 
-    qsort_r(&points[1], npoints - 1, sizeof (q_point), q_smaller_angle, &points[0]);
+    qsort_r(&points[1], npoints - 1, sizeof (qsa_point_s), qsa_smaller_angle, &points[0]);
 
-    q_stack_push(hull, &points[0]);
-    q_stack_push(hull, &points[1]);
-    q_stack_push(hull, &points[2]);
+    qsa_stack_push(hull, &points[0]);
+    qsa_stack_push(hull, &points[1]);
+    qsa_stack_push(hull, &points[2]);
 
     for (int i = Q_MIN_POINTS; i < npoints; i++) {
         while (true) {
-            q_point *p1 = q_stack_pop(hull);
-            q_point *p2 = q_stack_pop(hull);
+            qsa_point_s *p1 = qsa_stack_pop(hull);
+            qsa_point_s *p2 = qsa_stack_pop(hull);
 
-            q_stack_push(hull, p2);
-            q_stack_push(hull, p1);
+            qsa_stack_push(hull, p2);
+            qsa_stack_push(hull, p1);
 
-            if (q_rotate(p2, p1, &points[i]) == -1) {
-                q_stack_pop(hull);
+            if (qsa_rotate(p2, p1, &points[i]) == -1) {
+                qsa_stack_pop(hull);
             } else {
-                q_stack_push(hull, &points[i]);
+                qsa_stack_push(hull, &points[i]);
                 break;
             }
         }

@@ -7,54 +7,54 @@
 extern "C" {
 #endif
 
-    typedef struct q_graph_edge {
+    typedef struct qsa_graph_edge_s {
         int b;
         double weight;
-        struct q_graph_edge *next;
-    } q_graph_edge;
+        struct qsa_graph_edge_s *next;
+    } qsa_graph_edge_s;
 
     typedef struct {
-        q_graph_edge **adj; // adjacency list
+        qsa_graph_edge_s **adj; // adjacency list
         int nv; // number of vertices
         int ne; // number of edges
         bool directed;
         bool weighed;
-    } q_graph;
+    } qsa_graph_s;
 
-    typedef void (*visit_fn)(q_graph *g, q_graph_edge *e, void *arg);
+    typedef void (*qsa_visit_fn)(qsa_graph_s *g, qsa_graph_edge_s *e, void *arg);
 
-    bool *q_graph_marked_alloc(const q_graph *g);
+    bool *qsa_graph_marked_alloc(const qsa_graph_s *g);
 
-    q_graph *q_graph_new(int nv, bool directed, bool weighed);
-    void q_graph_free(q_graph *g);
-    void q_graph_add_edge(q_graph *g, int a, int b, double weight);
-    void q_graph_print(q_graph *g);
+    qsa_graph_s *qsa_graph_new(int nv, bool directed, bool weighed);
+    void qsa_graph_free(qsa_graph_s *g);
+    void qsa_graph_add_edge(qsa_graph_s *g, int a, int b, double weight);
+    void qsa_graph_print(qsa_graph_s *g);
 
-    void q_graph_traversal_bfs(q_graph *g, int s, visit_fn visit, void *arg);
-    void q_graph_traversal_dfs(q_graph *g, int s, visit_fn visit, void *arg);
+    void qsa_graph_traversal_bfs(qsa_graph_s *g, int s, qsa_visit_fn visit, void *arg);
+    void qsa_graph_traversal_dfs(qsa_graph_s *g, int s, qsa_visit_fn visit, void *arg);
 
     typedef struct {
         int nv; // number of vertices
         int s; // source vertex
         bool *marked; // marked[i] - exists paths from s to i
         int *dist; // dist[i] - distance from s to i
-    } q_graph_paths;
+    } qsa_graph_paths_s;
 
-    q_graph_paths *q_graph_paths_new(q_graph *g, int s);
-    void q_graph_paths_free(q_graph_paths *paths);
+    qsa_graph_paths_s *qsa_graph_paths_new(qsa_graph_s *g, int s);
+    void qsa_graph_paths_free(qsa_graph_paths_s *paths);
     
-    void q_graph_paths_bfs(q_graph *g, q_graph_paths *paths);
-    void q_graph_paths_dfs(q_graph *g, q_graph_paths *paths);
+    void qsa_graph_paths_bfs(qsa_graph_s *g, qsa_graph_paths_s *paths);
+    void qsa_graph_paths_dfs(qsa_graph_s *g, qsa_graph_paths_s *paths);
     
     typedef struct {
         int nv; // number of vertices
         int s; // source vertex
         double *dist; // dist[i] - distance from s to i
-        q_graph_edge *edges;
-    } q_graph_shortest_paths;
+        qsa_graph_edge_s *edges;
+    } qsa_graph_shortest_paths_s;
         
-    bool q_graph_shortest_paths_to(q_graph_shortest_paths *paths, int v);
-    double q_graph_shortest_paths_distance_to(q_graph_shortest_paths *paths, int v);
+    bool qsa_graph_shortest_paths_to(qsa_graph_shortest_paths_s *paths, int v);
+    double qsa_graph_shortest_paths_distance_to(qsa_graph_shortest_paths_s *paths, int v);
 
 #ifdef __cplusplus
 }

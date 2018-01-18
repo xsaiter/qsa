@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-    void q_graham_scan(q_point *points, int npoints, q_stack* hull);
+    void qsa_graham_scan(qsa_point_s *points, int npoints, qsa_stack_s* hull);
 
 #ifdef __cplusplus
 }

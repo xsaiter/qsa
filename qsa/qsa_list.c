@@ -8,9 +8,9 @@
 #include "qsa_list.h"
 #include "qsa_utils.h"
 
-q_list *q_list_new(size_t data_size)
+qsa_list_s *qsa_list_new(size_t data_size)
 {
-    q_list *list = xmalloc(sizeof (q_list));
+    qsa_list_s *list = qsa_malloc(sizeof (qsa_list_s));
 
     list->len = 0;
     list->data_size = data_size;
@@ -19,22 +19,22 @@ q_list *q_list_new(size_t data_size)
     return list;
 }
 
-q_list *q_list_new_int()
+qsa_list_s *qsa_list_new_int()
 {
-    return q_list_new(sizeof (int));
+    return qsa_list_new(sizeof (int));
 }
 
-static q_list_node *node_new(q_list *list, void *data)
+static qsa_list_node_s *node_new(qsa_list_s *list, void *data)
 {
-    q_list_node *node = xmalloc(sizeof (q_list_node));
-    node->data = xmalloc(list->data_size);
+    qsa_list_node_s *node = qsa_malloc(sizeof (qsa_list_node_s));
+    node->data = qsa_malloc(list->data_size);
     memcpy(node->data, data, list->data_size);
     return node;
 }
 
-void q_list_free(q_list *list)
+void qsa_list_free(qsa_list_s *list)
 {
-    q_list_node *e = list->head;
+    qsa_list_node_s *e = list->head;
     while (e) {
         free(e);
         e = e->next;
@@ -43,9 +43,9 @@ void q_list_free(q_list *list)
     free(list);
 }
 
-void q_list_prepend(q_list *list, void *data)
+void qsa_list_prepend(qsa_list_s *list, void *data)
 {
-    q_list_node *node = node_new(list, data);
+    qsa_list_node_s *node = node_new(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;
@@ -60,9 +60,9 @@ void q_list_prepend(q_list *list, void *data)
     list->len++;
 }
 
-void q_list_append(q_list *list, void *data)
+void qsa_list_append(qsa_list_s *list, void *data)
 {
-    q_list_node *node = node_new(list, data);
+    qsa_list_node_s *node = node_new(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;
@@ -77,13 +77,13 @@ void q_list_append(q_list *list, void *data)
     list->len++;
 }
 
-bool q_list_remove(q_list *list, void *data)
+bool qsa_list_remove(qsa_list_s *list, void *data)
 {
-    q_list_node *cur = list->head;
+    qsa_list_node_s *cur = list->head;
 
     while (cur) {
         if (cur->data == data) {
-            q_list_remove_node(list, cur);
+            qsa_list_remove_node(list, cur);
             free(data);
             return true;
         }
@@ -93,7 +93,7 @@ bool q_list_remove(q_list *list, void *data)
     return false;
 }
 
-void q_list_remove_node(q_list *list, q_list_node *node)
+void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *node)
 {
     if (!list || !node) {
         return;
@@ -114,9 +114,9 @@ void q_list_remove_node(q_list *list, q_list_node *node)
     list->len--;
 }
 
-q_list_node *q_list_find_by(q_list *list, void *data, q_equals_fn *equals)
+qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_equals_fn *equals)
 {
-    q_list_node *cur;
+    qsa_list_node_s *cur;
     cur = list->head;
     while (cur) {
         if (equals(cur->data, data)) {
@@ -127,9 +127,9 @@ q_list_node *q_list_find_by(q_list *list, void *data, q_equals_fn *equals)
     return NULL;
 }
 
-q_list_node *q_list_find(q_list *list, void *data)
+qsa_list_node_s *qsa_list_find(qsa_list_s *list, void *data)
 {
-    q_list_node *cur;
+    qsa_list_node_s *cur;
     cur = list->head;
     while (cur) {
         if (cur->data == data) {
@@ -140,16 +140,16 @@ q_list_node *q_list_find(q_list *list, void *data)
     return NULL;
 }
 
-void q_list_for_each(q_list *list, void (*f)(void *data))
+void qsa_list_for_each(qsa_list_s *list, void (*f)(void *data))
 {
-    q_list_node *cur = list->head;
+    qsa_list_node_s *cur = list->head;
     while (cur) {
         f(cur->data);
         cur = cur->next;
     }
 }
 
-bool q_list_empty(q_list *list)
+bool qsa_list_empty(qsa_list_s *list)
 {
     return list->len == 0;
 }

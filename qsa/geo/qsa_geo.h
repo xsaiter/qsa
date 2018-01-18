@@ -7,11 +7,10 @@ extern "C" {
 
     typedef struct {
         double x, y;
-    } q_point;
+    } qsa_point_s;
 
-    int q_rotate(const q_point *a, const q_point *b, const q_point *c);
-    double q_distance2(const q_point *a, const q_point *b);
-
+    int qsa_rotate(const qsa_point_s *a, const qsa_point_s *b, const qsa_point_s *c);
+    double qsa_distance2(const qsa_point_s *a, const qsa_point_s *b);
 
 #ifdef __cplusplus
 }

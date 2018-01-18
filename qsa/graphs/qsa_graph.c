@@ -7,22 +7,22 @@
 
 #include "qsa_graph.h"
 
-q_graph *q_graph_new(int nv, bool directed, bool weighed)
+qsa_graph_s *qsa_graph_new(int nv, bool directed, bool weighed)
 {
-    q_graph *g = xmalloc(sizeof (q_graph));
+    qsa_graph_s *g = qsa_malloc(sizeof (qsa_graph_s));
 
     g->nv = nv;
-    g->adj = xcalloc(g->nv, sizeof (q_graph_edge*));
+    g->adj = qsa_calloc(g->nv, sizeof (qsa_graph_edge_s*));
     g->directed = directed;
     g->weighed = weighed;
 
     return g;
 }
 
-void q_graph_free(q_graph *g)
+void qsa_graph_free(qsa_graph_s *g)
 {
     for (int i = 0; i < g->nv; ++i) {
-        q_graph_edge *e = g->adj[i];
+        qsa_graph_edge_s *e = g->adj[i];
         while (e) {
             free(e);
             e = e->next;
@@ -32,16 +32,16 @@ void q_graph_free(q_graph *g)
     free(g);
 }
 
-static void add_edge(q_graph *g, int a, int b, double weight)
+static void add_edge(qsa_graph_s *g, int a, int b, double weight)
 {
-    q_graph_edge *e = xmalloc(sizeof (q_graph_edge));
+    qsa_graph_edge_s *e = qsa_malloc(sizeof (qsa_graph_edge_s));
     e->b = b;
     e->weight = weight;
     e->next = g->adj[a];
     g->adj[a] = e;
 }
 
-void q_graph_add_edge(q_graph *g, int a, int b, double weight)
+void qsa_graph_add_edge(qsa_graph_s *g, int a, int b, double weight)
 {
     add_edge(g, a, b, weight);
     if (!g->directed) {
@@ -50,12 +50,12 @@ void q_graph_add_edge(q_graph *g, int a, int b, double weight)
     g->ne++;
 }
 
-void q_graph_print(q_graph *g)
+void qsa_graph_print(qsa_graph_s *g)
 {
     for (int i = 0; i < g->nv; ++i) {
         printf("%d", i);
 
-        q_graph_edge *e = g->adj[i];
+        qsa_graph_edge_s *e = g->adj[i];
 
         while (e) {
             printf("->%d", e->b);
@@ -66,27 +66,27 @@ void q_graph_print(q_graph *g)
     }
 }
 
-inline bool *q_graph_marked_alloc(const q_graph *g)
+inline bool *qsa_graph_marked_alloc(const qsa_graph_s *g)
 {
     return calloc(g->nv, sizeof (bool));
 }
 
-void q_graph_traversal_bfs(q_graph *g, int s, visit_fn visit, void *arg)
+void qsa_graph_traversal_bfs(qsa_graph_s *g, int s, qsa_visit_fn visit, void *arg)
 {
-    bool *marked = q_graph_marked_alloc(g);
+    bool *marked = qsa_graph_marked_alloc(g);
 
-    q_queue *q = q_queue_new_int();
-    q_queue_enq(q, &s);
+    qsa_queue_s *q = qsa_queue_new_int();
+    qsa_queue_enq(q, &s);
 
-    while (!q_queue_empty(q)) {
-        int i = Q_VPTR_TO_INT(q_queue_deq(q));
+    while (!qsa_queue_empty(q)) {
+        int i = QSA_VPTR_TO_INT(qsa_queue_deq(q));
 
-        q_graph_edge *e = g->adj[i];
+        qsa_graph_edge_s *e = g->adj[i];
 
         while (e) {
             if (!marked[e->b]) {
                 visit(g, e, arg);
-                q_queue_enq(q, &(e->b));
+                qsa_queue_enq(q, &(e->b));
             }
             e = e->next;
         }
@@ -94,16 +94,16 @@ void q_graph_traversal_bfs(q_graph *g, int s, visit_fn visit, void *arg)
         marked[i] = true;
     }
 
-    q_queue_free(q);
+    qsa_queue_free(q);
 
     free(marked);
 }
 
-static void dfs(q_graph *g, int i, bool *marked, visit_fn visit, void *arg)
+static void dfs(qsa_graph_s *g, int i, bool *marked, qsa_visit_fn visit, void *arg)
 {
     marked[i] = true;
 
-    q_graph_edge *e = g->adj[i];
+    qsa_graph_edge_s *e = g->adj[i];
 
     while (e) {
         if (!marked[e->b]) {
@@ -114,45 +114,45 @@ static void dfs(q_graph *g, int i, bool *marked, visit_fn visit, void *arg)
     }
 }
 
-void q_graph_traversal_dfs(q_graph *g, int s, visit_fn visit, void *arg)
+void qsa_graph_traversal_dfs(qsa_graph_s *g, int s, qsa_visit_fn visit, void *arg)
 {
-    bool *marked = q_graph_marked_alloc(g);
+    bool *marked = qsa_graph_marked_alloc(g);
     dfs(g, s, marked, visit, arg);
     free(marked);
 }
 
-q_graph_paths *q_graph_paths_new(q_graph *g, int s)
+qsa_graph_paths_s *qsa_graph_paths_new(qsa_graph_s *g, int s)
 {
-    q_graph_paths *paths = xmalloc(sizeof (q_graph_paths));
+    qsa_graph_paths_s *paths = qsa_malloc(sizeof (qsa_graph_paths_s));
 
-    paths->marked = q_graph_marked_alloc(g);
-    paths->dist = xmalloc0(g->nv);
+    paths->marked = qsa_graph_marked_alloc(g);
+    paths->dist = qsa_malloc0(g->nv);
     paths->s = s;
     paths->nv = g->nv;
 
     return paths;
 }
 
-void q_graph_paths_free(q_graph_paths *paths)
+void qsa_graph_paths_free(qsa_graph_paths_s *paths)
 {
     free(paths->dist);
     free(paths->marked);
     free(paths);
 }
 
-void q_graph_paths_bfs(q_graph *g, q_graph_paths *paths)
+void qsa_graph_paths_bfs(qsa_graph_s *g, qsa_graph_paths_s *paths)
 {
-    q_queue *q = q_queue_new_int();
-    q_queue_enq(q, &(paths->s));
+    qsa_queue_s *q = qsa_queue_new_int();
+    qsa_queue_enq(q, &(paths->s));
 
-    while (!q_queue_empty(q)) {
-        int i = Q_VPTR_TO_INT(q_queue_deq(q));
+    while (!qsa_queue_empty(q)) {
+        int i = QSA_VPTR_TO_INT(qsa_queue_deq(q));
 
-        q_graph_edge *e = g->adj[i];
+        qsa_graph_edge_s *e = g->adj[i];
 
         while (e) {
             if (!paths->marked[e->b]) {
-                q_queue_enq(q, &(e->b));
+                qsa_queue_enq(q, &(e->b));
                 paths->dist[e->b] = paths->dist[i] + 1;
             }
             e = e->next;
@@ -161,13 +161,13 @@ void q_graph_paths_bfs(q_graph *g, q_graph_paths *paths)
         paths->marked[i] = true;
     }
 
-    q_queue_free(q);
+    qsa_queue_free(q);
 }
 
-static void paths_dfs(q_graph *g, q_graph_paths *paths, int i)
+static void paths_dfs(qsa_graph_s *g, qsa_graph_paths_s *paths, int i)
 {
     paths->marked[i] = true;
-    q_graph_edge *e = g->adj[i];
+    qsa_graph_edge_s *e = g->adj[i];
 
     while (e) {
         if (!paths->marked[e->b]) {
@@ -178,17 +178,17 @@ static void paths_dfs(q_graph *g, q_graph_paths *paths, int i)
     }
 }
 
-void q_graph_paths_dfs(q_graph *g, q_graph_paths *paths)
+void qsa_graph_paths_dfs(qsa_graph_s *g, qsa_graph_paths_s *paths)
 {
     paths_dfs(g, paths, paths->s);
 }
 
-bool q_graph_shortest_paths_to(q_graph_shortest_paths *paths, int v)
+bool qsa_graph_shortest_paths_to(qsa_graph_shortest_paths_s *paths, int v)
 {
     return paths->dist[v] != -1.0;
 }
 
-double q_graph_shortest_paths_distance_to(q_graph_shortest_paths *paths, int v)
+double qsa_graph_shortest_paths_distance_to(qsa_graph_shortest_paths_s *paths, int v)
 {
     return paths->dist[v];
 }

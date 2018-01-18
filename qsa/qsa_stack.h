@@ -10,16 +10,16 @@ extern "C" {
 #endif
     
     typedef struct{
-        q_list *list;
-    } q_stack;   
+        qsa_list_s *list;
+    } qsa_stack_s;   
     
-    q_stack *q_stack_new(size_t data_size);
-    void q_stack_free(q_stack *s);
-    bool q_stack_empty(q_stack *s);
-    void q_stack_push(q_stack *s, void *data);
-    void *q_stack_pop(q_stack *s);
+    qsa_stack_s *qsa_stack_new(size_t data_size);
+    void qsa_stack_free(qsa_stack_s *s);
+    bool qsa_stack_empty(qsa_stack_s *s);
+    void qsa_stack_push(qsa_stack_s *s, void *data);
+    void *qsa_stack_pop(qsa_stack_s *s);
     
-    q_stack *q_stack_new_int();
+    qsa_stack_s *qsa_stack_new_int();
         
 #ifdef __cplusplus
 }

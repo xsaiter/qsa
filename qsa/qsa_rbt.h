@@ -9,13 +9,13 @@
 extern "C" {
 #endif
 
-    typedef struct q_rbt_node {
-        struct q_rbt_node *left, *right, *parent;
-    } q_rbt_node;
+    typedef struct qsa_rbt_node_s {
+        struct qsa_rbt_node_s *left, *right, *parent;
+    } qsa_rbt_node_s;
 
     typedef struct {
-        q_rbt_node *root;
-    } q_rbt;
+        qsa_rbt_node_s *root;
+    } qsa_rbt_s;
 
 
 #ifdef __cplusplus

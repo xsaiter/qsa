@@ -5,39 +5,39 @@
 #include "qsa_queue.h"
 #include "qsa_utils.h"
 
-q_queue *q_queue_new(size_t data_size){    
-    q_queue *q = xmalloc(sizeof(q_queue));    
-    q->list = q_list_new(data_size);
+qsa_queue_s *qsa_queue_new(size_t data_size){    
+    qsa_queue_s *q = qsa_malloc(sizeof(qsa_queue_s));    
+    q->list = qsa_list_new(data_size);
     return q;
 }
 
-inline q_queue *q_queue_new_int(){
-    return q_queue_new(sizeof(int));
+inline qsa_queue_s *qsa_queue_new_int(){
+    return qsa_queue_new(sizeof(int));
 }
 
-void q_queue_free(q_queue *q)
+void qsa_queue_free(qsa_queue_s *q)
 {
-    q_list_free(q->list);
+    qsa_list_free(q->list);
     free(q);
 }
 
-void q_queue_enq(q_queue *q, void *data)
+void qsa_queue_enq(qsa_queue_s *q, void *data)
 {
-    return q_list_append(q->list, data);
+    return qsa_list_append(q->list, data);
 }
 
-void *q_queue_deq(q_queue *q)
+void *qsa_queue_deq(qsa_queue_s *q)
 {
-    q_list_node *head = q->list->head;
+    qsa_list_node_s *head = q->list->head;
     if (!head) {
         return NULL;
     }
     void *ret = head->data;
-    q_list_remove_node(q->list, head);
+    qsa_list_remove_node(q->list, head);
     return ret;
 }
 
-bool q_queue_empty(q_queue *q)
+bool qsa_queue_empty(qsa_queue_s *q)
 {
-    return q_list_empty(q->list);
+    return qsa_list_empty(q->list);
 }

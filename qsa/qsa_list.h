@@ -8,35 +8,35 @@
 #ifdef __cplusplus
 extern "C" {
 #endif       
-    typedef struct q_list_node {
+    typedef struct qsa_list_node_s {
         void *data;
-        struct q_list_node *next;
-        struct q_list_node *prev;
-    } q_list_node;
+        struct qsa_list_node_s *next;
+        struct qsa_list_node_s *prev;
+    } qsa_list_node_s;
 
     typedef struct {
-        q_list_node *head;
-        q_list_node *tail;
+        qsa_list_node_s *head;
+        qsa_list_node_s *tail;
         size_t len;
         size_t data_size;
-    } q_list;
+    } qsa_list_s;
     
-    q_list *q_list_new(size_t data_size);
-    void q_list_free(q_list *list);
+    qsa_list_s *qsa_list_new(size_t data_size);
+    void qsa_list_free(qsa_list_s *list);
     
-    void q_list_prepend(q_list *list, void *data);
-    void q_list_append(q_list *list, void *data);    
+    void qsa_list_prepend(qsa_list_s *list, void *data);
+    void qsa_list_append(qsa_list_s *list, void *data);    
     
-    bool q_list_remove(q_list *list, void *data);
-    void q_list_remove_node(q_list *list, q_list_node *node);    
+    bool qsa_list_remove(qsa_list_s *list, void *data);
+    void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *node);    
     
-    q_list_node *q_list_find_by(q_list *list, void *data, q_equals_fn *equals);
-    q_list_node *q_list_find(q_list *list, void *data);
+    qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_equals_fn *equals);
+    qsa_list_node_s *qsa_list_find(qsa_list_s *list, void *data);
     
-    void q_list_for_each(q_list *list, void (*f)(void *data));    
-    bool q_list_empty(q_list *list);
+    void qsa_list_for_each(qsa_list_s *list, void (*f)(void *data));    
+    bool qsa_list_empty(qsa_list_s *list);
     
-    q_list *q_list_new_int();
+    qsa_list_s *qsa_list_new_int();
 
 #ifdef __cplusplus
 }

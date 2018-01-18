@@ -12,15 +12,15 @@ extern "C" {
         int len;
         size_t elem_size;
         void **elems;
-        q_compare_fn *cmp;
-    } q_heap;
+        qsa_compare_fn *cmp;
+    } qsa_heap_s;
 
-    q_heap *q_heap_new(int capacity, size_t elem_size, q_compare_fn *cmp);
-    void q_heap_free(q_heap* h);
-    void q_heap_add(q_heap *h, void *elem);
-    void *q_heap_top(q_heap *h);
-    void q_heap_pop(q_heap *h);
-    bool q_heap_empty(q_heap *h);
+    qsa_heap_s *qsa_heap_new(int capacity, size_t elem_size, qsa_compare_fn *cmp);
+    void qsa_heap_free(qsa_heap_s* h);
+    void qsa_heap_add(qsa_heap_s *h, void *elem);
+    void *qsa_heap_top(qsa_heap_s *h);
+    void qsa_heap_pop(qsa_heap_s *h);
+    bool qsa_heap_empty(qsa_heap_s *h);
 
 #ifdef __cplusplus
 }

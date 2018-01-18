@@ -9,12 +9,12 @@
 
 #define Q_DIRECTIONS (4)
 
-bool q_lee_alg(q_lee_opts *opts, q_vector *result)
+bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result)
 {
     int dx[Q_DIRECTIONS] = {1, 0, -1, 0};
     int dy[Q_DIRECTIONS] = {0, -1, 0, 1};
 
-    q_queue *q = q_queue_new(sizeof(q_lee_cell));
+    qsa_queue_s *q = qsa_queue_new(sizeof(qsa_lee_cell_s));
 
     int bx = opts->beg_x;
     int by = opts->beg_y;
@@ -22,7 +22,7 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
     int rows = opts->rows;
     int cols = opts->cols;
 
-    q_lee_cell cc[rows][cols];
+    qsa_lee_cell_s cc[rows][cols];
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -36,15 +36,15 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
     cc[bx][by].y = by;
     cc[bx][by].visited = true;
 
-    q_queue_enq(q, &cc[bx][by]);
+    qsa_queue_enq(q, &cc[bx][by]);
 
     int x, y, num, nx, ny;
 
     bool stop = false;
 
-    while (!stop && !q_queue_empty(q)) {
+    while (!stop && !qsa_queue_empty(q)) {
 
-        q_lee_cell *c = q_queue_deq(q);
+        qsa_lee_cell_s *c = qsa_queue_deq(q);
         x = c->x;
         y = c->y;
         num = c->n + 1;
@@ -64,12 +64,12 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
                     break;
                 }
 
-                q_queue_enq(q, &cc[nx][ny]);
+                qsa_queue_enq(q, &cc[nx][ny]);
             }
         }
     }
 
-    q_queue_free(q);
+    qsa_queue_free(q);
 
     if (!stop) {
         return false;
@@ -87,11 +87,11 @@ bool q_lee_alg(q_lee_opts *opts, q_vector *result)
             if (cc[nx][ny].n == num - 1) {
                 num = cc[nx][ny].n;
 
-                q_lee_cell *cell = malloc(sizeof (q_lee_cell));
+                qsa_lee_cell_s *cell = malloc(sizeof (qsa_lee_cell_s));
 
-                memcpy(cell, &cc[nx][ny], sizeof (q_lee_cell));
+                memcpy(cell, &cc[nx][ny], sizeof (qsa_lee_cell_s));
 
-                q_vector_add(result, cell);
+                qsa_vector_add(result, cell);
 
                 x = nx;
                 y = ny;

@@ -3,7 +3,7 @@
 
 #include "qsa_str.h"
 
-void q_str_remove_symbols(char *s, char c)
+void qsa_str_remove_symbols(char *s, char c)
 {
     char *p = s;
     while (*p != '\0') {
@@ -15,12 +15,12 @@ void q_str_remove_symbols(char *s, char c)
     }
 }
 
-void q_str_remove_spaces(char *s)
+void qsa_str_remove_spaces(char *s)
 {
-    q_str_remove_symbols(s, ' ');
+    qsa_str_remove_symbols(s, ' ');
 }
 
-bool q_str_is_palindrome(const char *s)
+bool qsa_str_is_palindrome(const char *s)
 {
     int i = 0, j = strlen(s) - 1;
     while (i < j) {
@@ -31,7 +31,7 @@ bool q_str_is_palindrome(const char *s)
     return true;
 }
 
-int q_str_count_parts(const char *s, char delim)
+int qsa_str_count_parts(const char *s, char delim)
 {
     int n = 1;
     const char *p = s;
@@ -46,9 +46,9 @@ int q_str_count_parts(const char *s, char delim)
     return n;
 }
 
-char **q_str_split_by(char *s, char delim)
+char **qsa_str_split_by(char *s, char delim)
 {
-    int n = q_str_count_parts(s, delim);
+    int n = qsa_str_count_parts(s, delim);
     char ** res = malloc(n * sizeof (char*));
 
     if (!res) {
@@ -72,7 +72,7 @@ char **q_str_split_by(char *s, char delim)
     return res;
 }
 
-int *q_str_prefix_func(const char *s, size_t *res_size)
+int *qsa_str_prefix_func(const char *s, size_t *res_size)
 {
     size_t n = strlen(s);
 
@@ -100,7 +100,7 @@ int *q_str_prefix_func(const char *s, size_t *res_size)
     return res;
 }
 
-int *q_str_z_func(const char *s, size_t *res_size)
+int *qsa_str_z_func(const char *s, size_t *res_size)
 {
     size_t n = strlen(s);
 
@@ -125,7 +125,7 @@ int *q_str_z_func(const char *s, size_t *res_size)
     return res;
 }
 
-bool q_str_check_balanced_round_brackets(char *s)
+bool qsa_str_check_balanced_round_brackets(char *s)
 {
     int n = 0;
     while (*s != '\0') {
@@ -143,7 +143,7 @@ bool q_str_check_balanced_round_brackets(char *s)
     return (n == 0);
 }
 
-int q_str_boyer_moore(const char *s, const char *p)
+int qsa_str_boyer_moore(const char *s, const char *p)
 {
     int n, m, i;
 
@@ -175,7 +175,7 @@ int q_str_boyer_moore(const char *s, const char *p)
     return -1;
 }
 
-int q_str_kmp(const char *s, const char *p)
+int qsa_str_kmp(const char *s, const char *p)
 {
     int n = strlen(s);
     int m = strlen(p);
@@ -185,7 +185,7 @@ int q_str_kmp(const char *s, const char *p)
 
     size_t pfx_size = 0;
     
-    int *pfx = q_str_prefix_func(p, &pfx_size);
+    int *pfx = qsa_str_prefix_func(p, &pfx_size);
     if(!pfx){
         return res;
     }

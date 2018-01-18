@@ -5,7 +5,7 @@
  * < 0 - counterclockwise 
  * = 0 - collinear    
  */
-int q_rotate(const q_point *a, const q_point *b, const q_point *c)
+int qsa_rotate(const qsa_point_s *a, const qsa_point_s *b, const qsa_point_s *c)
 {
     double s = (b->x - a->x)*(c->y - a->y) - (b->y - a->y)*(c->x - a->x);
 
@@ -20,7 +20,7 @@ int q_rotate(const q_point *a, const q_point *b, const q_point *c)
     return (1);
 }
 
-double q_distance2(const q_point *a, const q_point *b)
+double qsa_distance2(const qsa_point_s *a, const qsa_point_s *b)
 {
     double dx = a->x - b->x;
     double dy = a->y - b->y;    

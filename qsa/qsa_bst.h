@@ -21,10 +21,10 @@ extern "C" {
     typedef struct {
         q_bst_node *root;
         size_t key_size;
-        q_compare_fn *key_cmp;
+        qsa_compare_fn *key_cmp;
     } q_bst;
 
-    q_bst *q_bst_new(size_t key_size, q_compare_fn *key_cmp);
+    q_bst *q_bst_new(size_t key_size, qsa_compare_fn *key_cmp);
     void q_bst_free(q_bst *t);
     void q_bst_add(q_bst *t, void *key);
     void q_bst_remove(q_bst *t, void *key);

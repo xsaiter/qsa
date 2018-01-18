@@ -13,16 +13,16 @@ extern "C" {
         int n;
         int x, y;
         bool visited;
-    } q_lee_cell;
+    } qsa_lee_cell_s;
 
     typedef struct {
         int **a;
         int rows, cols;
         int beg_x, beg_y;
         int end_x, end_y;
-    } q_lee_opts;
+    } qsa_lee_opts_s;
 
-    bool q_lee_alg(q_lee_opts *opts, q_vector *result);
+    bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result);
 
 #ifdef __cplusplus
 }

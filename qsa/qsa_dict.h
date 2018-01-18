@@ -9,26 +9,26 @@ extern void *dict_not_found;
 extern "C" {
 #endif        
 
-    typedef struct q_dict_elem {
+    typedef struct qsa_dict_elem_s {
         void *key;
         void *value;
-        struct q_dict_elem *next;
+        struct qsa_dict_elem_s *next;
         unsigned int hash;
-    } q_dict_elem;
+    } qsa_dict_elem_s;
 
     typedef struct {
         int table_size;        
-        q_dict_elem **table;           
-        q_hash_fn *key_hash;
-        q_equals_fn *key_equals;
+        qsa_dict_elem_s **table;           
+        qsa_hash_fn *key_hash;
+        qsa_equals_fn *key_equals;
         size_t key_size;
         size_t value_size;
-    } q_dict;
+    } qsa_dict_s;
     
-    q_dict *q_dict_new(size_t key_size, q_hash_fn *key_hash, q_equals_fn *key_equals, size_t value_size);
-    void q_dict_free(q_dict *d);
-    void q_dict_add(q_dict *d, void *key, void *value);
-    void *q_dict_get(q_dict *d, const void *key);
+    qsa_dict_s *qsa_dict_new(size_t key_size, qsa_hash_fn *key_hash, qsa_equals_fn *key_equals, size_t value_size);
+    void qsa_dict_free(qsa_dict_s *d);
+    void qsa_dict_add(qsa_dict_s *d, void *key, void *value);
+    void *qsa_dict_get(qsa_dict_s *d, const void *key);
 
 #ifdef __cplusplus
 }

@@ -4,9 +4,9 @@
 #include "qsa_utils.h"
 #include "qsa_bst.h"
 
-q_bst *q_bst_new(size_t key_size, q_compare_fn *key_cmp)
+q_bst *q_bst_new(size_t key_size, qsa_compare_fn *key_cmp)
 {
-    q_bst *t = xmalloc(sizeof (q_bst));
+    q_bst *t = qsa_malloc(sizeof (q_bst));
 
     t->key_size = key_size;
     t->key_cmp = key_cmp;
@@ -16,9 +16,9 @@ q_bst *q_bst_new(size_t key_size, q_compare_fn *key_cmp)
 
 static q_bst_node *node_new(q_bst *t, void *key)
 {
-    q_bst_node *node = xmalloc(sizeof (q_bst_node));
+    q_bst_node *node = qsa_malloc(sizeof (q_bst_node));
 
-    node->key = xmalloc(t->key_size);
+    node->key = qsa_malloc(t->key_size);
     memcpy(node->key, key, t->key_size);
 
     return node;

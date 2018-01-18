@@ -29,100 +29,100 @@ static void test_vector_int()
 {
     printf("\ntest vector int");
 
-    q_vector *v = q_vector_new(2, sizeof (int));
+    qsa_vector_s *v = qsa_vector_new(2, sizeof (int));
     for (int i = 10; i <= 50; i += 10) {
-        q_vector_add(v, &i);
+        qsa_vector_add(v, &i);
     }
 
     for (size_t i = 0; i < v->len; ++i) {
-        int s = Q_VPTR_TO_INT(v->elems[i]);
+        int s = QSA_VPTR_TO_INT(v->elems[i]);
         printf("%d\n", s);
     }
 
-    q_vector_free(v);
+    qsa_vector_free(v);
 }
 
 static void test_vector_str()
 {
     printf("\ntest vector str");
 
-    q_vector *v = q_vector_new(2, sizeof (char*));
+    qsa_vector_s *v = qsa_vector_new(2, sizeof (char*));
 
-    q_vector_add(v, "aa");
-    q_vector_add(v, "bb");
-    q_vector_add(v, "cc");
-    q_vector_add(v, "dd");
+    qsa_vector_add(v, "aa");
+    qsa_vector_add(v, "bb");
+    qsa_vector_add(v, "cc");
+    qsa_vector_add(v, "dd");
 
     for (size_t i = 0; i < v->len; ++i) {
         char *s = v->elems[i];
         printf("%s\n", s);
     }
 
-    q_vector_free(v);
+    qsa_vector_free(v);
 }
 
 static void test_queue()
 {
     printf("\ntest queue:\n");
 
-    q_queue *q = q_queue_new_int();
+    qsa_queue_s *q = qsa_queue_new_int();
 
     for (int i = 10; i <= 30; i += 10) {
-        q_queue_enq(q, &i);
+        qsa_queue_enq(q, &i);
     }
 
-    while (!q_queue_empty(q)) {
-        printf("%d ", Q_VPTR_TO_INT(q_queue_deq(q)));
+    while (!qsa_queue_empty(q)) {
+        printf("%d ", QSA_VPTR_TO_INT(qsa_queue_deq(q)));
     }
 
-    q_queue_free(q);
+    qsa_queue_free(q);
 }
 
 static void test_stack()
 {
     printf("\ntest stack:\n");
 
-    q_stack *s = q_stack_new_int();
+    qsa_stack_s *s = qsa_stack_new_int();
 
     for (int i = 10; i < 30; i += 10) {
-        q_stack_push(s, &i);
+        qsa_stack_push(s, &i);
     }
 
-    while (!q_stack_empty(s)) {
-        printf("%d ", Q_VPTR_TO_INT(q_stack_pop(s)));
+    while (!qsa_stack_empty(s)) {
+        printf("%d ", QSA_VPTR_TO_INT(qsa_stack_pop(s)));
     }
 
-    q_stack_free(s);
+    qsa_stack_free(s);
 }
 
 static void test_graph_print()
 {
     printf("\ntest graph printf");
 
-    q_graph *g = q_graph_new(5, false, false);
+    qsa_graph_s *g = qsa_graph_new(5, false, false);
 
-    q_graph_add_edge(g, 1, 2, 0);
-    q_graph_add_edge(g, 1, 3, 0);
-    q_graph_add_edge(g, 2, 4, 0);
+    qsa_graph_add_edge(g, 1, 2, 0);
+    qsa_graph_add_edge(g, 1, 3, 0);
+    qsa_graph_add_edge(g, 2, 4, 0);
 
-    q_graph_print(g);
+    qsa_graph_print(g);
 
-    q_graph_free(g);
+    qsa_graph_free(g);
 }
 
-static void q_visit(q_graph *g, q_graph_edge *e, void *arg)
+static void q_visit(qsa_graph_s *g, qsa_graph_edge_s *e, void *arg)
 {
     printf("%d ", e->b);
 }
 
-static q_graph *test_make_graph()
+static qsa_graph_s *test_make_graph()
 {
-    q_graph *g = q_graph_new(6, false, false);
+    qsa_graph_s *g = qsa_graph_new(6, false, false);
 
-    q_graph_add_edge(g, 1, 2, 0);
-    q_graph_add_edge(g, 1, 3, 0);
-    q_graph_add_edge(g, 1, 4, 0);
-    q_graph_add_edge(g, 3, 5, 0);
+    qsa_graph_add_edge(g, 1, 2, 0);
+    qsa_graph_add_edge(g, 1, 3, 0);
+    qsa_graph_add_edge(g, 1, 4, 0);
+    qsa_graph_add_edge(g, 3, 5, 0);
 
     return g;
 }
@@ -131,96 +131,96 @@ static void test_graph_bfs()
 {
     printf("\ntest graph bfs: ");
 
-    q_graph *g = test_make_graph();
+    qsa_graph_s *g = test_make_graph();
 
-    q_graph_traversal_bfs(g, 1, q_visit, NULL);
+    qsa_graph_traversal_bfs(g, 1, q_visit, NULL);
 
-    q_graph_free(g);
+    qsa_graph_free(g);
 }
 
 static void test_graph_dfs()
 {
     printf("\ntest graph dfs: ");
 
-    q_graph *g = test_make_graph();
+    qsa_graph_s *g = test_make_graph();
 
-    q_graph_traversal_dfs(g, 1, q_visit, NULL);
+    qsa_graph_traversal_dfs(g, 1, q_visit, NULL);
 
-    q_graph_free(g);
+    qsa_graph_free(g);
 }
 
 static void test_graph_paths()
 {
     printf("\ntest graph paths bfs: ");
 
-    q_graph *g = test_make_graph();
+    qsa_graph_s *g = test_make_graph();
 
     int s = 1;
-    q_graph_paths *paths = q_graph_paths_new(g, s);
-    q_graph_paths_bfs(g, paths);
+    qsa_graph_paths_s *paths = qsa_graph_paths_new(g, s);
+    qsa_graph_paths_bfs(g, paths);
 
     for (int i = 0; i < g->nv; ++i) {
         printf("\ndistance from %d to %d = %d", s, i, paths->dist[i]);
     }
 
-    q_graph_paths_free(paths);
-    q_graph_free(g);
+    qsa_graph_paths_free(paths);
+    qsa_graph_free(g);
 }
 
 static void test_heap()
 {
-    q_heap *heap = q_heap_new(10, sizeof (int), &q_compare_int);
+    qsa_heap_s *heap = qsa_heap_new(10, sizeof (int), &qsa_compare_int);
 
     int x = 10;
-    q_heap_add(heap, &x);
+    qsa_heap_add(heap, &x);
 
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     x = 20;
-    q_heap_add(heap, &x);
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    qsa_heap_add(heap, &x);
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     x = 5;
-    q_heap_add(heap, &x);
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    qsa_heap_add(heap, &x);
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     x = 30;
-    q_heap_add(heap, &x);
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    qsa_heap_add(heap, &x);
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     x = 40;
-    q_heap_add(heap, &x);
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    qsa_heap_add(heap, &x);
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     x = 2;
-    q_heap_add(heap, &x);
-    printf("%d -> ", Q_VPTR_TO_INT(q_heap_top(heap)));
+    qsa_heap_add(heap, &x);
+    printf("%d -> ", QSA_VPTR_TO_INT(qsa_heap_top(heap)));
 
     printf("\n");
 
-    int y1 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y1 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y1);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
-    int y2 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y2 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y2);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
-    int y3 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y3 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y3);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
-    int y4 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y4 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y4);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
-    int y5 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y5 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y5);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
-    int y6 = Q_VPTR_TO_INT(q_heap_top(heap));
+    int y6 = QSA_VPTR_TO_INT(qsa_heap_top(heap));
     printf("%d -> ", y6);
-    q_heap_pop(heap);
+    qsa_heap_pop(heap);
 
     int tmp = y3;
 
@@ -228,16 +228,16 @@ static void test_heap()
 
 static void test_dict()
 {    
-    q_dict *d = q_dict_new(sizeof(char*), &q_hash_str, &q_equals_int, sizeof(int));
+    qsa_dict_s *d = qsa_dict_new(sizeof(char*), &qsa_hash_str, &qsa_equals_int, sizeof(int));
  
     int x = 10;
-    q_dict_add(d, "abc", &x);
+    qsa_dict_add(d, "abc", &x);
 
     int y = 20;
-    q_dict_add(d, "abcd", &y);
+    qsa_dict_add(d, "abcd", &y);
 
-    int val1 = Q_VPTR_TO_INT(q_dict_get(d, "abcd"));
-    int val2 = Q_VPTR_TO_INT(q_dict_get(d, "abc"));
+    int val1 = QSA_VPTR_TO_INT(qsa_dict_get(d, "abcd"));
+    int val2 = QSA_VPTR_TO_INT(qsa_dict_get(d, "abc"));
 }
 
 int main(int argc, char** argv)

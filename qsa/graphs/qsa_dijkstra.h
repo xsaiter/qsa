@@ -7,7 +7,7 @@
 extern "C" {
 #endif    
 
-    void q_dijkstra(const q_graph *g, int s, q_graph_shortest_paths *res);
+    void qsa_dijkstra(const qsa_graph_s *g, int s, qsa_graph_shortest_paths_s *res);
 
 #ifdef __cplusplus
 }
