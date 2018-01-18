@@ -1,5 +1,5 @@
-#ifndef _QSA_DICT_H
-#define _QSA_DICT_H
+#ifndef QSA_DICT_H
+#define QSA_DICT_H
 
 #include "qsa_utils.h"
 
@@ -34,4 +34,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_DICT_H */
+#endif /* QSA_DICT_H */

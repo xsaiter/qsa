@@ -1,5 +1,5 @@
-#ifndef _QSA_LEE_ALG_H
-#define _QSA_LEE_ALG_H
+#ifndef QSA_LEE_ALG_H
+#define QSA_LEE_ALG_H
 
 #include <stdbool.h>
 
@@ -28,5 +28,5 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_LEE_ALG_H */
+#endif /* QSA_LEE_ALG_H */
 

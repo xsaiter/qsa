@@ -2,8 +2,8 @@
  * union-find data structure (disjoint sets)
  */
 
-#ifndef _QSA_UF_H
-#define _QSA_UF_H
+#ifndef QSA_UF_H
+#define QSA_UF_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,4 +25,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_UF_H */
+#endif /* QSA_UF_H */

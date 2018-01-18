@@ -1,5 +1,5 @@
-#ifndef _QSA_HEAP_H
-#define _QSA_HEAP_H
+#ifndef QSA_HEAP_H
+#define QSA_HEAP_H
 
 #include "qsa_utils.h"
 
@@ -26,4 +26,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_HEAP_H */
+#endif /* QSA_HEAP_H */

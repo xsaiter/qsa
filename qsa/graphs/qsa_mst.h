@@ -2,8 +2,8 @@
  * minimum spanning tree
  */
 
-#ifndef _QSA_MST_H
-#define _QSA_MST_H
+#ifndef QSA_MST_H
+#define QSA_MST_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,5 +16,5 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_MST_H */
+#endif /* QSA_MST_H */
 

@@ -1,5 +1,5 @@
-#ifndef _QSA_STACK_H
-#define _QSA_STACK_H
+#ifndef QSA_STACK_H
+#define QSA_STACK_H
 
 #include <stdbool.h>
 
@@ -25,5 +25,5 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_STACK_H */
+#endif /* QSA_STACK_H */
 

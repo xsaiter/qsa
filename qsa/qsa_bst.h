@@ -2,8 +2,8 @@
  * binary search tree
  */
 
-#ifndef _QSA_BST_H
-#define _QSA_BST_H
+#ifndef QSA_BST_H
+#define QSA_BST_H
 
 #include "qsa_utils.h"
 
@@ -34,4 +34,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_BST_H */
+#endif /* QSA_BST_H */

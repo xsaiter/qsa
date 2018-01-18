@@ -1,5 +1,5 @@
-#ifndef _QSA_STR_H
-#define _QSA_STR_H
+#ifndef QSA_STR_H
+#define QSA_STR_H
 
 #include <stdbool.h>
 
@@ -28,4 +28,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _QSA_STR_H */
+#endif /* QSA_STR_H */
