@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "q_dict.h"
+#include "qsa_dict.h"
 
 #define Q_DICT_TABLE_SIZE (16)
 

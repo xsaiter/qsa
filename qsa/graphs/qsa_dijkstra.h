@@ -1,7 +1,7 @@
 #ifndef Q_DIJKSTRA_H
 #define Q_DIJKSTRA_H
 
-#include "q_graph.h"
+#include "qsa_graph.h"
 
 #ifdef __cplusplus
 extern "C" {

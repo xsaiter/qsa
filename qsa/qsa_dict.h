@@ -1,7 +1,7 @@
 #ifndef Q_DICT_H
 #define Q_DICT_H
 
-#include "q_utils.h"
+#include "qsa_utils.h"
 
 extern void *dict_not_found;
 

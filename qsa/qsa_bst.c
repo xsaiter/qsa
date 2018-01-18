@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "q_utils.h"
-#include "q_bst.h"
+#include "qsa_utils.h"
+#include "qsa_bst.h"
 
 q_bst *q_bst_new(size_t key_size, q_compare_fn *key_cmp)
 {

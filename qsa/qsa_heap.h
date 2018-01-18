@@ -1,7 +1,7 @@
 #ifndef Q_HEAP_H
 #define Q_HEAP_H
 
-#include "q_utils.h"
+#include "qsa_utils.h"
 
 #ifdef __cplusplus
 extern "C" {

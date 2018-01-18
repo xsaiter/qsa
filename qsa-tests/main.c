@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "q_list.h"
-#include "q_utils.h"
+#include "qsa_list.h"
+#include "qsa_utils.h"
 
-#include "str/q_str.h"
-#include "graphs/q_graph.h"
+#include "str/qsa_str.h"
+#include "graphs/qsa_graph.h"
 
-#include "q_queue.h"
-#include "q_stack.h"
+#include "qsa_queue.h"
+#include "qsa_stack.h"
 
-#include "q_heap.h"
+#include "qsa_heap.h"
 
-#include "q_dict.h"
+#include "qsa_dict.h"
 
 struct person {
     int age;

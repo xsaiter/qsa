@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "q_dijkstra.h"
+#include "qsa_dijkstra.h"
 
-#include "../q_utils.h"
-#include "../q_heap.h"
+#include "../qsa_utils.h"
+#include "../qsa_heap.h"
 
 void q_dijkstra(const q_graph *g, int s, q_graph_shortest_paths *res)
 {

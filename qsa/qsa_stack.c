@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "q_stack.h"
-#include "q_utils.h"
+#include "qsa_stack.h"
+#include "qsa_utils.h"
 
 q_stack *q_stack_new(size_t data_size){
     q_stack *s = xmalloc(sizeof(q_stack));    

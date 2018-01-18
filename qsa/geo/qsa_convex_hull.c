@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "q_convex_hull.h"
+#include "qsa_convex_hull.h"
 
 #define Q_MIN_POINTS 3
 

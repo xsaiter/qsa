@@ -2,10 +2,10 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "../q_utils.h"
-#include "../q_queue.h"
+#include "../qsa_utils.h"
+#include "../qsa_queue.h"
 
-#include "q_graph.h"
+#include "qsa_graph.h"
 
 q_graph *q_graph_new(int nv, bool directed, bool weighed)
 {

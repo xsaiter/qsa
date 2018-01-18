@@ -1,4 +1,4 @@
-#include "q_geo.h"
+#include "qsa_geo.h"
 
 /* 
  * > 0 if a, b, c - clockwise

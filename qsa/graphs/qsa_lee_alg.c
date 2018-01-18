@@ -2,10 +2,10 @@
 #include<stdbool.h>
 #include<string.h>
 
-#include "q_lee_alg.h"
+#include "qsa_lee_alg.h"
 
-#include "../q_queue.h"
-#include "../q_vector.h"
+#include "../qsa_queue.h"
+#include "../qsa_vector.h"
 
 #define Q_DIRECTIONS (4)
 

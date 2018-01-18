@@ -1,8 +1,8 @@
 #ifndef Q_CONVEX_HULL_H
 #define Q_CONVEX_HULL_H
 
-#include "q_geo.h"
-#include "../q_stack.h"
+#include "qsa_geo.h"
+#include "../qsa_stack.h"
 
 #ifdef __cplusplus
 extern "C" {

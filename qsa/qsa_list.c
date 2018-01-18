@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#include "q_list.h"
-#include "q_utils.h"
+#include "qsa_list.h"
+#include "qsa_utils.h"
 
 q_list *q_list_new(size_t data_size)
 {

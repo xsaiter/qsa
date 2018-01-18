@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "q_str.h"
+#include "qsa_str.h"
 
 void q_str_remove_symbols(char *s, char c)
 {

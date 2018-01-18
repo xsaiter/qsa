@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "q_queue.h"
-#include "q_utils.h"
+#include "qsa_queue.h"
+#include "qsa_utils.h"
 
 q_queue *q_queue_new(size_t data_size){    
     q_queue *q = xmalloc(sizeof(q_queue));    

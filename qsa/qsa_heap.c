@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "q_heap.h"
+#include "qsa_heap.h"
 
 #define Q_LEFT(x) (2*(x) + 1)
 #define Q_RIGHT(x) (2*(x) + 2)

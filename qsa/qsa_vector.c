@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include"q_vector.h"
-#include "q_utils.h"
+#include"qsa_vector.h"
+#include "qsa_utils.h"
 
 q_vector *q_vector_new(size_t capacity, size_t elem_size)
 {
