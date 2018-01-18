@@ -11,24 +11,24 @@
 extern "C" {
 #endif
 
-    typedef struct q_bst_node {
+    typedef struct qsa_bst_node_s {
         void *key;
-        struct q_bst_node *parent;
-        struct q_bst_node *left;
-        struct q_bst_node *right;
-    } q_bst_node;
+        struct qsa_bst_node_s *parent;
+        struct qsa_bst_node_s *left;
+        struct qsa_bst_node_s *right;
+    } qsa_bst_node_s;
 
     typedef struct {
-        q_bst_node *root;
+        qsa_bst_node_s *root;
         size_t key_size;
         qsa_compare_fn *key_cmp;
-    } q_bst;
+    } qsa_bst_s;
 
-    q_bst *q_bst_new(size_t key_size, qsa_compare_fn *key_cmp);
-    void q_bst_free(q_bst *t);
-    void q_bst_add(q_bst *t, void *key);
-    void q_bst_remove(q_bst *t, void *key);
-    q_bst_node *q_bst_find(q_bst *t, void *key);
+    qsa_bst_s *qsa_bst_new(size_t key_size, qsa_compare_fn *key_cmp);
+    void qsa_bst_free(qsa_bst_s *t);
+    void qsa_bst_add(qsa_bst_s *t, void *key);
+    void qsa_bst_remove(qsa_bst_s *t, void *key);
+    qsa_bst_node_s *qsa_bst_find(qsa_bst_s *t, void *key);
 
 #ifdef __cplusplus
 }

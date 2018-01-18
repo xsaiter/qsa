@@ -6,7 +6,7 @@
 
 #include "qsa_convex_hull.h"
 
-#define Q_MIN_POINTS 3
+#define QSA_CONVEX_HULL_MIN_POINTS 3
 
 static int qsa_smaller_angle(const void *x1, const void *x2, void *xpivot)
 {
@@ -26,7 +26,7 @@ static int qsa_smaller_angle(const void *x1, const void *x2, void *xpivot)
 
 void qsa_graham_scan(qsa_point_s *points, int npoints, qsa_stack_s *hull)
 {
-    if (npoints <= Q_MIN_POINTS) {
+    if (npoints <= QSA_CONVEX_HULL_MIN_POINTS) {
         for (int i = 0; i < npoints; i++) {
             qsa_stack_push(hull, &points[i]);
         }
@@ -53,7 +53,7 @@ void qsa_graham_scan(qsa_point_s *points, int npoints, qsa_stack_s *hull)
     qsa_stack_push(hull, &points[1]);
     qsa_stack_push(hull, &points[2]);
 
-    for (int i = Q_MIN_POINTS; i < npoints; i++) {
+    for (int i = QSA_CONVEX_HULL_MIN_POINTS; i < npoints; i++) {
         while (true) {
             qsa_point_s *p1 = qsa_stack_pop(hull);
             qsa_point_s *p2 = qsa_stack_pop(hull);

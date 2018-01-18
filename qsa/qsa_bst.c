@@ -4,9 +4,9 @@
 #include "qsa_utils.h"
 #include "qsa_bst.h"
 
-q_bst *q_bst_new(size_t key_size, qsa_compare_fn *key_cmp)
+qsa_bst_s *qsa_bst_new(size_t key_size, qsa_compare_fn *key_cmp)
 {
-    q_bst *t = qsa_malloc(sizeof (q_bst));
+    qsa_bst_s *t = qsa_malloc(sizeof (qsa_bst_s));
 
     t->key_size = key_size;
     t->key_cmp = key_cmp;
@@ -14,9 +14,9 @@ q_bst *q_bst_new(size_t key_size, qsa_compare_fn *key_cmp)
     return t;
 }
 
-static q_bst_node *node_new(q_bst *t, void *key)
+static qsa_bst_node_s *node_new(qsa_bst_s *t, void *key)
 {
-    q_bst_node *node = qsa_malloc(sizeof (q_bst_node));
+    qsa_bst_node_s *node = qsa_malloc(sizeof (qsa_bst_node_s));
 
     node->key = qsa_malloc(t->key_size);
     memcpy(node->key, key, t->key_size);
@@ -24,12 +24,12 @@ static q_bst_node *node_new(q_bst *t, void *key)
     return node;
 }
 
-void q_bst_free(q_bst *t)
+void qsa_bst_free(qsa_bst_s *t)
 {
     free(t);
 }
 
-static void add_node(q_bst *t, void *key, q_bst_node *x)
+static void add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 {
     if (t->key_cmp(x->key, key) == 0) {
         return;
@@ -50,7 +50,7 @@ static void add_node(q_bst *t, void *key, q_bst_node *x)
     }
 }
 
-void q_bst_add(q_bst *t, void *key)
+void qsa_bst_add(qsa_bst_s *t, void *key)
 {
     if (!t->root) {
         t->root = node_new(t, key);
@@ -59,9 +59,9 @@ void q_bst_add(q_bst *t, void *key)
     }
 }
 
-q_bst_node *q_bst_find(q_bst *t, void *key)
+qsa_bst_node_s *qsa_bst_find(qsa_bst_s *t, void *key)
 {
-    q_bst_node *r = t->root;
+    qsa_bst_node_s *r = t->root;
 
     while (r) {
         int cmp = t->key_cmp(r->key, key);
@@ -79,7 +79,7 @@ q_bst_node *q_bst_find(q_bst *t, void *key)
     return NULL;
 }
 
-static void transplant(q_bst *t, q_bst_node *a, q_bst_node *b)
+static void transplant(qsa_bst_s *t, qsa_bst_node_s *a, qsa_bst_node_s *b)
 {
     if (!a->parent) {
         t->root = b;
@@ -94,16 +94,16 @@ static void transplant(q_bst *t, q_bst_node *a, q_bst_node *b)
     }
 }
 
-static q_bst_node *min_node(q_bst_node *x)
+static qsa_bst_node_s *min_node(qsa_bst_node_s *x)
 {
-    q_bst_node *c = x;
+    qsa_bst_node_s *c = x;
     while ((c->left)) {
         c = c->left;
     }
     return c;
 }
 
-static void remove_node(q_bst *t, q_bst_node *x)
+static void remove_node(qsa_bst_s *t, qsa_bst_node_s *x)
 {
     if (!x->left && !x->right) {
         if (!x->parent) {
@@ -120,7 +120,7 @@ static void remove_node(q_bst *t, q_bst_node *x)
     } else if (!x->right) {
         transplant(t, x, x->left);
     } else {
-        q_bst_node *m = min_node(x->right);
+        qsa_bst_node_s *m = min_node(x->right);
 
         if (m->parent != x) {
             transplant(t, m, m->right);
@@ -134,7 +134,7 @@ static void remove_node(q_bst *t, q_bst_node *x)
     }
 }
 
-static void _q_bst_remove(q_bst *t, void *key, q_bst_node *x)
+static void _q_bst_remove(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 {
     if (x) {
         int cmp = t->key_cmp(x->key, key);
@@ -149,7 +149,7 @@ static void _q_bst_remove(q_bst *t, void *key, q_bst_node *x)
     }
 }
 
-void q_bst_remove(q_bst *t, void *key)
+void qsa_bst_remove(qsa_bst_s *t, void *key)
 {
     _q_bst_remove(t, key, t->root);
 }
