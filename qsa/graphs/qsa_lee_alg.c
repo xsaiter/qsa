@@ -7,12 +7,12 @@
 #include "../qsa_queue.h"
 #include "../qsa_vector.h"
 
-#define Q_DIRECTIONS (4)
+#define QSA_DIRECTIONS (4)
 
 bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result)
 {
-    int dx[Q_DIRECTIONS] = {1, 0, -1, 0};
-    int dy[Q_DIRECTIONS] = {0, -1, 0, 1};
+    int dx[QSA_DIRECTIONS] = {1, 0, -1, 0};
+    int dy[QSA_DIRECTIONS] = {0, -1, 0, 1};
 
     qsa_queue_s *q = qsa_queue_new(sizeof(qsa_lee_cell_s));
 
@@ -49,7 +49,7 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result)
         y = c->y;
         num = c->n + 1;
 
-        for (int i = 0; i < Q_DIRECTIONS; ++i) {
+        for (int i = 0; i < QSA_DIRECTIONS; ++i) {
             nx = x + dx[i];
             ny = y + dy[i];
 
@@ -80,7 +80,7 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result)
     num = cc[x][y].n;
 
     while (x != bx || y != by) {
-        for (int i = 0; i < Q_DIRECTIONS; ++i) {
+        for (int i = 0; i < QSA_DIRECTIONS; ++i) {
             nx = x + dx[i];
             ny = y + dy[i];
 

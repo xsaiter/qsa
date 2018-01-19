@@ -3,11 +3,11 @@
 
 #include "qsa_utils.h"
 
-extern void *dict_not_found;
-
 #ifdef __cplusplus
 extern "C" {
-#endif        
+#endif
+    
+    extern void *dict_not_found;
 
     typedef struct qsa_dict_elem_s {
         void *key;

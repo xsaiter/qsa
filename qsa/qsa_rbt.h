@@ -10,7 +10,9 @@ extern "C" {
 #endif
 
     typedef struct qsa_rbt_node_s {
-        struct qsa_rbt_node_s *left, *right, *parent;
+        struct qsa_rbt_node_s *left;
+        struct qsa_rbt_node_s *right;
+        struct qsa_rbt_node_s *parent;
     } qsa_rbt_node_s;
 
     typedef struct {

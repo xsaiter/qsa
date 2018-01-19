@@ -42,17 +42,17 @@ extern "C" {
 
     qsa_graph_paths_s *qsa_graph_paths_new(qsa_graph_s *g, int s);
     void qsa_graph_paths_free(qsa_graph_paths_s *paths);
-    
+
     void qsa_graph_paths_bfs(qsa_graph_s *g, qsa_graph_paths_s *paths);
     void qsa_graph_paths_dfs(qsa_graph_s *g, qsa_graph_paths_s *paths);
-    
+
     typedef struct {
         int nv; // number of vertices
         int s; // source vertex
         double *dist; // dist[i] - distance from s to i
         qsa_graph_edge_s *edges;
     } qsa_graph_shortest_paths_s;
-        
+
     bool qsa_graph_shortest_paths_to(qsa_graph_shortest_paths_s *paths, int v);
     double qsa_graph_shortest_paths_distance_to(qsa_graph_shortest_paths_s *paths, int v);
 

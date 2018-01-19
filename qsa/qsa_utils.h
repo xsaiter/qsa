@@ -3,6 +3,10 @@
 
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define QSA_OK 0
 #define QSA_ERROR -1
 
@@ -11,12 +15,10 @@
 
 #define QSA_FOREVER() while(1)
 
+#define UNUSED(x) ((void)(x))
+
 #define QSA_LOG_ERR(...) fprintf(stderr, __VA_ARGS__)
 #define QSA_LOG_INFO(...) printf(__VA_ARGS__)
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
     void qsa_die(const char*text);
     void *qsa_malloc(size_t size);
@@ -25,6 +27,7 @@ extern "C" {
 
     typedef int (qsa_compare_fn) (const void *l, const void *r);
     typedef bool (qsa_equals_fn) (const void *l, const void *r);
+    typedef void (qsa_action_fn) (void *data);
 
     typedef unsigned int (qsa_hash_fn) (const void *arg);
 

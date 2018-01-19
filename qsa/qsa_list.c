@@ -140,7 +140,7 @@ qsa_list_node_s *qsa_list_find(qsa_list_s *list, void *data)
     return NULL;
 }
 
-void qsa_list_for_each(qsa_list_s *list, void (*f)(void *data))
+void qsa_list_for_each(qsa_list_s *list, qsa_action_fn *f)
 {
     qsa_list_node_s *cur = list->head;
     while (cur) {

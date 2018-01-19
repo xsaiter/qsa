@@ -65,7 +65,7 @@ qsa_bst_node_s *qsa_bst_find(qsa_bst_s *t, void *key)
 
     while (r) {
         int cmp = t->key_cmp(r->key, key);
-        
+
         if (cmp == 0) {
             return r;
         }

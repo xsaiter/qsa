@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+
 #include "qsa_utils.h"
 
 #ifdef __cplusplus
@@ -33,7 +34,7 @@ extern "C" {
     qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_equals_fn *equals);
     qsa_list_node_s *qsa_list_find(qsa_list_s *list, void *data);
     
-    void qsa_list_for_each(qsa_list_s *list, void (*f)(void *data));    
+    void qsa_list_for_each(qsa_list_s *list, qsa_action_fn *f);
     bool qsa_list_empty(qsa_list_s *list);
     
     qsa_list_s *qsa_list_new_int();

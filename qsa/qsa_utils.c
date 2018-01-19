@@ -47,9 +47,11 @@ int qsa_compare_int(const void *l, const void *r)
     if (lv > rv) {
         return 1;
     }
+
     if (lv < rv) {
         return -1;
     }
+
     return 0;
 }
 
@@ -59,8 +61,8 @@ bool qsa_equals_int(const void *l, const void *r)
 }
 
 unsigned int qsa_hash_str(const void *arg)
-{    
-    return qsa_fnv1_hash((char*)arg);
+{
+    return qsa_fnv1_hash((char*) arg);
 }
 
 unsigned int qsa_fnv1_hash(char *buf)

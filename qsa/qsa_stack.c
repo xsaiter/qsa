@@ -5,14 +5,16 @@
 #include "qsa_stack.h"
 #include "qsa_utils.h"
 
-qsa_stack_s *qsa_stack_new(size_t data_size){
-    qsa_stack_s *s = qsa_malloc(sizeof(qsa_stack_s));    
+qsa_stack_s *qsa_stack_new(size_t data_size)
+{
+    qsa_stack_s *s = qsa_malloc(sizeof (qsa_stack_s));
     s->list = qsa_list_new(data_size);
     return s;
 }
 
-inline qsa_stack_s *qsa_stack_new_int(){
-    return qsa_stack_new(sizeof(int));
+inline qsa_stack_s *qsa_stack_new_int()
+{
+    return qsa_stack_new(sizeof (int));
 }
 
 void qsa_stack_free(qsa_stack_s *s)
