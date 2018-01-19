@@ -2,8 +2,8 @@
 #define QSA_STACK_H
 
 #include <stdbool.h>
-
 #include "qsa_list.h"
+
 
 #ifdef __cplusplus
 extern "C" {

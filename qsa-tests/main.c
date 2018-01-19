@@ -241,8 +241,8 @@ static void test_dict()
 }
 
 int main(int argc, char** argv)
-{
-    test_dict();
+{    
+    test_dict();    
     /*
     test_graph_bfs();
     test_graph_dfs();
