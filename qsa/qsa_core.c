@@ -3,9 +3,9 @@
 
 #include "qsa_core.h"
 
-inline void qsa_die(const char *text)
+inline void qsa_die(const char *msg)
 {
-    perror(text);
+    perror(msg);
     exit(EXIT_FAILURE);
 }
 
@@ -20,7 +20,6 @@ void *qsa_malloc(size_t size)
 
 void *qsa_malloc0(size_t size)
 {
-
     void *p = calloc(1, size);
     if (!p) {
         qsa_die("xmalloc0");

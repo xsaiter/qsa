@@ -16,7 +16,8 @@
 #define QSA_LOG_ERR(...) fprintf(stderr, __VA_ARGS__)
 #define QSA_LOG_INFO(...) printf(__VA_ARGS__)
 
-void qsa_die(const char*text);
+void qsa_die(const char*msg);
+
 void *qsa_malloc(size_t size);
 void *qsa_malloc0(size_t size);
 void *qsa_calloc(size_t nmemb, size_t size);

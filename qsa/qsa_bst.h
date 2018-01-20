@@ -5,7 +5,7 @@
 #ifndef QSA_BST_H
 #define QSA_BST_H
 
-#include "qsa_utils.h"
+#include "qsa_core.h"
 
 typedef struct qsa_bst_node_s {
     void *key;
