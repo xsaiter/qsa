@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "qsa_core.h"
 #include"qsa_vector.h"
-#include "qsa_utils.h"
 
 qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size)
 {

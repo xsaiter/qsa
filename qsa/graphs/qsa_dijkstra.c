@@ -2,7 +2,6 @@
 
 #include "qsa_dijkstra.h"
 
-#include "../qsa_utils.h"
 #include "../qsa_heap.h"
 
 void qsa_dijkstra(const qsa_graph_s *g, int s, qsa_graph_shortest_paths_s *res)
