@@ -22,7 +22,8 @@ typedef struct qsa_rbt_node_s {
 } qsa_rbt_node_s;
 
 typedef struct {
-    qsa_rbt_node_s *root;    
+    qsa_rbt_node_s *root;
+    qsa_rbt_node_s *nil;
     size_t key_size; 
     qsa_compare_fn *key_cmp;
 } qsa_rbt_s;
