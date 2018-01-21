@@ -1,6 +1,7 @@
 #ifndef QSA_CORE_H
 #define QSA_CORE_H
 
+#include <stddef.h>
 #include <stdbool.h>
 
 #define QSA_OK 0
