@@ -50,7 +50,7 @@ static void add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
     }
 }
 
-void qsa_bst_add(qsa_bst_s *t, void *key)
+void qsa_bst_insert(qsa_bst_s *t, void *key)
 {
     if (!t->root) {
         t->root = node_new(t, key);
@@ -59,7 +59,7 @@ void qsa_bst_add(qsa_bst_s *t, void *key)
     }
 }
 
-qsa_bst_node_s *qsa_bst_find(qsa_bst_s *t, void *key)
+qsa_bst_node_s *qsa_bst_search(const qsa_bst_s *t, const void *key)
 {
     qsa_bst_node_s *r = t->root;
 
@@ -149,7 +149,7 @@ static void _q_bst_remove(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
     }
 }
 
-void qsa_bst_remove(qsa_bst_s *t, void *key)
+void qsa_bst_delete(qsa_bst_s *t, void *key)
 {
     _q_bst_remove(t, key, t->root);
 }
