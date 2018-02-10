@@ -20,11 +20,6 @@ qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size)
     return v;
 }
 
-inline qsa_vector_s *qsa_vector_new_int(size_t capacity)
-{
-    return qsa_vector_new(capacity, sizeof (int));
-}
-
 void qsa_vector_free(qsa_vector_s *v)
 {
     free(v->elems);

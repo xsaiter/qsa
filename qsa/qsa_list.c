@@ -19,11 +19,6 @@ qsa_list_s *qsa_list_new(size_t data_size)
     return list;
 }
 
-qsa_list_s *qsa_list_new_int()
-{
-    return qsa_list_new(sizeof (int));
-}
-
 static qsa_list_node_s *node_new(qsa_list_s *list, void *data)
 {
     qsa_list_node_s *node = qsa_malloc(sizeof (qsa_list_node_s));
@@ -114,12 +109,12 @@ void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *node)
     list->len--;
 }
 
-qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_equals_fn *equals)
+qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_eq_fn *eq)
 {
     qsa_list_node_s *cur;
     cur = list->head;
     while (cur) {
-        if (equals(cur->data, data)) {
+        if (eq(cur->data, data)) {
             return cur;
         }
         cur = cur->next;

@@ -52,7 +52,7 @@ int qsa_compare_int(const void *l, const void *r)
     return 0;
 }
 
-bool qsa_equals_int(const void *l, const void *r)
+bool qsa_eq_int(const void *l, const void *r)
 {
     return qsa_compare_int(l, r) == 0;
 }

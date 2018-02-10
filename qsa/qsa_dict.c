@@ -7,13 +7,13 @@
 
 #define QSA_DICT_TABLE_SIZE (16)
 
-qsa_dict_s *qsa_dict_new(size_t key_size, qsa_hash_fn *key_hash, qsa_equals_fn *key_equals, size_t value_size)
+qsa_dict_s *qsa_dict_new(size_t key_size, qsa_hash_fn *key_hash, qsa_eq_fn *key_eq, size_t value_size)
 {
     qsa_dict_s *d = qsa_malloc(sizeof (qsa_dict_s));
 
     d->key_size = key_size;
     d->key_hash = key_hash;
-    d->key_equals = key_equals;
+    d->key_equals = key_eq;
 
     d->value_size = value_size;
 

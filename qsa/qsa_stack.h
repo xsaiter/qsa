@@ -14,7 +14,5 @@ bool qsa_stack_empty(qsa_stack_s *s);
 void qsa_stack_push(qsa_stack_s *s, void *data);
 void *qsa_stack_pop(qsa_stack_s *s);
 
-qsa_stack_s *qsa_stack_new_int();
-
 #endif /* QSA_STACK_H */
 

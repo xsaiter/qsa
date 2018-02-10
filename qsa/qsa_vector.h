@@ -17,7 +17,5 @@ void qsa_vector_set(qsa_vector_s *v, size_t index, void *elem);
 void *qsa_vector_get(qsa_vector_s *v, size_t index);
 void qsa_vector_for_each(qsa_vector_s *v, void (*f)(void* elem));
 
-qsa_vector_s *qsa_vector_new_int(size_t capacity);
-
 #endif /* QSA_VECTOR_H */
 
