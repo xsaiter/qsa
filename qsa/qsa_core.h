@@ -10,6 +10,7 @@ typedef enum {
 } qsa_code_s;
 
 #define QSA_VPTR_TO_INT(p) (*(int*)(p))
+
 #define QSA_VPTR_TO_LONG(p) (*(long*)(p))
 
 #define QSA_FOREVER() while(1)
@@ -17,6 +18,7 @@ typedef enum {
 #define QSA_UNUSED(x) ((void)(x))
 
 #define QSA_LOG_ERR(...) fprintf(stderr, __VA_ARGS__)
+
 #define QSA_LOG_INFO(...) printf(__VA_ARGS__)
 
 void qsa_die(const char*msg);
