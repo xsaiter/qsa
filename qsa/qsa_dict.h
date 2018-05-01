@@ -22,8 +22,12 @@ typedef struct {
 } qsa_dict_s;
 
 qsa_dict_s *qsa_dict_new(size_t key_size, qsa_hash_fn *key_hash, qsa_eq_fn *key_eq, size_t value_size);
+
+
 void qsa_dict_free(qsa_dict_s *d);
+
 void qsa_dict_add(qsa_dict_s *d, void *key, void *value);
+
 void *qsa_dict_get(qsa_dict_s *d, const void *key);
 
 #endif /* QSA_DICT_H */

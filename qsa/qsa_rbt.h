@@ -28,8 +28,11 @@ typedef struct {
 } qsa_rbt_s;
 
 qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_compare_fn *key_cmp);
+
 void qsa_rbt_free(qsa_rbt_s *t);
+
 qsa_rbt_node_s *qsa_rbt_search(const qsa_rbt_s *t, const void *key);
+
 void qsa_rbt_insert(qsa_rbt_s *t, void *key);
 
 #endif /* QSA_RBT_H */

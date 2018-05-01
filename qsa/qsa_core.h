@@ -22,18 +22,22 @@ typedef enum {
 void qsa_die(const char*msg);
 
 void *qsa_malloc(size_t size);
+
 void *qsa_malloc0(size_t size);
+
 void *qsa_calloc(size_t nmemb, size_t size);
 
 typedef int (qsa_compare_fn) (const void *l, const void *r);
+
 typedef bool (qsa_eq_fn) (const void *l, const void *r);
+
 typedef void (qsa_action_fn) (void *data);
 
 typedef unsigned int (qsa_hash_fn) (const void *arg);
 
 int qsa_compare_int(const void *l, const void *r);
-bool qsa_eq_int(const void *l, const void *r);
 
+bool qsa_eq_int(const void *l, const void *r);
 
 #endif /* QSA_CORE_H */
 

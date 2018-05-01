@@ -21,9 +21,13 @@ typedef struct {
 } qsa_bst_s;
 
 qsa_bst_s *qsa_bst_new(size_t key_size, qsa_compare_fn *key_cmp);
+
 void qsa_bst_free(qsa_bst_s *t);
+
 void qsa_bst_insert(qsa_bst_s *t, void *key);
+
 void qsa_bst_delete(qsa_bst_s *t, void *key);
+
 qsa_bst_node_s *qsa_bst_search(const qsa_bst_s *t, const void *key);
 
 
