@@ -12,9 +12,11 @@ qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size)
     v->len = 0;
     v->capacity = capacity;
     v->elems = qsa_malloc(v->capacity * sizeof (void*));
+    
     for (size_t i = 0; i < v->capacity; ++i) {
         v->elems[i] = qsa_malloc(elem_size);
     }
+    
     v->elem_size = elem_size;
 
     return v;
