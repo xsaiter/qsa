@@ -7,7 +7,7 @@
 typedef struct qsa_avl_node_s{
     int data;
     struct qsa_avl_node_s *left;
-    struct qsa_avl_node_s *right;
+    struct qsa_avl_node_s *right;    
     int height;
 } qsa_avl_node_s;
 
@@ -22,6 +22,8 @@ void qsa_avl_free(qsa_avl_s *self);
 void qsa_avl_insert(qsa_avl_s *self, int data);
 
 void qsa_avl_delete(qsa_avl_s *self, int data);
+
+void qsa_avl_print(qsa_avl_s *self);
 
 #endif /* QSA_AVL_H */
 
