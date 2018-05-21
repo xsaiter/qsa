@@ -21,7 +21,7 @@ qsa_avl_s *qsa_avl_new(size_t data_size, qsa_cmp_fn *cmp_data)
     return t;
 }
 
-void qsa_avl_free_r(qsa_avl_node_s *x)
+static void qsa_avl_free_r(qsa_avl_node_s *x)
 {
     if (!x) {
         return;
@@ -136,6 +136,7 @@ static qsa_avl_node_s *qsa_avl_node_new(qsa_avl_s *t, void *data)
 static void qsa_avl_insert_r(qsa_avl_s *t, qsa_avl_node_s **x, void *data)
 {
     if (!(*x)) {
+        *x = qsa_avl_node_new(t, data);
         return;
     }
 
@@ -155,7 +156,7 @@ void qsa_avl_insert(qsa_avl_s *t, void *data)
     qsa_avl_insert_r(t, &(t->root), data);
 }
 
-qsa_avl_node_s *qsa_avl_search_r(qsa_avl_s *t, qsa_avl_node_s *x, void *data)
+static qsa_avl_node_s *qsa_avl_search_r(qsa_avl_s *t, qsa_avl_node_s *x, void *data)
 {
     if (!x) {
         return NULL;
@@ -179,27 +180,28 @@ qsa_avl_node_s *qsa_avl_search(qsa_avl_s *t, void *data)
     return qsa_avl_search_r(t, t->root, data);
 }
 
-void qsa_avl_print_r(qsa_avl_s *t, qsa_avl_node_s *x, void (*display)(void *data), int depth){
-    if(!x){
+static void qsa_avl_print_r(qsa_avl_s *t, qsa_avl_node_s *x, void (*display)(void *data), int depth)
+{
+    if (!x) {
         return;
     }
-    
+
     printf(" %d", depth);
-    
+
     display(x->data);
-    
-    if(x->left){
+
+    if (x->left) {
         printf("lhs:");
         display(x->left->data);
     }
-    
-    if(x->right){
+
+    if (x->right) {
         printf("rhs:");
         display(x->right->data);
     }
-    
+
     qsa_avl_print_r(t, x->left, display, depth + 1);
-    
+
     qsa_avl_print_r(t, x->right, display, depth + 1);
 }
 
