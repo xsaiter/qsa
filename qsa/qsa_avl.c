@@ -6,7 +6,7 @@
 
 #include "qsa_core.h"
 
-typedef enum qsa_rotate_types_s {
+typedef enum {
     ROTATE_LEFT, ROTATE_RIGHT
 } qsa_rotate_types_s;
 
