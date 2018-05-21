@@ -11,7 +11,7 @@ static qsa_rbt_node_s *qsa_rbt_node_new(void *key, qsa_rbt_colors_s color)
     return r;
 }
 
-qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_compare_fn *key_cmp)
+qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_cmp_fn *key_cmp)
 {
     qsa_rbt_s *t = qsa_malloc(sizeof (qsa_rbt_s));
 

@@ -17,10 +17,10 @@ typedef struct qsa_bst_node_s {
 typedef struct {
     qsa_bst_node_s *root;
     size_t key_size;
-    qsa_compare_fn *key_cmp;
+    qsa_cmp_fn *key_cmp;
 } qsa_bst_s;
 
-qsa_bst_s *qsa_bst_new(size_t key_size, qsa_compare_fn *key_cmp);
+qsa_bst_s *qsa_bst_new(size_t key_size, qsa_cmp_fn *key_cmp);
 
 void qsa_bst_free(qsa_bst_s *t);
 

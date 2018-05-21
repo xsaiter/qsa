@@ -19,12 +19,12 @@ typedef struct qsa_btree_node_s {
 typedef struct {
     size_t data_size;
     size_t key_size;
-    qsa_compare_fn *cmp_keys;
+    qsa_cmp_fn *cmp_keys;
     qsa_btree_node_s *root;
     size_t min_degree;    
 } qsa_btree_s;
 
-qsa_btree_s *qsa_btree_new(size_t min_degree, size_t key_size, qsa_compare_fn *cmp_keys);
+qsa_btree_s *qsa_btree_new(size_t min_degree, size_t key_size, qsa_cmp_fn *cmp_keys);
 
 
 #endif /* QSA_BTREE_H */

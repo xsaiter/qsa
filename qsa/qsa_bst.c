@@ -4,7 +4,7 @@
 #include "qsa_core.h"
 #include "qsa_bst.h"
 
-qsa_bst_s *qsa_bst_new(size_t key_size, qsa_compare_fn *key_cmp)
+qsa_bst_s *qsa_bst_new(size_t key_size, qsa_cmp_fn *key_cmp)
 {
     qsa_bst_s *t = qsa_malloc(sizeof (qsa_bst_s));
 

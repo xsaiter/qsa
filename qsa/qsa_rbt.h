@@ -24,10 +24,10 @@ typedef struct {
     qsa_rbt_node_s *root;
     qsa_rbt_node_s *nil;
     size_t key_size; 
-    qsa_compare_fn *key_cmp;
+    qsa_cmp_fn *key_cmp;
 } qsa_rbt_s;
 
-qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_compare_fn *key_cmp);
+qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_cmp_fn *key_cmp);
 
 void qsa_rbt_free(qsa_rbt_s *t);
 

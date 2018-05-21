@@ -36,7 +36,7 @@ void *qsa_calloc(size_t nmemb, size_t size)
     return p;
 }
 
-int qsa_compare_int(const void *l, const void *r)
+int qsa_cmp_int(const void *l, const void *r)
 {
     int lv = QSA_VPTR_TO_INT(l);
     int rv = QSA_VPTR_TO_INT(r);
@@ -54,5 +54,5 @@ int qsa_compare_int(const void *l, const void *r)
 
 bool qsa_eq_int(const void *l, const void *r)
 {
-    return qsa_compare_int(l, r) == 0;
+    return qsa_cmp_int(l, r) == 0;
 }

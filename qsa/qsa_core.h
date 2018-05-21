@@ -29,7 +29,7 @@ void *qsa_malloc0(size_t size);
 
 void *qsa_calloc(size_t nmemb, size_t size);
 
-typedef int (qsa_compare_fn) (const void *l, const void *r);
+typedef int (qsa_cmp_fn) (const void *l, const void *r);
 
 typedef bool (qsa_eq_fn) (const void *l, const void *r);
 
@@ -37,7 +37,7 @@ typedef void (qsa_action_fn) (void *data);
 
 typedef unsigned int (qsa_hash_fn) (const void *arg);
 
-int qsa_compare_int(const void *l, const void *r);
+int qsa_cmp_int(const void *l, const void *r);
 
 bool qsa_eq_int(const void *l, const void *r);
 

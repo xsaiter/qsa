@@ -8,10 +8,10 @@ typedef struct {
     int len;
     size_t elem_size;
     void **elems;
-    qsa_compare_fn *cmp;
+    qsa_cmp_fn *cmp;
 } qsa_heap_s;
 
-qsa_heap_s *qsa_heap_new(int capacity, size_t elem_size, qsa_compare_fn *cmp);
+qsa_heap_s *qsa_heap_new(int capacity, size_t elem_size, qsa_cmp_fn *cmp);
 
 void qsa_heap_free(qsa_heap_s* h);
 
