@@ -10,7 +10,7 @@ typedef enum {
     ROTATE_LEFT, ROTATE_RIGHT
 } qsa_rotate_types_s;
 
-qsa_avl_s *qsa_avl_new(size_t data_size, qsa_cmp_fn *cmp_data)
+qsa_avl_s *qsa_avl_create(size_t data_size, qsa_cmp_fn *cmp_data)
 {
     qsa_avl_s *t = qsa_malloc(sizeof (qsa_avl_s));
 
@@ -37,7 +37,7 @@ static void qsa_avl_free_r(qsa_avl_node_s *x)
 
 void qsa_avl_free(qsa_avl_s *t)
 {
-    free(t->root);
+    qsa_avl_free_r(t->root);
     free(t);
 }
 

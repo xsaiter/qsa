@@ -15,6 +15,8 @@
 
 #include "qsa_dict.h"
 
+#include "qsa_avl.h"
+
 struct person {
     int age;
 };
@@ -82,7 +84,7 @@ static void test_stack()
 {
     printf("\ntest stack:\n");
 
-    qsa_stack_s *s = qsa_stack_new(sizeof(int));
+    qsa_stack_s *s = qsa_stack_new(sizeof (int));
 
     for (int i = 10; i < 30; i += 10) {
         qsa_stack_push(s, &i);
@@ -169,7 +171,7 @@ static void test_graph_paths()
 
 static void test_heap()
 {
-    qsa_heap_s *heap = qsa_heap_new(10, sizeof (int), &qsa_compare_int);
+    qsa_heap_s *heap = qsa_heap_new(10, sizeof (int), &qsa_cmp_int);
 
     int x = 10;
     qsa_heap_add(heap, &x);
@@ -227,9 +229,9 @@ static void test_heap()
 }
 
 static void test_dict()
-{    
-    qsa_dict_s *d = qsa_dict_new(sizeof(char*), &qsa_hash_str, &qsa_eq_int, sizeof(int));
- 
+{
+    qsa_dict_s *d = qsa_dict_new(sizeof (char*), &qsa_hash_str, &qsa_eq_int, sizeof (int));
+
     int x = 10;
     qsa_dict_add(d, "abc", &x);
 
@@ -240,9 +242,27 @@ static void test_dict()
     int val2 = QSA_VPTR_TO_INT(qsa_dict_get(d, "abc"));
 }
 
+static void print_int(void *data)
+{
+    printf(" (%d) ", QSA_VPTR_TO_INT(data));
+}
+
+static void test_avl()
+{
+    qsa_avl_s *t = qsa_avl_create(sizeof (int), &qsa_cmp_int);
+
+    for (int i = 1; i <= 8; ++i) {
+        qsa_avl_insert(t, &i);
+    }
+
+    qsa_avl_print(t, &print_int);
+
+    qsa_avl_free(t);
+}
+
 int main(int argc, char** argv)
-{    
-    test_dict();    
+{
+    test_dict();
     /*
     test_graph_bfs();
     test_graph_dfs();

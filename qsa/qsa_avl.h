@@ -19,7 +19,7 @@ typedef struct {
     qsa_cmp_fn *cmp_data;
 } qsa_avl_s;
 
-qsa_avl_s *qsa_avl_new(size_t data_size, qsa_cmp_fn *cmp_data);
+qsa_avl_s *qsa_avl_create(size_t data_size, qsa_cmp_fn *cmp_data);
 
 void qsa_avl_free(qsa_avl_s *t);
 
