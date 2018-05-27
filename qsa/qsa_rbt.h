@@ -27,7 +27,7 @@ typedef struct {
     qsa_cmp_fn *key_cmp;
 } qsa_rbt_s;
 
-qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_cmp_fn *key_cmp);
+qsa_rbt_s *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp);
 
 void qsa_rbt_free(qsa_rbt_s *t);
 

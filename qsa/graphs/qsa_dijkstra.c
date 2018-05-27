@@ -12,7 +12,7 @@ void qsa_dijkstra(const qsa_graph_s *g, int s, qsa_graph_shortest_paths_s *res)
         res->dist[i] = -1;
     }    
 
-    qsa_heap_s *h = qsa_heap_new(g->nv, sizeof (int), &qsa_cmp_int);
+    qsa_heap_s *h = qsa_heap_create(g->nv, sizeof (int), &qsa_cmp_int);
     
     qsa_heap_add(h, &s);
 

@@ -10,7 +10,7 @@ typedef struct {
     size_t elem_size;
 } qsa_vector_s;
 
-qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size);
+qsa_vector_s *qsa_vector_create(size_t capacity, size_t elem_size);
 
 void qsa_vector_free(qsa_vector_s *v);
 

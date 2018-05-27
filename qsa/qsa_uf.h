@@ -13,7 +13,7 @@ typedef struct {
     size_t n;
 } q_uf_s;
 
-q_uf_s* q_uf_new(size_t n);
+q_uf_s* q_uf_create(size_t n);
 
 void q_uf_free(q_uf_s *uf);
 

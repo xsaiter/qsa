@@ -19,7 +19,7 @@ typedef struct {
     size_t data_size;
 } qsa_list_s;
 
-qsa_list_s *qsa_list_new(size_t data_size);
+qsa_list_s *qsa_list_create(size_t data_size);
 
 void qsa_list_free(qsa_list_s *list);
 

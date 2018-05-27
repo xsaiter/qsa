@@ -31,7 +31,7 @@ static void test_vector_int()
 {
     printf("\ntest vector int");
 
-    qsa_vector_s *v = qsa_vector_new(2, sizeof (int));
+    qsa_vector_s *v = qsa_vector_create(2, sizeof (int));
     for (int i = 10; i <= 50; i += 10) {
         qsa_vector_add(v, &i);
     }
@@ -48,7 +48,7 @@ static void test_vector_str()
 {
     printf("\ntest vector str");
 
-    qsa_vector_s *v = qsa_vector_new(2, sizeof (char*));
+    qsa_vector_s *v = qsa_vector_create(2, sizeof (char*));
 
     qsa_vector_add(v, "aa");
     qsa_vector_add(v, "bb");
@@ -101,7 +101,7 @@ static void test_graph_print()
 {
     printf("\ntest graph printf");
 
-    qsa_graph_s *g = qsa_graph_new(5, false, false);
+    qsa_graph_s *g = qsa_graph_create(5, false, false);
 
     qsa_graph_add_edge(g, 1, 2, 0);
     qsa_graph_add_edge(g, 1, 3, 0);
@@ -119,7 +119,7 @@ static void q_visit(qsa_graph_s *g, qsa_graph_edge_s *e, void *arg)
 
 static qsa_graph_s *test_make_graph()
 {
-    qsa_graph_s *g = qsa_graph_new(6, false, false);
+    qsa_graph_s *g = qsa_graph_create(6, false, false);
 
     qsa_graph_add_edge(g, 1, 2, 0);
     qsa_graph_add_edge(g, 1, 3, 0);
@@ -171,7 +171,7 @@ static void test_graph_paths()
 
 static void test_heap()
 {
-    qsa_heap_s *heap = qsa_heap_new(10, sizeof (int), &qsa_cmp_int);
+    qsa_heap_s *heap = qsa_heap_create(10, sizeof (int), &qsa_cmp_int);
 
     int x = 10;
     qsa_heap_add(heap, &x);
@@ -230,7 +230,7 @@ static void test_heap()
 
 static void test_dict()
 {
-    qsa_dict_s *d = qsa_dict_new(sizeof (char*), &qsa_hash_str, &qsa_eq_int, sizeof (int));
+    qsa_dict_s *d = qsa_dict_create(sizeof (char*), &qsa_hash_str, &qsa_eq_int, sizeof (int));
 
     int x = 10;
     qsa_dict_add(d, "abc", &x);

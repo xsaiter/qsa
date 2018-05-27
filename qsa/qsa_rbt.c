@@ -2,7 +2,7 @@
 
 #include "qsa_rbt.h"
 
-static qsa_rbt_node_s *qsa_rbt_node_new(void *key, qsa_rbt_colors_s color)
+static qsa_rbt_node_s *qsa_rbt_node_create(void *key, qsa_rbt_colors_s color)
 {
     qsa_rbt_node_s *r = qsa_malloc(sizeof (qsa_rbt_node_s));
     r->key = key;
@@ -11,7 +11,7 @@ static qsa_rbt_node_s *qsa_rbt_node_new(void *key, qsa_rbt_colors_s color)
     return r;
 }
 
-qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_cmp_fn *key_cmp)
+qsa_rbt_s *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp)
 {
     qsa_rbt_s *t = qsa_malloc(sizeof (qsa_rbt_s));
 
@@ -19,7 +19,7 @@ qsa_rbt_s *qsa_rbt_new(size_t key_size, qsa_cmp_fn *key_cmp)
     t->key_cmp = key_cmp;
     t->root = NULL;
 
-    qsa_rbt_node_s *nil = qsa_rbt_node_new(NULL, BLACK);        
+    qsa_rbt_node_s *nil = qsa_rbt_node_create(NULL, BLACK);        
     nil->parent = t->root;
     
     t->root->parent = nil;
@@ -108,7 +108,7 @@ void qsa_rbt_insert(qsa_rbt_s *t, void *key)
 {
     int cmp = 0;
 
-    qsa_rbt_node_s *z = qsa_rbt_node_new(key, RED);
+    qsa_rbt_node_s *z = qsa_rbt_node_create(key, RED);
 
     qsa_rbt_node_s *y = t->nil;
     qsa_rbt_node_s *x = t->root;

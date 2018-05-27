@@ -8,7 +8,7 @@
 #include "qsa_list.h"
 #include "qsa_utils.h"
 
-qsa_list_s *qsa_list_new(size_t data_size)
+qsa_list_s *qsa_list_create(size_t data_size)
 {
     qsa_list_s *list = qsa_malloc(sizeof (qsa_list_s));
 
@@ -19,7 +19,7 @@ qsa_list_s *qsa_list_new(size_t data_size)
     return list;
 }
 
-static qsa_list_node_s *node_new(qsa_list_s *list, void *data)
+static qsa_list_node_s *qsa_list_node_create(qsa_list_s *list, void *data)
 {
     qsa_list_node_s *node = qsa_malloc(sizeof (qsa_list_node_s));
     node->data = qsa_malloc(list->data_size);
@@ -40,7 +40,7 @@ void qsa_list_free(qsa_list_s *list)
 
 void qsa_list_prepend(qsa_list_s *list, void *data)
 {
-    qsa_list_node_s *node = node_new(list, data);
+    qsa_list_node_s *node = qsa_list_node_create(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;
@@ -57,7 +57,7 @@ void qsa_list_prepend(qsa_list_s *list, void *data)
 
 void qsa_list_append(qsa_list_s *list, void *data)
 {
-    qsa_list_node_s *node = node_new(list, data);
+    qsa_list_node_s *node = qsa_list_node_create(list, data);
 
     if (list->len == 0) {
         list->head = list->tail = node;

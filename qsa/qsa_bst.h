@@ -20,7 +20,7 @@ typedef struct {
     qsa_cmp_fn *key_cmp;
 } qsa_bst_s;
 
-qsa_bst_s *qsa_bst_new(size_t key_size, qsa_cmp_fn *key_cmp);
+qsa_bst_s *qsa_bst_create(size_t key_size, qsa_cmp_fn *key_cmp);
 
 void qsa_bst_free(qsa_bst_s *t);
 

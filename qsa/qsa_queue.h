@@ -7,7 +7,7 @@ typedef struct {
     qsa_list_s *list;
 } qsa_queue_s;
 
-qsa_queue_s *qsa_queue_new(size_t data_size);
+qsa_queue_s *qsa_queue_create(size_t data_size);
 
 void qsa_queue_free(qsa_queue_s *q);
 

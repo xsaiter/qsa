@@ -3,7 +3,7 @@
 #include "qsa_uf.h"
 #include "qsa_core.h"
 
-q_uf_s* q_uf_new(size_t n)
+q_uf_s* q_uf_create(size_t n)
 {
     q_uf_s *uf = qsa_malloc(sizeof (q_uf_s));
 

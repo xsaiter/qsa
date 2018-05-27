@@ -21,7 +21,7 @@ typedef void (*qsa_visit_fn)(qsa_graph_s *g, qsa_graph_edge_s *e, void *arg);
 
 bool *qsa_graph_marked_alloc(const qsa_graph_s *g);
 
-qsa_graph_s *qsa_graph_new(int nv, bool directed, bool weighed);
+qsa_graph_s *qsa_graph_create(int nv, bool directed, bool weighed);
 
 void qsa_graph_free(qsa_graph_s *g);
 

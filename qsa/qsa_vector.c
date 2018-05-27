@@ -5,7 +5,7 @@
 #include "qsa_core.h"
 #include"qsa_vector.h"
 
-qsa_vector_s *qsa_vector_new(size_t capacity, size_t elem_size)
+qsa_vector_s *qsa_vector_create(size_t capacity, size_t elem_size)
 {
     qsa_vector_s *v = qsa_malloc(sizeof (qsa_vector_s));
 

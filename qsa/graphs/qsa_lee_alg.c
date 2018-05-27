@@ -14,7 +14,7 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result)
     int dx[QSA_DIRECTIONS] = {1, 0, -1, 0};
     int dy[QSA_DIRECTIONS] = {0, -1, 0, 1};
 
-    qsa_queue_s *q = qsa_queue_new(sizeof(qsa_lee_cell_s));
+    qsa_queue_s *q = qsa_queue_create(sizeof(qsa_lee_cell_s));
 
     int bx = opts->beg_x;
     int by = opts->beg_y;

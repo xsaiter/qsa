@@ -18,6 +18,6 @@ typedef struct {
     qsa_cmp_fn *cmp;
 } qsa_fib_heap_s;
 
-qsa_fib_heap_s *qsa_fib_heap_new(size_t elem_size, qsa_cmp_fn *cmp);
+qsa_fib_heap_s *qsa_fib_heap_create(size_t elem_size, qsa_cmp_fn *cmp);
 
 #endif /* QSA_FIB_HEAP_H */

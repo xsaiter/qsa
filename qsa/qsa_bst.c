@@ -4,7 +4,7 @@
 #include "qsa_core.h"
 #include "qsa_bst.h"
 
-qsa_bst_s *qsa_bst_new(size_t key_size, qsa_cmp_fn *key_cmp)
+qsa_bst_s *qsa_bst_create(size_t key_size, qsa_cmp_fn *key_cmp)
 {
     qsa_bst_s *t = qsa_malloc(sizeof (qsa_bst_s));
 
@@ -14,7 +14,7 @@ qsa_bst_s *qsa_bst_new(size_t key_size, qsa_cmp_fn *key_cmp)
     return t;
 }
 
-static qsa_bst_node_s *node_new(qsa_bst_s *t, void *key)
+static qsa_bst_node_s *qsa_bst_node_create(qsa_bst_s *t, void *key)
 {
     qsa_bst_node_s *node = qsa_malloc(sizeof (qsa_bst_node_s));
 
@@ -29,7 +29,7 @@ void qsa_bst_free(qsa_bst_s *t)
     free(t);
 }
 
-static void add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
+static void qsa_bst_add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 {
     if (t->key_cmp(x->key, key) == 0) {
         return;
@@ -37,15 +37,15 @@ static void add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 
     if (t->key_cmp(x->key, key) > 0) {
         if (!x->left) {
-            x->left = node_new(t, key);
+            x->left = qsa_bst_node_create(t, key);
         } else {
-            add_node(t, key, x->left);
+            qsa_bst_add_node(t, key, x->left);
         }
     } else {
         if (!x->right) {
-            x->right = node_new(t, key);
+            x->right = qsa_bst_node_create(t, key);
         } else {
-            add_node(t, key, x->right);
+            qsa_bst_add_node(t, key, x->right);
         }
     }
 }
@@ -53,9 +53,9 @@ static void add_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 void qsa_bst_insert(qsa_bst_s *t, void *key)
 {
     if (!t->root) {
-        t->root = node_new(t, key);
+        t->root = qsa_bst_node_create(t, key);
     } else {
-        add_node(t, key, t->root);
+        qsa_bst_add_node(t, key, t->root);
     }
 }
 
@@ -79,7 +79,7 @@ qsa_bst_node_s *qsa_bst_search(const qsa_bst_s *t, const void *key)
     return NULL;
 }
 
-static void transplant(qsa_bst_s *t, qsa_bst_node_s *a, qsa_bst_node_s *b)
+static void qsa_bst_transplant(qsa_bst_s *t, qsa_bst_node_s *a, qsa_bst_node_s *b)
 {
     if (!a->parent) {
         t->root = b;
@@ -94,7 +94,7 @@ static void transplant(qsa_bst_s *t, qsa_bst_node_s *a, qsa_bst_node_s *b)
     }
 }
 
-static qsa_bst_node_s *min_node(qsa_bst_node_s *x)
+static qsa_bst_node_s *qsa_bst_min_node(qsa_bst_node_s *x)
 {
     qsa_bst_node_s *c = x;
     while ((c->left)) {
@@ -103,7 +103,7 @@ static qsa_bst_node_s *min_node(qsa_bst_node_s *x)
     return c;
 }
 
-static void remove_node(qsa_bst_s *t, qsa_bst_node_s *x)
+static void qsa_bst_remove_node(qsa_bst_s *t, qsa_bst_node_s *x)
 {
     if (!x->left && !x->right) {
         if (!x->parent) {
@@ -116,40 +116,40 @@ static void remove_node(qsa_bst_s *t, qsa_bst_node_s *x)
             }
         }
     } else if (!x->left) {
-        transplant(t, x, x->right);
+        qsa_bst_transplant(t, x, x->right);
     } else if (!x->right) {
-        transplant(t, x, x->left);
+        qsa_bst_transplant(t, x, x->left);
     } else {
-        qsa_bst_node_s *m = min_node(x->right);
+        qsa_bst_node_s *m = qsa_bst_min_node(x->right);
 
         if (m->parent != x) {
-            transplant(t, m, m->right);
+            qsa_bst_transplant(t, m, m->right);
             m->right = x->right;
             m->right->parent = m;
         }
 
-        transplant(t, x, m);
+        qsa_bst_transplant(t, x, m);
         m->left = x->left;
         m->left->parent = m;
     }
 }
 
-static void _q_bst_remove(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
+static void qsa_bst_delete_node(qsa_bst_s *t, void *key, qsa_bst_node_s *x)
 {
     if (x) {
         int cmp = t->key_cmp(x->key, key);
 
         if (cmp > 0) {
-            _q_bst_remove(t, key, x->left);
+            qsa_bst_delete_node(t, key, x->left);
         } else if (cmp < 0) {
-            _q_bst_remove(t, key, x->right);
+            qsa_bst_delete_node(t, key, x->right);
         } else {
-            remove_node(t, x);
+            qsa_bst_remove_node(t, x);
         }
     }
 }
 
 void qsa_bst_delete(qsa_bst_s *t, void *key)
 {
-    _q_bst_remove(t, key, t->root);
+    qsa_bst_delete_node(t, key, t->root);
 }

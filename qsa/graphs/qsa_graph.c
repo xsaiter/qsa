@@ -7,7 +7,7 @@
 
 #include "qsa_graph.h"
 
-qsa_graph_s *qsa_graph_new(int nv, bool directed, bool weighed)
+qsa_graph_s *qsa_graph_create(int nv, bool directed, bool weighed)
 {
     qsa_graph_s *g = qsa_malloc(sizeof (qsa_graph_s));
 

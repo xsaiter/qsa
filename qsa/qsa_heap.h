@@ -11,7 +11,7 @@ typedef struct {
     qsa_cmp_fn *cmp;
 } qsa_heap_s;
 
-qsa_heap_s *qsa_heap_new(int capacity, size_t elem_size, qsa_cmp_fn *cmp);
+qsa_heap_s *qsa_heap_create(int capacity, size_t elem_size, qsa_cmp_fn *cmp);
 
 void qsa_heap_free(qsa_heap_s* h);
 

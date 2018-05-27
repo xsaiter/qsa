@@ -8,7 +8,7 @@
 qsa_stack_s *qsa_stack_new(size_t data_size)
 {
     qsa_stack_s *s = qsa_malloc(sizeof (qsa_stack_s));
-    s->list = qsa_list_new(data_size);
+    s->list = qsa_list_create(data_size);
     return s;
 }
 
