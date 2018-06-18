@@ -17,7 +17,7 @@ void *qsa_queue_deq(qsa_queue_s *q);
 
 bool qsa_queue_empty(qsa_queue_s *q);
 
-qsa_queue_s *qsa_queue_new_int();
+qsa_queue_s *qsa_queue_create_int();
 
 #endif /* QSA_QUEUE_H */
 

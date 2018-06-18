@@ -8,7 +8,7 @@ typedef struct {
     qsa_list_s *list;
 } qsa_stack_s;
 
-qsa_stack_s *qsa_stack_new(size_t data_size);
+qsa_stack_s *qsa_stack_create(size_t data_size);
 
 void qsa_stack_free(qsa_stack_s *s);
 

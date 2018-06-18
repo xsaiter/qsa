@@ -75,7 +75,7 @@ void qsa_graph_traversal_bfs(qsa_graph_s *g, int s, qsa_visit_fn visit, void *ar
 {
     bool *marked = qsa_graph_marked_alloc(g);
 
-    qsa_queue_s *q = qsa_queue_new_int();
+    qsa_queue_s *q = qsa_queue_create_int();
     qsa_queue_enq(q, &s);
 
     while (!qsa_queue_empty(q)) {
@@ -142,7 +142,7 @@ void qsa_graph_paths_free(qsa_graph_paths_s *paths)
 
 void qsa_graph_paths_bfs(qsa_graph_s *g, qsa_graph_paths_s *paths)
 {
-    qsa_queue_s *q = qsa_queue_new_int();
+    qsa_queue_s *q = qsa_queue_create_int();
     qsa_queue_enq(q, &(paths->s));
 
     while (!qsa_queue_empty(q)) {

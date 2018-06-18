@@ -5,14 +5,16 @@
 #include "qsa_queue.h"
 #include "qsa_utils.h"
 
-qsa_queue_s *qsa_queue_create(size_t data_size){    
-    qsa_queue_s *q = qsa_malloc(sizeof(qsa_queue_s));    
+qsa_queue_s *qsa_queue_create(size_t data_size)
+{
+    qsa_queue_s *q = qsa_malloc(sizeof (qsa_queue_s));
     q->list = qsa_list_create(data_size);
     return q;
 }
 
-inline qsa_queue_s *qsa_queue_new_int(){
-    return qsa_queue_create(sizeof(int));
+qsa_queue_s *qsa_queue_create_int()
+{
+    return qsa_queue_create(sizeof (int));
 }
 
 void qsa_queue_free(qsa_queue_s *q)

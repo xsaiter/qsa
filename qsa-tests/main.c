@@ -67,7 +67,7 @@ static void test_queue()
 {
     printf("\ntest queue:\n");
 
-    qsa_queue_s *q = qsa_queue_new_int();
+    qsa_queue_s *q = qsa_queue_create_int();
 
     for (int i = 10; i <= 30; i += 10) {
         qsa_queue_enq(q, &i);
@@ -84,7 +84,7 @@ static void test_stack()
 {
     printf("\ntest stack:\n");
 
-    qsa_stack_s *s = qsa_stack_new(sizeof (int));
+    qsa_stack_s *s = qsa_stack_create(sizeof (int));
 
     for (int i = 10; i < 30; i += 10) {
         qsa_stack_push(s, &i);

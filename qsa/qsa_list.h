@@ -29,7 +29,7 @@ void qsa_list_append(qsa_list_s *list, void *data);
 
 bool qsa_list_remove(qsa_list_s *list, void *data);
 
-void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *node);
+void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *x);
 
 qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_eq_fn *eq);
 
