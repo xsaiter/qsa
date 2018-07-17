@@ -11,14 +11,14 @@ typedef struct {
     int *p;
     int *s;
     size_t n;
-} q_uf_s;
+} qsa_uf_s;
 
-q_uf_s* q_uf_create(size_t n);
+qsa_uf_s* qsa_uf_create(size_t n);
 
-void q_uf_free(q_uf_s *uf);
+void qsa_uf_free(qsa_uf_s *uf);
 
-int q_uf_find(q_uf_s *uf, int v);
+int qsa_uf_find(qsa_uf_s *uf, int v);
 
-void q_uf_union(q_uf_s *uf, int v1, int v2);
+void qsa_uf_union(qsa_uf_s *uf, int v1, int v2);
 
 #endif /* QSA_UF_H */

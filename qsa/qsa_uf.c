@@ -3,9 +3,9 @@
 #include "qsa_uf.h"
 #include "qsa_core.h"
 
-q_uf_s* q_uf_create(size_t n)
+qsa_uf_s* qsa_uf_create(size_t n)
 {
-    q_uf_s *uf = qsa_malloc(sizeof (q_uf_s));
+    qsa_uf_s *uf = qsa_malloc(sizeof (qsa_uf_s));
 
     uf->n = n;
     uf->s = qsa_malloc(n * sizeof (int));
@@ -19,25 +19,25 @@ q_uf_s* q_uf_create(size_t n)
     return uf;
 }
 
-void q_uf_free(q_uf_s *uf)
+void qsa_uf_free(qsa_uf_s *uf)
 {
     free(uf->s);
     free(uf->p);
     free(uf);
 }
 
-int q_uf_find(q_uf_s *uf, int v)
+int qsa_uf_find(qsa_uf_s *uf, int v)
 {
     if (uf->p[v] == v) {
         return v;
     }
-    return q_uf_find(uf, uf->p[v]);
+    return qsa_uf_find(uf, uf->p[v]);
 }
 
-void q_uf_union(q_uf_s *uf, int v1, int v2)
+void qsa_uf_union(qsa_uf_s *uf, int v1, int v2)
 {
-    int r1 = q_uf_find(uf, v1);
-    int r2 = q_uf_find(uf, v2);
+    int r1 = qsa_uf_find(uf, v1);
+    int r2 = qsa_uf_find(uf, v2);
 
     if (v1 == v2) {
         return;
