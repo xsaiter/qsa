@@ -4,7 +4,7 @@
 #include "qsa_list.h"
 
 typedef struct {
-    qsa_list_s *list;
+  qsa_list_s *list;
 } qsa_queue_s;
 
 qsa_queue_s *qsa_queue_create(size_t data_size);
@@ -20,4 +20,3 @@ bool qsa_queue_empty(qsa_queue_s *q);
 qsa_queue_s *qsa_queue_create_int();
 
 #endif /* QSA_QUEUE_H */
-

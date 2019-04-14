@@ -1,22 +1,22 @@
 #ifndef QSA_LIST_H
 #define QSA_LIST_H
 
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 #include "qsa_core.h"
 
 typedef struct qsa_list_node_s {
-    void *data;
-    struct qsa_list_node_s *next;
-    struct qsa_list_node_s *prev;
+  void *data;
+  struct qsa_list_node_s *next;
+  struct qsa_list_node_s *prev;
 } qsa_list_node_s;
 
 typedef struct {
-    qsa_list_node_s *head;
-    qsa_list_node_s *tail;
-    size_t len;
-    size_t data_size;
+  qsa_list_node_s *head;
+  qsa_list_node_s *tail;
+  size_t len;
+  size_t data_size;
 } qsa_list_s;
 
 qsa_list_s *qsa_list_create(size_t data_size);

@@ -7,7 +7,7 @@
 
 #include "qsa_core.h"
 
-typedef struct {    
+typedef struct {
 } qsa_van_eb_tree_s;
 
 #endif /* QSA_VAN_EB_TREE_H */

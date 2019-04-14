@@ -6,4 +6,3 @@
 #define QSA_MST_H
 
 #endif /* QSA_MST_H */
-

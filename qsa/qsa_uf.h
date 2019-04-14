@@ -8,12 +8,12 @@
 #include <stddef.h>
 
 typedef struct {
-    int *p;
-    int *s;
-    size_t n;
+  int *p;
+  int *s;
+  size_t n;
 } qsa_uf_s;
 
-qsa_uf_s* qsa_uf_create(size_t n);
+qsa_uf_s *qsa_uf_create(size_t n);
 
 void qsa_uf_free(qsa_uf_s *uf);
 
