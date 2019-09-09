@@ -17,10 +17,6 @@
 
 #include "qsa/qsa_avl.h"
 
-struct person {
-  int age;
-};
-
 static void print_s(void *data) {
   char *s = (char *)data;
   printf("%s", s);
@@ -79,7 +75,7 @@ static void test_queue() {
 static void test_stack() {
   printf("\ntest stack:\n");
 
-  qsa_stack_s *s = qsa_stack_create(sizeof(int));
+  struct qsa_stack *s = qsa_stack_create(sizeof(int));
 
   for (int i = 10; i < 30; i += 10) {
     qsa_stack_push(s, &i);
@@ -216,8 +212,8 @@ static void test_heap() {
 }
 
 static void test_dict() {
-  qsa_dict_s *d =
-      qsa_dict_create(sizeof(char *), &qsa_hash_str, &qsa_eq_int, sizeof(int));
+  qsa_dict_s *d = qsa_dict_create(sizeof(char *), &qsa_hash_str, &qsa_same_int,
+                                  sizeof(int));
 
   int x = 10;
   qsa_dict_add(d, "abc", &x);
@@ -232,7 +228,7 @@ static void test_dict() {
 static void print_int(void *data) { printf(" (%d) ", QSA_VPTR_TO_INT(data)); }
 
 static void test_avl() {
-  qsa_avl_s *t = qsa_avl_create(sizeof(int), &qsa_cmp_int);
+  struct qsa_avl *t = qsa_avl_create(sizeof(int), &qsa_cmp_int);
 
   for (int i = 1; i <= 8; ++i) {
     qsa_avl_insert(t, &i);

@@ -4,18 +4,18 @@
 #include "qsa_list.h"
 #include <stdbool.h>
 
-typedef struct {
-  qsa_list_s *list;
-} qsa_stack_s;
+struct qsa_stack {
+  struct qsa_list *list;
+};
 
-qsa_stack_s *qsa_stack_create(size_t data_size);
+struct qsa_stack *qsa_stack_create(size_t data_size);
 
-void qsa_stack_free(qsa_stack_s *s);
+void qsa_stack_free(struct qsa_stack *s);
 
-bool qsa_stack_empty(qsa_stack_s *s);
+bool qsa_stack_empty(struct qsa_stack *s);
 
-void qsa_stack_push(qsa_stack_s *s, void *data);
+void qsa_stack_push(struct qsa_stack *s, void *data);
 
-void *qsa_stack_pop(qsa_stack_s *s);
+void *qsa_stack_pop(struct qsa_stack *s);
 
 #endif /* QSA_STACK_H */

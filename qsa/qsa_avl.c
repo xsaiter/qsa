@@ -6,19 +6,17 @@
 
 #include "qsa_core.h"
 
-typedef enum { ROTATE_LEFT, ROTATE_RIGHT } qsa_rotate_types_s;
+typedef enum { ROTATE_LEFT, ROTATE_RIGHT } qsa_rotate_types;
 
-qsa_avl_s *qsa_avl_create(size_t data_size, qsa_cmp_fn *cmp_data) {
-  qsa_avl_s *t = qsa_malloc(sizeof(qsa_avl_s));
-
+struct qsa_avl *qsa_avl_create(size_t data_size, qsa_cmp_fn *cmp_data) {
+  struct qsa_avl *t = qsa_malloc(sizeof(struct qsa_avl));
   t->data_size = data_size;
   t->root = NULL;
   t->cmp_data = cmp_data;
-
   return t;
 }
 
-static void qsa_avl_free_r(qsa_avl_node_s *x) {
+static void qsa_avl_free_r(struct qsa_avl_node *x) {
   if (!x) {
     return;
   }
@@ -31,12 +29,12 @@ static void qsa_avl_free_r(qsa_avl_node_s *x) {
   free(x);
 }
 
-void qsa_avl_free(qsa_avl_s *t) {
+void qsa_avl_free(struct qsa_avl *t) {
   qsa_avl_free_r(t->root);
   free(t);
 }
 
-static void qsa_avl_set_height(qsa_avl_node_s *x) {
+static void qsa_avl_set_height(struct qsa_avl_node *x) {
   int l = 0, r = 0;
 
   if (x->left) {
@@ -54,7 +52,7 @@ static void qsa_avl_set_height(qsa_avl_node_s *x) {
   }
 }
 
-static int qsa_avl_get_balance(qsa_avl_node_s *x) {
+static int qsa_avl_get_balance(struct qsa_avl_node *x) {
   int l = 0, r = 0;
 
   if (x->left) {
@@ -68,8 +66,8 @@ static int qsa_avl_get_balance(qsa_avl_node_s *x) {
   return r - l;
 }
 
-static void qsa_avl_rotate(qsa_avl_node_s **x, qsa_rotate_types_s type) {
-  qsa_avl_node_s *t;
+static void qsa_avl_rotate(struct qsa_avl_node **x, qsa_rotate_types type) {
+  struct qsa_avl_node *t;
 
   if (type == ROTATE_LEFT) {
     t = (*x)->left;
@@ -88,7 +86,7 @@ static void qsa_avl_rotate(qsa_avl_node_s **x, qsa_rotate_types_s type) {
   *x = t;
 }
 
-static void qsa_avl_balance(qsa_avl_node_s **x) {
+static void qsa_avl_balance(struct qsa_avl_node **x) {
   qsa_avl_set_height(*x);
 
   int balance = qsa_avl_get_balance(*x);
@@ -109,8 +107,8 @@ static void qsa_avl_balance(qsa_avl_node_s **x) {
   }
 }
 
-static qsa_avl_node_s *qsa_avl_node_new(qsa_avl_s *t, void *data) {
-  qsa_avl_node_s *x = qsa_malloc(sizeof(qsa_avl_node_s));
+static struct qsa_avl_node *qsa_avl_node_new(struct qsa_avl *t, void *data) {
+  struct qsa_avl_node *x = qsa_malloc(sizeof(struct qsa_avl_node));
 
   x->data = qsa_malloc(t->data_size);
 
@@ -123,7 +121,8 @@ static qsa_avl_node_s *qsa_avl_node_new(qsa_avl_s *t, void *data) {
   return x;
 }
 
-static void qsa_avl_insert_r(qsa_avl_s *t, qsa_avl_node_s **x, void *data) {
+static void qsa_avl_insert_r(struct qsa_avl *t, struct qsa_avl_node **x,
+                             void *data) {
   if (!(*x)) {
     *x = qsa_avl_node_new(t, data);
     return;
@@ -140,34 +139,30 @@ static void qsa_avl_insert_r(qsa_avl_s *t, qsa_avl_node_s **x, void *data) {
   }
 }
 
-void qsa_avl_insert(qsa_avl_s *t, void *data) {
+void qsa_avl_insert(struct qsa_avl *t, void *data) {
   qsa_avl_insert_r(t, &(t->root), data);
 }
 
-static qsa_avl_node_s *qsa_avl_search_r(qsa_avl_s *t, qsa_avl_node_s *x,
-                                        void *data) {
+static struct qsa_avl_node *
+qsa_avl_search_r(struct qsa_avl *t, struct qsa_avl_node *x, void *data) {
   if (!x) {
     return NULL;
   }
-
   int cmp = t->cmp_data(x->data, data);
-
   if (cmp > 0) {
     return qsa_avl_search_r(t, x->left, data);
   }
-
   if (cmp < 0) {
     return qsa_avl_search_r(t, x->right, data);
   }
-
   return x;
 }
 
-qsa_avl_node_s *qsa_avl_search(qsa_avl_s *t, void *data) {
+struct qsa_avl_node *qsa_avl_search(struct qsa_avl *t, void *data) {
   return qsa_avl_search_r(t, t->root, data);
 }
 
-static void qsa_avl_print_r(qsa_avl_s *t, qsa_avl_node_s *x,
+static void qsa_avl_print_r(struct qsa_avl *t, struct qsa_avl_node *x,
                             void (*display)(void *data), int depth) {
   if (!x) {
     return;
@@ -192,6 +187,6 @@ static void qsa_avl_print_r(qsa_avl_s *t, qsa_avl_node_s *x,
   qsa_avl_print_r(t, x->right, display, depth + 1);
 }
 
-void qsa_avl_print(qsa_avl_s *t, void (*display)(void *data)) {
+void qsa_avl_print(struct qsa_avl *t, void (*display)(void *data)) {
   qsa_avl_print_r(t, t->root, display, 0);
 }

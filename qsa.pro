@@ -1,4 +1,4 @@
-QMAKE_CC = gcc -std=c11
+QMAKE_CC = gcc-8 -std=c11
 
 TEMPLATE = app
 CONFIG += console

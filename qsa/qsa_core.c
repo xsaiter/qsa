@@ -3,7 +3,7 @@
 
 #include "qsa_core.h"
 
-inline void qsa_die(const char *msg) {
+void qsa_die(const char *msg) {
   perror(msg);
   exit(EXIT_FAILURE);
 }
@@ -33,18 +33,17 @@ void *qsa_calloc(size_t nmemb, size_t size) {
 }
 
 int qsa_cmp_int(const void *l, const void *r) {
-  int lv = QSA_VPTR_TO_INT(l);
-  int rv = QSA_VPTR_TO_INT(r);
-
+  int lv = QSA_CONST_VPTR_TO_INT(l);
+  int rv = QSA_CONST_VPTR_TO_INT(r);
   if (lv > rv) {
     return 1;
   }
-
   if (lv < rv) {
     return -1;
   }
-
   return 0;
 }
 
-bool qsa_eq_int(const void *l, const void *r) { return qsa_cmp_int(l, r) == 0; }
+bool qsa_same_int(const void *l, const void *r) {
+  return qsa_cmp_int(l, r) == 0;
+}

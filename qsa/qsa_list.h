@@ -6,37 +6,38 @@
 
 #include "qsa_core.h"
 
-typedef struct qsa_list_node_s {
+struct qsa_list_node {
   void *data;
-  struct qsa_list_node_s *next;
-  struct qsa_list_node_s *prev;
-} qsa_list_node_s;
+  struct qsa_list_node *next;
+  struct qsa_list_node *prev;
+};
 
-typedef struct {
-  qsa_list_node_s *head;
-  qsa_list_node_s *tail;
+struct qsa_list {
+  struct qsa_list_node *head;
+  struct qsa_list_node *tail;
   size_t len;
   size_t data_size;
-} qsa_list_s;
+};
 
-qsa_list_s *qsa_list_create(size_t data_size);
+struct qsa_list *qsa_list_create(size_t data_size);
 
-void qsa_list_free(qsa_list_s *list);
+void qsa_list_free(struct qsa_list *list);
 
-void qsa_list_prepend(qsa_list_s *list, void *data);
+void qsa_list_prepend(struct qsa_list *list, void *data);
 
-void qsa_list_append(qsa_list_s *list, void *data);
+void qsa_list_append(struct qsa_list *list, void *data);
 
-bool qsa_list_remove(qsa_list_s *list, void *data);
+bool qsa_list_remove(struct qsa_list *list, void *data);
 
-void qsa_list_remove_node(qsa_list_s *list, qsa_list_node_s *x);
+void qsa_list_remove_node(struct qsa_list *list, struct qsa_list_node *x);
 
-qsa_list_node_s *qsa_list_find_by(qsa_list_s *list, void *data, qsa_eq_fn *eq);
+struct qsa_list_node *qsa_list_find_by(struct qsa_list *list, void *data,
+                                       qsa_eq_fn *eq);
 
-qsa_list_node_s *qsa_list_find(qsa_list_s *list, void *data);
+struct qsa_list_node *qsa_list_find(struct qsa_list *list, void *data);
 
-void qsa_list_for_each(qsa_list_s *list, qsa_action_fn *f);
+void qsa_list_for_each(struct qsa_list *list, qsa_action_fn *f);
 
-bool qsa_list_empty(qsa_list_s *list);
+bool qsa_list_empty(struct qsa_list *list);
 
 #endif /* QSA_LIST_H */

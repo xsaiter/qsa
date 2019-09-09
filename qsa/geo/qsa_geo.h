@@ -1,14 +1,16 @@
 #ifndef QSA_GEO_H
 #define QSA_GEO_H
 
-typedef struct {
-    double x, y;
-} qsa_point_s;
+struct qsa_point {
+  double x, y;
+};
 
-double qsa_cross_product(const qsa_point_s *a, const qsa_point_s *b, const qsa_point_s *c);
+double qsa_cross_product(const struct qsa_point *a, const struct qsa_point *b,
+                         const struct qsa_point *c);
 
-int qsa_rotate(const qsa_point_s *a, const qsa_point_s *b, const qsa_point_s *c);
+int qsa_rotate(const struct qsa_point *a, const struct qsa_point *b,
+               const struct qsa_point *c);
 
-double qsa_distance2(const qsa_point_s *a, const qsa_point_s *b);
+double qsa_distance2(const struct qsa_point *a, const struct qsa_point *b);
 
 #endif /* QSA_GEO_H */

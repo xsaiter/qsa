@@ -5,25 +5,25 @@
 #include "qsa_stack.h"
 #include "qsa_utils.h"
 
-qsa_stack_s *qsa_stack_create(size_t data_size) {
-  qsa_stack_s *s = qsa_malloc(sizeof(qsa_stack_s));
+struct qsa_stack *qsa_stack_create(size_t data_size) {
+  struct qsa_stack *s = qsa_malloc(sizeof(struct qsa_stack));
   s->list = qsa_list_create(data_size);
   return s;
 }
 
-void qsa_stack_free(qsa_stack_s *s) {
+void qsa_stack_free(struct qsa_stack *s) {
   qsa_list_free(s->list);
   free(s);
 }
 
-void qsa_stack_push(qsa_stack_s *s, void *data) {
+void qsa_stack_push(struct qsa_stack *s, void *data) {
   qsa_list_prepend(s->list, data);
 }
 
-bool qsa_stack_empty(qsa_stack_s *s) { return qsa_list_empty(s->list); }
+bool qsa_stack_empty(struct qsa_stack *s) { return qsa_list_empty(s->list); }
 
-void *qsa_stack_pop(qsa_stack_s *s) {
-  qsa_list_node_s *head = s->list->head;
+void *qsa_stack_pop(struct qsa_stack *s) {
+  struct qsa_list_node *head = s->list->head;
   if (!head) {
     return NULL;
   }

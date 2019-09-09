@@ -11,7 +11,9 @@ qsa_queue_s *qsa_queue_create(size_t data_size) {
   return q;
 }
 
-qsa_queue_s *qsa_queue_create_int() { return qsa_queue_create(sizeof(int)); }
+qsa_queue_s *qsa_queue_create_int(void) {
+  return qsa_queue_create(sizeof(int));
+}
 
 void qsa_queue_free(qsa_queue_s *q) {
   qsa_list_free(q->list);
@@ -23,7 +25,7 @@ void qsa_queue_enq(qsa_queue_s *q, void *data) {
 }
 
 void *qsa_queue_deq(qsa_queue_s *q) {
-  qsa_list_node_s *head = q->list->head;
+  struct qsa_list_node *head = q->list->head;
   if (!head) {
     return NULL;
   }
