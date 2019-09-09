@@ -9,11 +9,11 @@
 
 #define QSA_DIRECTIONS (4)
 
-bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result) {
+bool qsa_lee_alg(struct qsa_lee_opts *opts, struct qsa_vector *result) {
   int dx[QSA_DIRECTIONS] = {1, 0, -1, 0};
   int dy[QSA_DIRECTIONS] = {0, -1, 0, 1};
 
-  qsa_queue_s *q = qsa_queue_create(sizeof(qsa_lee_cell_s));
+  struct qsa_queue *q = qsa_queue_create(sizeof(struct qsa_lee_cell));
 
   int bx = opts->beg_x;
   int by = opts->beg_y;
@@ -21,7 +21,7 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result) {
   int rows = opts->rows;
   int cols = opts->cols;
 
-  qsa_lee_cell_s cc[rows][cols];
+  struct qsa_lee_cell cc[rows][cols];
 
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < cols; ++j) {
@@ -42,8 +42,7 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result) {
   bool stop = false;
 
   while (!stop && !qsa_queue_empty(q)) {
-
-    qsa_lee_cell_s *c = qsa_queue_deq(q);
+    struct qsa_lee_cell *c = qsa_queue_deq(q);
     x = c->x;
     y = c->y;
     num = c->n + 1;
@@ -87,9 +86,9 @@ bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result) {
       if (cc[nx][ny].n == num - 1) {
         num = cc[nx][ny].n;
 
-        qsa_lee_cell_s *cell = malloc(sizeof(qsa_lee_cell_s));
+        struct qsa_lee_cell *cell = malloc(sizeof(struct qsa_lee_cell));
 
-        memcpy(cell, &cc[nx][ny], sizeof(qsa_lee_cell_s));
+        memcpy(cell, &cc[nx][ny], sizeof(struct qsa_lee_cell));
 
         qsa_vector_add(result, cell);
 

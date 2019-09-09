@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-typedef enum { QSA_CODE_OK = 0, QSA_CODE_ERROR = 1 } qsa_code_s;
+typedef enum { QSA_CODE_OK = 0, QSA_CODE_ERROR = 1 } qsa_codes;
 
 #define QSA_VPTR_TO_INT(p) (*(int *)(p))
 #define QSA_CONST_VPTR_TO_INT(p) (*(const int *)(p))

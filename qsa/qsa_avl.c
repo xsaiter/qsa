@@ -6,7 +6,7 @@
 
 #include "qsa_core.h"
 
-typedef enum { ROTATE_LEFT, ROTATE_RIGHT } qsa_rotate_types;
+enum qsa_rotate_types { ROTATE_LEFT, ROTATE_RIGHT };
 
 struct qsa_avl *qsa_avl_create(size_t data_size, qsa_cmp_fn *cmp_data) {
   struct qsa_avl *t = qsa_malloc(sizeof(struct qsa_avl));
@@ -66,7 +66,8 @@ static int qsa_avl_get_balance(struct qsa_avl_node *x) {
   return r - l;
 }
 
-static void qsa_avl_rotate(struct qsa_avl_node **x, qsa_rotate_types type) {
+static void qsa_avl_rotate(struct qsa_avl_node **x,
+                           enum qsa_rotate_types type) {
   struct qsa_avl_node *t;
 
   if (type == ROTATE_LEFT) {

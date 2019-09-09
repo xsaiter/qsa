@@ -10,29 +10,29 @@
 
 #include "qsa_core.h"
 
-typedef enum { RED = 0, BLACK = 1 } qsa_rbt_colors_s;
+enum qsa_rbt_colors { RED = 0, BLACK = 1 };
 
-typedef struct qsa_rbt_node_s {
+struct qsa_rbt_node {
   void *key;
-  qsa_rbt_colors_s color;
-  struct qsa_rbt_node_s *left;
-  struct qsa_rbt_node_s *right;
-  struct qsa_rbt_node_s *parent;
-} qsa_rbt_node_s;
+  enum qsa_rbt_colors color;
+  struct qsa_rbt_node *left;
+  struct qsa_rbt_node *right;
+  struct qsa_rbt_node *parent;
+};
 
-typedef struct {
-  qsa_rbt_node_s *root;
-  qsa_rbt_node_s *nil;
+struct qsa_rbt {
+  struct qsa_rbt_node *root;
+  struct qsa_rbt_node *nil;
   size_t key_size;
   qsa_cmp_fn *key_cmp;
-} qsa_rbt_s;
+};
 
-qsa_rbt_s *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp);
+struct qsa_rbt *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp);
 
-void qsa_rbt_free(qsa_rbt_s *t);
+void qsa_rbt_free(struct qsa_rbt *t);
 
-qsa_rbt_node_s *qsa_rbt_search(const qsa_rbt_s *t, const void *key);
+struct qsa_rbt_node *qsa_rbt_search(const struct qsa_rbt *t, const void *key);
 
-void qsa_rbt_insert(qsa_rbt_s *t, void *key);
+void qsa_rbt_insert(struct qsa_rbt *t, void *key);
 
 #endif /* QSA_RBT_H */

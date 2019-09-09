@@ -3,6 +3,7 @@
 
 #include "qsa_graph.h"
 
-void qsa_dijkstra(const qsa_graph_s *g, int s, qsa_graph_shortest_paths_s *res);
+void qsa_dijkstra(const struct qsa_graph *g, int s,
+                  struct qsa_graph_shortest_paths *res);
 
 #endif /* QSA_DIJKSTRA_H */

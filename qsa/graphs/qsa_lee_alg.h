@@ -5,19 +5,19 @@
 
 #include "../qsa_vector.h"
 
-typedef struct {
+struct qsa_lee_cell {
   int n;
   int x, y;
   bool visited;
-} qsa_lee_cell_s;
+};
 
-typedef struct {
+struct qsa_lee_opts {
   int **a;
   int rows, cols;
   int beg_x, beg_y;
   int end_x, end_y;
-} qsa_lee_opts_s;
+};
 
-bool qsa_lee_alg(qsa_lee_opts_s *opts, qsa_vector_s *result);
+bool qsa_lee_alg(struct qsa_lee_opts *opts, struct qsa_vector *result);
 
 #endif /* QSA_LEE_ALG_H */

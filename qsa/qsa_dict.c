@@ -7,9 +7,9 @@
 
 #define QSA_DICT_TABLE_SIZE (16)
 
-qsa_dict_s *qsa_dict_create(size_t key_size, qsa_hash_fn *key_hash,
-                            qsa_eq_fn *key_eq, size_t value_size) {
-  qsa_dict_s *d = qsa_malloc(sizeof(qsa_dict_s));
+struct qsa_dict *qsa_dict_create(size_t key_size, qsa_hash_fn *key_hash,
+                                 qsa_eq_fn *key_eq, size_t value_size) {
+  struct qsa_dict *d = qsa_malloc(sizeof(struct qsa_dict));
 
   d->key_size = key_size;
   d->key_hash = key_hash;
@@ -27,21 +27,22 @@ qsa_dict_s *qsa_dict_create(size_t key_size, qsa_hash_fn *key_hash,
   return d;
 }
 
-inline static unsigned int idx_table(qsa_dict_s *d, const void *key) {
+inline static unsigned int idx_table(struct qsa_dict *d, const void *key) {
   unsigned int h = d->key_hash(key);
   return h % d->table_size;
 }
 
-static qsa_dict_elem_s *q_find_elem(qsa_dict_s *d, const void *key) {
-  qsa_dict_elem_s *e = d->table[idx_table(d, key)];
+static struct qsa_dict_elem *q_find_elem(struct qsa_dict *d, const void *key) {
+  struct qsa_dict_elem *e = d->table[idx_table(d, key)];
   while (e && !(d->key_equals(e->key, key))) {
     e = e->next;
   }
   return e;
 }
 
-static qsa_dict_elem_s *elem_new(qsa_dict_s *d, void *key, void *value) {
-  qsa_dict_elem_s *e = qsa_malloc(sizeof(qsa_dict_elem_s));
+static struct qsa_dict_elem *elem_new(struct qsa_dict *d, void *key,
+                                      void *value) {
+  struct qsa_dict_elem *e = qsa_malloc(sizeof(struct qsa_dict_elem));
 
   e->key = qsa_malloc(d->key_size);
   memcpy(e->key, key, d->key_size);
@@ -55,29 +56,29 @@ static qsa_dict_elem_s *elem_new(qsa_dict_s *d, void *key, void *value) {
   return e;
 }
 
-void qsa_dict_free(qsa_dict_s *d) { free(d); }
+void qsa_dict_free(struct qsa_dict *d) { free(d); }
 
-void qsa_dict_add(qsa_dict_s *d, void *key, void *value) {
+void qsa_dict_add(struct qsa_dict *d, void *key, void *value) {
   unsigned int idx = idx_table(d, key);
-  qsa_dict_elem_s *e = d->table[idx];
+  struct qsa_dict_elem *e = d->table[idx];
   if (!e) {
     d->table[idx] = elem_new(d, key, value);
   } else {
-    qsa_dict_elem_s *x = e;
+    struct qsa_dict_elem *x = e;
     while (x && !(d->key_equals(e->key, key))) {
       x = x->next;
     }
 
     if (!x) {
-      qsa_dict_elem_s *s = elem_new(d, key, value);
+      struct qsa_dict_elem *s = elem_new(d, key, value);
       s->next = d->table[idx];
       d->table[idx] = s;
     }
   }
 }
 
-void *qsa_dict_get(qsa_dict_s *d, const void *key) {
-  qsa_dict_elem_s *e = q_find_elem(d, key);
+void *qsa_dict_get(struct qsa_dict *d, const void *key) {
+  struct qsa_dict_elem *e = q_find_elem(d, key);
   if (e) {
     return e->value;
   }

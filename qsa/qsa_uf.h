@@ -7,18 +7,18 @@
 
 #include <stddef.h>
 
-typedef struct {
+struct qsa_uf {
   int *p;
   int *s;
   size_t n;
-} qsa_uf_s;
+};
 
-qsa_uf_s *qsa_uf_create(size_t n);
+struct qsa_uf *qsa_uf_create(size_t n);
 
-void qsa_uf_free(qsa_uf_s *uf);
+void qsa_uf_free(struct qsa_uf *uf);
 
-int qsa_uf_find(qsa_uf_s *uf, int v);
+int qsa_uf_find(struct qsa_uf *uf, int v);
 
-void qsa_uf_union(qsa_uf_s *uf, int v1, int v2);
+void qsa_uf_union(struct qsa_uf *uf, int v1, int v2);
 
 #endif /* QSA_UF_H */

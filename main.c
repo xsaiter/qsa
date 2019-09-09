@@ -25,7 +25,7 @@ static void print_s(void *data) {
 static void test_vector_int() {
   printf("\ntest vector int");
 
-  qsa_vector_s *v = qsa_vector_create(2, sizeof(int));
+  struct qsa_vector *v = qsa_vector_create(2, sizeof(int));
   for (int i = 10; i <= 50; i += 10) {
     qsa_vector_add(v, &i);
   }
@@ -41,7 +41,7 @@ static void test_vector_int() {
 static void test_vector_str() {
   printf("\ntest vector str");
 
-  qsa_vector_s *v = qsa_vector_create(2, sizeof(char *));
+  struct qsa_vector *v = qsa_vector_create(2, sizeof(char *));
 
   qsa_vector_add(v, "aa");
   qsa_vector_add(v, "bb");
@@ -59,7 +59,7 @@ static void test_vector_str() {
 static void test_queue() {
   printf("\ntest queue:\n");
 
-  qsa_queue_s *q = qsa_queue_create_int();
+  struct qsa_queue *q = qsa_queue_create_int();
 
   for (int i = 10; i <= 30; i += 10) {
     qsa_queue_enq(q, &i);
@@ -91,7 +91,7 @@ static void test_stack() {
 static void test_graph_print() {
   printf("\ntest graph printf");
 
-  qsa_graph_s *g = qsa_graph_create(5, false, false);
+  struct qsa_graph *g = qsa_graph_create(5, false, false);
 
   qsa_graph_add_edge(g, 1, 2, 0);
   qsa_graph_add_edge(g, 1, 3, 0);
@@ -102,12 +102,12 @@ static void test_graph_print() {
   qsa_graph_free(g);
 }
 
-static void q_visit(qsa_graph_s *g, qsa_graph_edge_s *e, void *arg) {
+static void q_visit(struct qsa_graph *g, struct qsa_graph_edge *e, void *arg) {
   printf("%d ", e->b);
 }
 
-static qsa_graph_s *test_make_graph() {
-  qsa_graph_s *g = qsa_graph_create(6, false, false);
+static struct qsa_graph *test_make_graph() {
+  struct qsa_graph *g = qsa_graph_create(6, false, false);
 
   qsa_graph_add_edge(g, 1, 2, 0);
   qsa_graph_add_edge(g, 1, 3, 0);
@@ -120,7 +120,7 @@ static qsa_graph_s *test_make_graph() {
 static void test_graph_bfs() {
   printf("\ntest graph bfs: ");
 
-  qsa_graph_s *g = test_make_graph();
+  struct qsa_graph *g = test_make_graph();
 
   qsa_graph_traversal_bfs(g, 1, q_visit, NULL);
 
@@ -130,7 +130,7 @@ static void test_graph_bfs() {
 static void test_graph_dfs() {
   printf("\ntest graph dfs: ");
 
-  qsa_graph_s *g = test_make_graph();
+  struct qsa_graph *g = test_make_graph();
 
   qsa_graph_traversal_dfs(g, 1, q_visit, NULL);
 
@@ -140,10 +140,10 @@ static void test_graph_dfs() {
 static void test_graph_paths() {
   printf("\ntest graph paths bfs: ");
 
-  qsa_graph_s *g = test_make_graph();
+  struct qsa_graph *g = test_make_graph();
 
   int s = 1;
-  qsa_graph_paths_s *paths = qsa_graph_paths_new(g, s);
+  struct qsa_graph_paths *paths = qsa_graph_paths_new(g, s);
   qsa_graph_paths_bfs(g, paths);
 
   for (int i = 0; i < g->nv; ++i) {
@@ -155,7 +155,7 @@ static void test_graph_paths() {
 }
 
 static void test_heap() {
-  qsa_heap_s *heap = qsa_heap_create(10, sizeof(int), &qsa_cmp_int);
+  struct qsa_heap *heap = qsa_heap_create(10, sizeof(int), &qsa_cmp_int);
 
   int x = 10;
   qsa_heap_add(heap, &x);
@@ -212,8 +212,8 @@ static void test_heap() {
 }
 
 static void test_dict() {
-  qsa_dict_s *d = qsa_dict_create(sizeof(char *), &qsa_hash_str, &qsa_same_int,
-                                  sizeof(int));
+  struct qsa_dict *d = qsa_dict_create(sizeof(char *), &qsa_hash_str,
+                                       &qsa_same_int, sizeof(int));
 
   int x = 10;
   qsa_dict_add(d, "abc", &x);
@@ -239,9 +239,10 @@ static void test_avl() {
   qsa_avl_free(t);
 }
 
+enum sort_types { ST_INSERTION, ST_BUBBLE_SORT };
+
 int main(int argc, char **argv) {
   test_dict();
-
   test_graph_bfs();
   test_graph_dfs();
   test_queue();

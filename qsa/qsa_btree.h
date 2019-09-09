@@ -7,29 +7,29 @@
 
 #include "qsa_core.h"
 
-typedef struct {
+struct qsa_btree_entry {
   int key;
   int ptr;
-} qsa_btree_entry_s;
+};
 
-typedef struct qsa_btree_node_s {
+struct qsa_btree_node {
   bool is_leaf;
-  size_t n;                    // count entries
-  qsa_btree_entry_s **e;       // entries
-  struct qsa_btree_node_s **c; // children
-} qsa_btree_node_s;
+  size_t n;                   // count entries
+  struct qsa_btree_entry **e; // entries
+  struct qsa_btree_node **c;  // children
+};
 
-typedef struct {
-  qsa_btree_node_s *root;
+struct qsa_btree {
+  struct qsa_btree_node *root;
   size_t degree;
   size_t max_ne; // max entries
   size_t max_nc; // max children
-} qsa_btree_s;
+};
 
-qsa_btree_s *qsa_btree_create(size_t degree);
+struct qsa_btree *qsa_btree_create(size_t degree);
 
-void qsa_btree_free(qsa_btree_s *t);
+void qsa_btree_free(struct qsa_btree *t);
 
-void qsa_btree_insert(qsa_btree_s *t, int key, int ptr);
+void qsa_btree_insert(struct qsa_btree *t, int key, int ptr);
 
 #endif /* QSA_BTREE_H */

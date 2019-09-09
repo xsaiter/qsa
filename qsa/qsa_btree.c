@@ -2,36 +2,35 @@
 
 #include "qsa_btree.h"
 
-qsa_btree_s *qsa_btree_create(size_t degree) {
-  qsa_btree_s *t = qsa_malloc(sizeof(qsa_btree_s));
-
+struct qsa_btree *qsa_btree_create(size_t degree) {
+  struct qsa_btree *t = qsa_malloc(sizeof(struct qsa_btree));
   t->degree = degree;
   t->max_ne = 2 * degree - 1;
   t->max_nc = t->max_ne + 1;
   t->root = NULL;
-
   return t;
 }
 
-void qsa_btree_free(qsa_btree_s *t) { free(t); }
+void qsa_btree_free(struct qsa_btree *t) { free(t); }
 
-static qsa_btree_node_s *qsa_btree_node_create(qsa_btree_s *t) {
-  qsa_btree_node_s *x = qsa_malloc(sizeof(qsa_btree_node_s));
+static struct qsa_btree_node *qsa_btree_node_create(struct qsa_btree *t) {
+  struct qsa_btree_node *x = qsa_malloc(sizeof(struct qsa_btree_node));
 
   x->n = 0;
-  x->e = qsa_malloc(sizeof(qsa_btree_entry_s *) * t->max_ne);
-  x->c = qsa_malloc(sizeof(qsa_btree_node_s *) * t->max_nc);
+  x->e = qsa_malloc(sizeof(struct qsa_btree_entry *) * t->max_ne);
+  x->c = qsa_malloc(sizeof(struct qsa_btree_node *) * t->max_nc);
   x->is_leaf = false;
 
   return x;
 }
 
-void qsa_btree_node_split_child(qsa_btree_s *t, qsa_btree_node_s *x, int i) {
+void qsa_btree_node_split_child(struct qsa_btree *t, struct qsa_btree_node *x,
+                                int i) {
   size_t d = t->degree;
 
-  qsa_btree_node_s *y = x->c[i];
+  struct qsa_btree_node *y = x->c[i];
 
-  qsa_btree_node_s *z = qsa_btree_node_create(t);
+  struct qsa_btree_node *z = qsa_btree_node_create(t);
 
   z->is_leaf = y->is_leaf;
   z->n = d - 1;
@@ -63,25 +62,25 @@ void qsa_btree_node_split_child(qsa_btree_s *t, qsa_btree_node_s *x, int i) {
   ++(x->n);
 }
 
-static bool qsa_btree_node_is_full(qsa_btree_s *t, qsa_btree_node_s *x) {
+static bool qsa_btree_node_is_full(struct qsa_btree *t,
+                                   struct qsa_btree_node *x) {
   return x->n == t->max_ne;
 }
 
-static qsa_btree_entry_s *qsa_btree_entry_create(int key, int ptr) {
-  qsa_btree_entry_s *e = qsa_malloc(sizeof(qsa_btree_entry_s));
-
+static struct qsa_btree_entry *qsa_btree_entry_create(int key, int ptr) {
+  struct qsa_btree_entry *e = qsa_malloc(sizeof(struct qsa_btree_entry));
   e->key = key;
   e->ptr = ptr;
-
   return e;
 }
 
-static void qsa_btree_insert_non_full(qsa_btree_s *t, qsa_btree_node_s *x,
-                                      int key, int ptr) {
+static void qsa_btree_insert_non_full(struct qsa_btree *t,
+                                      struct qsa_btree_node *x, int key,
+                                      int ptr) {
   int i = x->n - 1;
 
   if (x->is_leaf) {
-    qsa_btree_entry_s *e = qsa_btree_entry_create(key, ptr);
+    struct qsa_btree_entry *e = qsa_btree_entry_create(key, ptr);
 
     while (i >= 0 && x->e[i]->key > key) {
       x->e[i + 1] = x->e[i];
@@ -99,7 +98,7 @@ static void qsa_btree_insert_non_full(qsa_btree_s *t, qsa_btree_node_s *x,
 
     ++i;
 
-    qsa_btree_node_s *c = x->c[i];
+    struct qsa_btree_node *c = x->c[i];
 
     bool is_full = qsa_btree_node_is_full(t, c);
 
@@ -114,13 +113,13 @@ static void qsa_btree_insert_non_full(qsa_btree_s *t, qsa_btree_node_s *x,
   qsa_btree_insert_non_full(t, x->c[i], key, ptr);
 }
 
-void qsa_btree_insert(qsa_btree_s *t, int key, int ptr) {
-  qsa_btree_node_s *r = t->root;
+void qsa_btree_insert(struct qsa_btree *t, int key, int ptr) {
+  struct qsa_btree_node *r = t->root;
 
   bool is_full = qsa_btree_node_is_full(t, r);
 
   if (is_full) {
-    qsa_btree_node_s *x = qsa_btree_node_create(t);
+    struct qsa_btree_node *x = qsa_btree_node_create(t);
 
     x->is_leaf = false;
     x->n = 0;
@@ -129,7 +128,6 @@ void qsa_btree_insert(qsa_btree_s *t, int key, int ptr) {
     t->root = x;
 
     qsa_btree_node_split_child(t, x, 0);
-
     qsa_btree_insert_non_full(t, t->root, key, ptr);
   } else {
     qsa_btree_insert_non_full(t, r, key, ptr);

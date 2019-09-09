@@ -2,22 +2,23 @@
 
 #include "qsa_rbt.h"
 
-static qsa_rbt_node_s *qsa_rbt_node_create(void *key, qsa_rbt_colors_s color) {
-  qsa_rbt_node_s *r = qsa_malloc(sizeof(qsa_rbt_node_s));
+static struct qsa_rbt_node *qsa_rbt_node_create(void *key,
+                                                enum qsa_rbt_colors color) {
+  struct qsa_rbt_node *r = qsa_malloc(sizeof(struct qsa_rbt_node));
   r->key = key;
   r->color = color;
   r->parent = r->left = r->right = NULL;
   return r;
 }
 
-qsa_rbt_s *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp) {
-  qsa_rbt_s *t = qsa_malloc(sizeof(qsa_rbt_s));
+struct qsa_rbt *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp) {
+  struct qsa_rbt *t = qsa_malloc(sizeof(struct qsa_rbt));
 
   t->key_size = key_size;
   t->key_cmp = key_cmp;
   t->root = NULL;
 
-  qsa_rbt_node_s *nil = qsa_rbt_node_create(NULL, BLACK);
+  struct qsa_rbt_node *nil = qsa_rbt_node_create(NULL, BLACK);
   nil->parent = t->root;
 
   t->root->parent = nil;
@@ -26,8 +27,8 @@ qsa_rbt_s *qsa_rbt_create(size_t key_size, qsa_cmp_fn *key_cmp) {
   return t;
 }
 
-qsa_rbt_node_s *qsa_rbt_search(const qsa_rbt_s *t, const void *key) {
-  qsa_rbt_node_s *x = t->root;
+struct qsa_rbt_node *qsa_rbt_search(const struct qsa_rbt *t, const void *key) {
+  struct qsa_rbt_node *x = t->root;
 
   while (x) {
     int cmp = t->key_cmp(x->key, key);
@@ -46,10 +47,10 @@ qsa_rbt_node_s *qsa_rbt_search(const qsa_rbt_s *t, const void *key) {
   return x;
 }
 
-static void qsa_rbt_left_rotate(qsa_rbt_s *t, qsa_rbt_node_s *x) {
+static void qsa_rbt_left_rotate(struct qsa_rbt *t, struct qsa_rbt_node *x) {
   assert(x->right != t->nil);
 
-  qsa_rbt_node_s *y = x->right;
+  struct qsa_rbt_node *y = x->right;
   x->right = y->left;
 
   if (y->left != t->nil) {
@@ -71,10 +72,10 @@ static void qsa_rbt_left_rotate(qsa_rbt_s *t, qsa_rbt_node_s *x) {
   x->parent = y;
 }
 
-static void qsa_rbt_right_rotate(qsa_rbt_s *t, qsa_rbt_node_s *x) {}
+static void qsa_rbt_right_rotate(struct qsa_rbt *t, struct qsa_rbt_node *x) {}
 
-static void qsa_rbt_insert_restore(qsa_rbt_s *t, qsa_rbt_node_s *z) {
-  qsa_rbt_node_s *y = NULL;
+static void qsa_rbt_insert_restore(struct qsa_rbt *t, struct qsa_rbt_node *z) {
+  struct qsa_rbt_node *y = NULL;
 
   while (z->parent->color == RED) {
     if (z->parent == z->parent->parent->left) {
@@ -96,13 +97,13 @@ static void qsa_rbt_insert_restore(qsa_rbt_s *t, qsa_rbt_node_s *z) {
   }
 }
 
-void qsa_rbt_insert(qsa_rbt_s *t, void *key) {
+void qsa_rbt_insert(struct qsa_rbt *t, void *key) {
   int cmp = 0;
 
-  qsa_rbt_node_s *z = qsa_rbt_node_create(key, RED);
+  struct qsa_rbt_node *z = qsa_rbt_node_create(key, RED);
 
-  qsa_rbt_node_s *y = t->nil;
-  qsa_rbt_node_s *x = t->root;
+  struct qsa_rbt_node *y = t->nil;
+  struct qsa_rbt_node *x = t->root;
 
   while (x != t->nil) {
     y = x;

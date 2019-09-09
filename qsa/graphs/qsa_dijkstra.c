@@ -4,15 +4,15 @@
 
 #include "../qsa_heap.h"
 
-void qsa_dijkstra(const qsa_graph_s *g, int s,
-                  qsa_graph_shortest_paths_s *res) {
+void qsa_dijkstra(const struct qsa_graph *g, int s,
+                  struct qsa_graph_shortest_paths *res) {
   res->s = s;
   res->dist = qsa_malloc0(g->nv * sizeof(double));
   for (int i = 0; i < g->nv; ++i) {
     res->dist[i] = -1;
   }
 
-  qsa_heap_s *h = qsa_heap_create(g->nv, sizeof(int), &qsa_cmp_int);
+  struct qsa_heap *h = qsa_heap_create(g->nv, sizeof(int), &qsa_cmp_int);
 
   qsa_heap_add(h, &s);
 
@@ -20,7 +20,7 @@ void qsa_dijkstra(const qsa_graph_s *g, int s,
     int t = QSA_VPTR_TO_INT(qsa_heap_top(h));
     qsa_heap_pop(h);
 
-    qsa_graph_edge_s *e = g->adj[t];
+    struct qsa_graph_edge *e = g->adj[t];
 
     while (e) {
       double d = res->dist[e->b] + e->weight;
