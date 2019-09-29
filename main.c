@@ -241,7 +241,7 @@ static void test_avl() {
 
 enum sort_types { ST_INSERTION, ST_BUBBLE_SORT };
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv) {    
   test_dict();
   test_graph_bfs();
   test_graph_dfs();
