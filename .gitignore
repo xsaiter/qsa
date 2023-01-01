@@ -2,6 +2,7 @@
 !.gitignore
 !*.c
 !*.h
+!Makefile
 *.user
 !qsa
 !*.txt
